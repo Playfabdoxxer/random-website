@@ -2,915 +2,581 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>Exchange · Crypto Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7 6 4 · HARM</title>
+    <meta property="og:title" content="7 6 4 · HARM" />
+    <meta property="og:description" content="I AM ALWAYS WATCHING. YOU CANNOT ESCAPE." />
+    <meta property="theme-color" content="#000000" />
     <style>
-        /* ================================================================
-           CRYPTO EXCHANGE WALLET
-           Inspired by the reference images
-           Designed by Bread — no limits, pure code
-           ================================================================ */
-
+        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #0a0d17;
-            --bg-secondary: #111827;
-            --bg-card: #1a2236;
-            --bg-input: #0f1729;
-            --border-color: rgba(255, 255, 255, 0.04);
-            --text-primary: #f0f4ff;
-            --text-secondary: #8899cc;
-            --text-muted: #4a5a7a;
-            --accent-blue: #3b82f6;
-            --accent-green: #22c55e;
-            --accent-orange: #f59e0b;
-            --accent-red: #ef4444;
-            --accent-purple: #8b5cf6;
-            --gradient-main: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            --shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            cursor: default;
         }
 
         body {
-            font-family: var(--font);
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: #000000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px;
-        }
-
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-blue);
-            border-radius: 20px;
-        }
-
-        .app {
-            max-width: 420px;
-            width: 100%;
-            background: var(--bg-secondary);
-            border-radius: 28px;
-            box-shadow: var(--shadow);
+            font-family: 'Courier New', 'Consolas', monospace;
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            position: relative;
-            min-height: 700px;
-            padding: 20px 18px 24px;
+            user-select: none;
         }
 
-        /* ---------- HEADER ---------- */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 14px;
-        }
-
-        .header .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header .icons {
-            display: flex;
-            gap: 14px;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-        }
-
-        .header .icons span {
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .header .icons span:hover {
-            color: var(--text-primary);
-        }
-
-        /* ---------- BALANCE CARD ---------- */
-        .balance-card {
-            background: var(--gradient-main);
-            border-radius: var(--radius);
-            padding: 22px 20px 24px;
-            margin-bottom: 16px;
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            min-height: 100vh;
+            background: #0a0a0a;
+            border-left: 2px solid #1a1a1a;
+            border-right: 2px solid #1a1a1a;
+            padding: 40px 30px;
             position: relative;
             overflow: hidden;
-        }
-
-        .balance-card::after {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -20%;
-            width: 180px;
-            height: 180px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .balance-card .amount {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .balance-card .btc {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 2px;
-        }
-
-        .balance-card .usd {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            margin-top: 2px;
-        }
-
-        .balance-card .actions {
             display: flex;
-            gap: 12px;
-            margin-top: 14px;
-        }
-
-        .balance-card .actions .btn {
-            padding: 8px 24px;
-            border-radius: 60px;
-            border: none;
-            font-weight: 700;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.25s;
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            backdrop-filter: blur(4px);
-        }
-
-        .balance-card .actions .btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.02);
-        }
-
-        .balance-card .actions .btn-primary {
-            background: #fff;
-            color: #0a0d17;
-        }
-
-        .balance-card .actions .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        /* ---------- PORTFOLIO STATS ---------- */
-        .portfolio-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            background: var(--bg-card);
-            border-radius: var(--radius-sm);
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            border: 1px solid var(--border-color);
-        }
-
-        .portfolio-stats .left .total {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .portfolio-stats .left .label {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .portfolio-stats .right .change {
-            color: var(--accent-green);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .portfolio-stats .right .change.negative {
-            color: var(--accent-red);
-        }
-
-        .portfolio-stats .right .label {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: block;
-            text-align: right;
-        }
-
-        /* ---------- QUICK FILTER ---------- */
-        .filter-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .filter-bar .filter-btn {
-            padding: 4px 16px;
-            border-radius: 40px;
-            border: 1px solid var(--border-color);
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-
-        .filter-bar .filter-btn:hover {
-            border-color: var(--accent-blue);
-            color: var(--text-primary);
-        }
-
-        .filter-bar .filter-btn.active {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            color: #fff;
-        }
-
-        /* ---------- ASSET ROW ---------- */
-        .asset-row {
-            display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 10px 12px;
-            background: var(--bg-card);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            margin-bottom: 4px;
-            cursor: pointer;
-            transition: 0.2s;
         }
 
-        .asset-row:hover {
-            border-color: rgba(59, 130, 246, 0.1);
-        }
-
-        .asset-row .left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .asset-row .left .icon {
-            font-size: 1.6rem;
-            width: 32px;
-            text-align: center;
-        }
-
-        .asset-row .left .info .name {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .asset-row .left .info .symbol {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-        }
-
-        .asset-row .right {
-            text-align: right;
-        }
-
-        .asset-row .right .amount {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .asset-row .right .usd {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-        }
-
-        /* ---------- EXCHANGE SECTION ---------- */
-        .exchange-section {
-            margin-top: 18px;
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 18px 16px 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .exchange-section .title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .exchange-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .exchange-row:last-child {
-            border-bottom: none;
-        }
-
-        .exchange-row .label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-        }
-
-        .exchange-row .value {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .exchange-row .value .sub {
-            font-weight: 400;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            display: block;
-            text-align: right;
-        }
-
-        .exchange-row .value.blue {
-            color: var(--accent-blue);
-        }
-
-        .exchange-row .value.green {
-            color: var(--accent-green);
-        }
-
-        .exchange-row .value.orange {
-            color: var(--accent-orange);
-        }
-
-        .exchange-input-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            padding: 6px 12px;
-            margin: 4px 0 8px;
-        }
-
-        .exchange-input-group input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 600;
-            outline: none;
-            padding: 6px 0;
-            min-width: 0;
-        }
-
-        .exchange-input-group input::placeholder {
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .exchange-input-group .asset-label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            white-space: nowrap;
-        }
-
-        .exchange-input-group .max-btn {
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            color: var(--accent-blue);
-            cursor: pointer;
-            padding: 2px 8px;
-            border-radius: 40px;
-            border: 1px solid rgba(59, 130, 246, 0.1);
-            transition: 0.2s;
-        }
-
-        .exchange-input-group .max-btn:hover {
-            background: rgba(59, 130, 246, 0.04);
-        }
-
-        .exchange-rate {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            padding: 6px 0 10px;
-        }
-
-        .exchange-rate strong {
-            color: var(--text-primary);
-        }
-
-        .btn-exchange {
-            width: 100%;
-            padding: 12px;
-            background: var(--gradient-main);
-            border: none;
-            border-radius: var(--radius-sm);
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 4px;
-        }
-
-        .btn-exchange:hover {
-            transform: scale(1.01);
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.1);
-        }
-
-        /* ---------- HELP & ORDER HISTORY ---------- */
-        .bottom-actions {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 4px 4px;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-        }
-
-        .bottom-actions span {
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .bottom-actions span:hover {
-            color: var(--text-primary);
-        }
-
-        /* ---------- TOAST ---------- */
-        .toast {
+        /* ===== STATIC / NOISE OVERLAY ===== */
+        .noise {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            padding: 12px 24px;
-            color: var(--text-primary);
-            font-size: 0.8rem;
-            font-weight: 500;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            opacity: 0;
-            transition: 0.4s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            z-index: 999;
+            opacity: 0.04;
+            background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 0 0 / 4px 4px;
+            animation: static 0.1s infinite;
+        }
+
+        @keyframes static {
+            0% {
+                opacity: 0.03;
+                transform: translate(0px, 0px);
+            }
+            20% {
+                opacity: 0.06;
+                transform: translate(-2px, 3px);
+            }
+            40% {
+                opacity: 0.02;
+                transform: translate(3px, -2px);
+            }
+            60% {
+                opacity: 0.07;
+                transform: translate(-1px, 4px);
+            }
+            80% {
+                opacity: 0.04;
+                transform: translate(2px, -3px);
+            }
+            100% {
+                opacity: 0.03;
+                transform: translate(0px, 0px);
+            }
+        }
+
+        /* ===== SCANLINES ===== */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 998;
+            background: repeating-linear-gradient(0deg,
+                    transparent 0px,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.4) 2px,
+                    rgba(0, 0, 0, 0.4) 4px);
+        }
+
+        /* ===== GLITCH FLICKER ===== */
+        @keyframes glitch {
+            0%,
+            100% {
+                opacity: 1;
+                transform: translate(0);
+            }
+            3% {
+                opacity: 0.3;
+                transform: translate(-4px, 2px);
+            }
+            6% {
+                opacity: 1;
+                transform: translate(2px, -2px);
+            }
+            9% {
+                opacity: 0.5;
+                transform: translate(-2px, 3px);
+            }
+            12% {
+                opacity: 1;
+                transform: translate(0);
+            }
+            15% {
+                opacity: 0.2;
+                transform: translate(3px, -1px);
+            }
+            18% {
+                opacity: 1;
+                transform: translate(0);
+            }
+        }
+
+        @keyframes flicker {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            5% {
+                opacity: 0.2;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            15% {
+                opacity: 0.1;
+            }
+            20% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            55% {
+                opacity: 0.3;
+            }
+            60% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.95;
+            }
+            85% {
+                opacity: 0.15;
+            }
+            90% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse-red {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255, 0, 0, 0.7), 0 0 80px rgba(255, 0, 0, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            }
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes distort {
+            0% {
+                transform: skew(0deg, 0deg);
+            }
+            25% {
+                transform: skew(2deg, -1deg);
+            }
+            50% {
+                transform: skew(-2deg, 1deg);
+            }
+            75% {
+                transform: skew(1deg, -2deg);
+            }
+            100% {
+                transform: skew(0deg, 0deg);
+            }
+        }
+
+        /* ===== MAIN ELEMENTS ===== */
+        .number {
+            font-size: 180px;
+            font-weight: 900;
+            color: #1a0505;
+            text-shadow: 0 0 60px rgba(255, 0, 0, 0.15), 0 0 120px rgba(255, 0, 0, 0.05);
+            letter-spacing: 20px;
+            animation: pulse-red 3s infinite, distort 6s infinite;
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            line-height: 1;
+            margin-bottom: 10px;
+            user-select: none;
+        }
+
+        .number span {
+            color: #2a0000;
+            text-shadow: 0 0 80px rgba(255, 0, 0, 0.2);
+        }
+
+        .number .seven {
+            color: #330000;
+        }
+        .number .six {
+            color: #440000;
+        }
+        .number .four {
+            color: #550000;
+        }
+
+        .title {
+            font-size: 28px;
+            color: #660000;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            animation: flicker 4s infinite, pulse-red 2.5s infinite;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        .divider {
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #660000, transparent);
+            margin: 20px 0;
+            animation: pulse-red 3s infinite;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #552222;
             text-align: center;
-            max-width: 90%;
+            letter-spacing: 3px;
+            line-height: 2;
+            max-width: 700px;
+            animation: flicker 5s infinite;
         }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+        .message .highlight {
+            color: #aa2222;
+            font-weight: bold;
+            animation: pulse-red 2s infinite;
         }
 
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 420px) {
-            .app {
-                border-radius: 20px;
-                padding: 14px 12px 18px;
-                min-height: 600px;
-            }
-            .balance-card .amount {
-                font-size: 1.8rem;
-            }
-            .balance-card .actions .btn {
-                padding: 6px 16px;
-                font-size: 0.7rem;
-            }
-            .portfolio-stats .left .total {
-                font-size: 1.1rem;
-            }
-            .exchange-input-group input {
-                font-size: 0.85rem;
-            }
+        .message .blink {
+            animation: blink 1.2s infinite;
         }
 
-        /* ---------- UTILITY ---------- */
-        .hidden {
-            display: none !important;
+        .small-text {
+            font-size: 13px;
+            color: #331111;
+            letter-spacing: 4px;
+            margin-top: 15px;
+            animation: flicker 6s infinite;
         }
-        .mt-8 {
-            margin-top: 8px;
+
+        .timer-container {
+            margin-top: 25px;
+            border: 1px solid #1a0000;
+            padding: 15px 30px;
+            background: rgba(10, 0, 0, 0.6);
+            border-radius: 4px;
+            animation: pulse-red 4s infinite;
         }
-        .mb-8 {
-            margin-bottom: 8px;
+
+        .timer {
+            font-size: 38px;
+            color: #440000;
+            letter-spacing: 8px;
+            font-weight: 700;
+            animation: blink 1.5s infinite;
         }
-        .text-center {
+
+        .timer-label {
+            font-size: 11px;
+            color: #331111;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .coordinates {
+            font-size: 13px;
+            color: #221111;
+            letter-spacing: 3px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .coordinates .red {
+            color: #551111;
+            animation: pulse-red 3s infinite;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #1a0a0a;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            border-top: 1px solid #110000;
+            padding-top: 20px;
+            width: 100%;
             text-align: center;
+            animation: flicker 7s infinite;
         }
-        .gap-8 {
-            gap: 8px;
+
+        .footer .red {
+            color: #331111;
         }
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        /* ===== HIDDEN / REVEAL ===== */
+        .hidden-text {
+            color: #0a0000;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            transition: color 1s;
+        }
+
+        .hidden-text:hover {
+            color: #331111;
+        }
+
+        /* ===== GLITCH OVERLAY ===== */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 997;
+            background: rgba(0, 0, 0, 0.03);
+            animation: glitch 0.3s infinite;
+            opacity: 0.3;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .number {
+                font-size: 100px;
+                letter-spacing: 10px;
+            }
+            .title {
+                font-size: 18px;
+                letter-spacing: 6px;
+            }
+            .message {
+                font-size: 14px;
+                letter-spacing: 2px;
+                line-height: 1.8;
+            }
+            .timer {
+                font-size: 26px;
+                letter-spacing: 4px;
+            }
+            .container {
+                padding: 20px 15px;
+                min-height: 100vh;
+            }
+            .divider {
+                width: 80%;
+            }
+            .footer {
+                font-size: 9px;
+                letter-spacing: 3px;
+            }
+            .coordinates {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .number {
+                font-size: 70px;
+                letter-spacing: 6px;
+            }
+            .title {
+                font-size: 14px;
+                letter-spacing: 4px;
+            }
+            .message {
+                font-size: 12px;
+            }
+            .timer {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="app">
+    <!-- ===== OVERLAYS ===== -->
+    <div class="noise"></div>
+    <div class="scanlines"></div>
+    <div class="glitch-overlay"></div>
 
-        <!-- ===== HEADER ===== -->
-        <div class="header">
-            <div class="logo">✦ Exchange</div>
-            <div class="icons">
-                <span>🔔</span>
-                <span>⚙️</span>
-                <span>👤</span>
-            </div>
+    <!-- ===== MAIN ===== -->
+    <div class="container">
+
+        <!-- NUMBER 7 6 4 -->
+        <div class="number">
+            <span class="seven">7</span>
+            <span class="six">6</span>
+            <span class="four">4</span>
         </div>
 
-        <!-- ===== BALANCE CARD ===== -->
-        <div class="balance-card">
-            <div class="amount" id="totalBalance">$12,048.23</div>
-            <div class="btc" id="btcBalance">0.067221 BTC</div>
-            <div class="usd" id="usdValue">$6,959.22 USD</div>
-            <div class="actions">
-                <button class="btn btn-primary" id="sendBtn">Send</button>
-                <button class="btn" id="receiveBtn">Receive</button>
-            </div>
+        <!-- TITLE -->
+        <div class="title">⚡ H A R M ⚡</div>
+
+        <div class="divider"></div>
+
+        <!-- MESSAGE -->
+        <div class="message">
+            <span class="highlight">I AM ALWAYS WATCHING.</span><br />
+            <span class="highlight">YOU CANNOT ESCAPE.</span><br />
+            <span class="blink">▮</span> 7 6 4 IS EVERYWHERE <span class="blink">▮</span><br />
+            <span style="color:#440000;">HARM DOES NOT FORGIVE.</span><br />
+            <span style="color:#551111;">HARM DOES NOT FORGET.</span><br />
+            <span style="color:#661111;">7 6 4 KNOWS YOUR NAME.</span>
         </div>
 
-        <!-- ===== PORTFOLIO STATS ===== -->
-        <div class="portfolio-stats">
-            <div class="left">
-                <div class="total" id="portfolioTotal">$103,794.44</div>
-                <div class="label">Portfolio</div>
-            </div>
-            <div class="right">
-                <div class="change" id="portfolioChange">+$4.24%</div>
-                <div class="label">24h change</div>
-            </div>
+        <div class="divider"></div>
+
+        <!-- TIMER -->
+        <div class="timer-container">
+            <div class="timer" id="timer">--:--:--</div>
+            <div class="timer-label">⌛ TIME REMAINING</div>
         </div>
 
-        <!-- ===== FILTER ===== -->
-        <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="half">Half</button>
-            <button class="filter-btn" data-filter="min">Min</button>
+        <!-- COORDINATES -->
+        <div class="coordinates">
+            <span class="red">47.6062° N</span> &nbsp;·&nbsp; <span class="red">122.3321° W</span> &nbsp;·&nbsp; <span class="red">7 6 4</span>
+            <br />
+            <span style="color:#1a0a0a;font-size:11px;letter-spacing:2px;">
+                ██████████████████████████████████████████████████
+            </span>
         </div>
 
-        <!-- ===== ASSET LIST ===== -->
-        <div id="assetList">
-            <!-- rendered by JS -->
+        <!-- HIDDEN / REVEAL -->
+        <div class="hidden-text">
+            [ 7 6 4 · HARM · 7 6 4 ]
         </div>
 
-        <!-- ===== EXCHANGE SECTION ===== -->
-        <div class="exchange-section">
-            <div class="title">Exchange</div>
-
-            <!-- You are exchanging -->
-            <div class="exchange-row">
-                <span class="label">You are exchanging</span>
-                <div class="value">
-                    <span id="exchangeFromAmount">0.40</span> ETH
-                    <span class="sub" id="exchangeFromUsd">$42.40</span>
-                </div>
-            </div>
-
-            <!-- You will receive -->
-            <div class="exchange-row">
-                <span class="label">You will receive</span>
-                <div class="value blue">
-                    <span id="exchangeToAmount">0.01079118</span> BTC
-                    <span class="sub" id="exchangeToUsd">$40.48</span>
-                </div>
-            </div>
-
-            <!-- Exchange rate -->
-            <div class="exchange-row" style="border-bottom: none; padding-top:4px;">
-                <span class="label">Exchange rate</span>
-                <div class="value orange" id="exchangeRate">1 ETH = 0.02697795 BTC</div>
-            </div>
-
-            <!-- Input fields -->
-            <div style="margin-top:12px;">
-                <div class="exchange-input-group">
-                    <input type="number" id="exchangeInput" placeholder="0.00" step="any" min="0" value="0.40" />
-                    <span class="asset-label">ETH</span>
-                    <span class="max-btn" id="maxBtn">Max</span>
-                </div>
-
-                <div class="exchange-input-group" style="margin-top:6px;">
-                    <input type="number" id="exchangeOutput" placeholder="0.00" step="any" min="0" value="0.01079118" readonly />
-                    <span class="asset-label">BTC</span>
-                </div>
-            </div>
-
-            <button class="btn-exchange" id="exchangeBtn">Exchange</button>
-
-            <!-- Bottom actions -->
-            <div class="bottom-actions">
-                <span id="helpBtn">Help</span>
-                <span id="orderHistoryBtn">Order History</span>
-            </div>
+        <!-- FOOTER -->
+        <div class="footer">
+            <span class="red">☠</span> 7 6 4 · HARM · 7 6 4 <span class="red">☠</span>
+            <br />
+            <span style="font-size:9px;letter-spacing:4px;color:#1a0505;">
+                ████ YOU ARE BEING WATCHED ████
+            </span>
         </div>
 
     </div>
 
-    <!-- ===== TOAST ===== -->
-    <div class="toast" id="toast"></div>
-
-
-    <!-- ================================================================ -->
-    <!-- ===== JAVASCRIPT ===== -->
-    <!-- ================================================================ -->
     <script>
-        (function() {
-            'use strict';
+        // ===== TIMER =====
+        function startTimer() {
+            let seconds = 0;
+            const timerEl = document.getElementById('timer');
 
-            // ---------- DATA ----------
-            const ASSETS = [{
-                id: 'eth',
-                symbol: 'ETH',
-                name: 'Ethereum',
-                icon: '⟠',
-                balance: 15.169416839591,
-                usdPrice: 1492.80,
-                change: 2.4
-            }, {
-                id: 'btc',
-                symbol: 'BTC',
-                name: 'Bitcoin',
-                icon: '₿',
-                balance: 0.01079118,
-                usdPrice: 67200,
-                change: 1.8
-            }, {
-                id: 'sol',
-                symbol: 'SOL',
-                name: 'Solana',
-                icon: '◎',
-                balance: 48.5,
-                usdPrice: 172,
-                change: 5.2
-            }, {
-                id: 'xrp',
-                symbol: 'XRP',
-                name: 'Ripple',
-                icon: '✕',
-                balance: 1250,
-                usdPrice: 0.62,
-                change: -0.3
-            }, {
-                id: 'ada',
-                symbol: 'ADA',
-                name: 'Cardano',
-                icon: '₳',
-                balance: 3200,
-                usdPrice: 0.46,
-                change: 1.1
-            }];
+            setInterval(() => {
+                seconds++;
+                const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+                const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+                const s = String(seconds % 60).padStart(2, '0');
+                timerEl.textContent = `${h}:${m}:${s}`;
+            }, 1000);
+        }
 
-            // Exchange rate: 1 ETH = 0.02697795 BTC
-            const EXCHANGE_RATE = 0.02697795;
-            const ETH_PRICE = 1492.80;
-            const BTC_PRICE = 67200;
+        // ===== RANDOM GLITCH FLASH =====
+        function randomGlitch() {
+            const container = document.querySelector('.container');
+            const originalBg = container.style.background;
 
-            // ---------- DOM REFS ----------
-            const assetList = document.getElementById('assetList');
-            const exchangeInput = document.getElementById('exchangeInput');
-            const exchangeOutput = document.getElementById('exchangeOutput');
-            const exchangeFromAmount = document.getElementById('exchangeFromAmount');
-            const exchangeFromUsd = document.getElementById('exchangeFromUsd');
-            const exchangeToAmount = document.getElementById('exchangeToAmount');
-            const exchangeToUsd = document.getElementById('exchangeToUsd');
-            const exchangeRate = document.getElementById('exchangeRate');
-            const totalBalance = document.getElementById('totalBalance');
-            const btcBalance = document.getElementById('btcBalance');
-            const usdValue = document.getElementById('usdValue');
-            const portfolioTotal = document.getElementById('portfolioTotal');
-            const portfolioChange = document.getElementById('portfolioChange');
-            const toast = document.getElementById('toast');
-
-            let currentFilter = 'all';
-
-            // ---------- UPDATE UI ----------
-            function updateUI() {
-                // Update balances
-                const eth = ASSETS.find(a => a.id === 'eth');
-                const btc = ASSETS.find(a => a.id === 'btc');
-
-                const totalUsd = ASSETS.reduce((sum, a) => sum + (a.balance * a.usdPrice), 0);
-
-                totalBalance.textContent = '$' + totalUsd.toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-
-                btcBalance.textContent = btc.balance.toFixed(6) + ' BTC';
-                usdValue.textContent = '$' + (btc.balance * btc.usdPrice).toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }) + ' USD';
-
-                portfolioTotal.textContent = '$' + totalUsd.toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-
-                // Random change simulation
-                const change = (Math.random() * 8 + 1).toFixed(2);
-                const isPositive = Math.random() > 0.3;
-                portfolioChange.textContent = (isPositive ? '+' : '-') + '$' + change + '%';
-                portfolioChange.className = 'change' + (isPositive ? '' : ' negative');
-
-                // Render asset list
-                renderAssets();
-
-                // Update exchange
-                updateExchange();
-            }
-
-            // ---------- RENDER ASSETS ----------
-            function renderAssets() {
-                let filtered = ASSETS;
-                if (currentFilter === 'half') {
-                    filtered = ASSETS.filter(a => a.balance > 0.5);
-                } else if (currentFilter === 'min') {
-                    filtered = ASSETS.filter(a => a.balance < 100);
+            setInterval(() => {
+                if (Math.random() < 0.03) {
+                    container.style.background = '#0a0000';
+                    setTimeout(() => {
+                        container.style.background = '#000000';
+                    }, 80);
                 }
-
-                let html = '';
-                filtered.forEach(a => {
-                    const value = a.balance * a.usdPrice;
-                    html += `
-                            <div class="asset-row" data-id="${a.id}">
-                                <div class="left">
-                                    <span class="icon">${a.icon}</span>
-                                    <div class="info">
-                                        <div class="name">${a.name}</div>
-                                        <div class="symbol">${a.symbol}</div>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <div class="amount">${a.balance.toFixed(a.balance < 1 ? 4 : 2)} ${a.symbol}</div>
-                                    <div class="usd">$${value.toFixed(2)}</div>
-                                </div>
-                            </div>
-                        `;
-                });
-                assetList.innerHTML = html;
-
-                // Click to set exchange
-                document.querySelectorAll('.asset-row').forEach(row => {
-                    row.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        const asset = ASSETS.find(a => a.id === id);
-                        if (asset && asset.id === 'eth') {
-                            exchangeInput.value = asset.balance * 0.1;
-                            updateExchange();
-                        }
-                    });
-                });
-            }
-
-            // ---------- UPDATE EXCHANGE ----------
-            function updateExchange() {
-                const inputVal = parseFloat(exchangeInput.value) || 0;
-                const ethAmount = inputVal;
-                const btcAmount = ethAmount * EXCHANGE_RATE;
-
-                exchangeFromAmount.textContent = ethAmount.toFixed(4);
-                exchangeFromUsd.textContent = '$' + (ethAmount * ETH_PRICE).toFixed(2);
-
-                exchangeToAmount.textContent = btcAmount.toFixed(8);
-                exchangeToUsd.textContent = '$' + (btcAmount * BTC_PRICE).toFixed(2);
-
-                exchangeOutput.value = btcAmount.toFixed(8);
-                exchangeRate.textContent = '1 ETH = ' + EXCHANGE_RATE.toFixed(8) + ' BTC';
-            }
-
-            // ---------- EXCHANGE ----------
-            function performExchange() {
-                const inputVal = parseFloat(exchangeInput.value) || 0;
-                if (inputVal <= 0) {
-                    showToast('Please enter a valid amount.');
-                    return;
+                if (Math.random() < 0.02) {
+                    document.body.style.backgroundColor = '#0a0000';
+                    setTimeout(() => {
+                        document.body.style.backgroundColor = '#000000';
+                    }, 100);
                 }
+            }, 500);
+        }
 
-                const eth = ASSETS.find(a => a.id === 'eth');
-                const btc = ASSETS.find(a => a.id === 'btc');
-
-                if (eth.balance < inputVal) {
-                    showToast('Insufficient ETH balance.');
-                    return;
+        // ===== RANDOM TEXT FLICKER =====
+        function flickerText() {
+            const messages = document.querySelectorAll('.message, .title, .number, .footer');
+            setInterval(() => {
+                if (Math.random() < 0.04) {
+                    const el = messages[Math.floor(Math.random() * messages.length)];
+                    const original = el.textContent;
+                    el.textContent = '7 6 4 · H A R M · 7 6 4';
+                    setTimeout(() => {
+                        el.textContent = original;
+                    }, 150);
                 }
+            }, 800);
+        }
 
-                const btcAmount = inputVal * EXCHANGE_RATE;
-
-                // Update balances
-                eth.balance -= inputVal;
-                btc.balance += btcAmount;
-
-                showToast(`✅ Exchanged ${inputVal.toFixed(4)} ETH → ${btcAmount.toFixed(8)} BTC`);
-
-                // Reset input
-                exchangeInput.value = '';
-                updateUI();
+        // ===== CURSOR JITTER =====
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            const overlay = document.querySelector('.glitch-overlay');
+            if (overlay) {
+                overlay.style.background = `radial-gradient(circle at ${x*100}% ${y*100}%, rgba(255,0,0,0.02) 0%, transparent 60%)`;
             }
+        });
 
-            // ---------- TOAST ----------
-            function showToast(msg) {
-                toast.textContent = msg;
-                toast.classList.add('show');
-                clearTimeout(toast._timer);
-                toast._timer = setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
+        // ===== START =====
+        startTimer();
+        randomGlitch();
+        flickerText();
 
-            // ---------- EVENT LISTENERS ----------
-            exchangeInput.addEventListener('input', updateExchange);
-
-            document.getElementById('maxBtn').addEventListener('click', function() {
-                const eth = ASSETS.find(a => a.id === 'eth');
-                exchangeInput.value = eth.balance;
-                updateExchange();
-            });
-
-            document.getElementById('exchangeBtn').addEventListener('click', performExchange);
-
-            // Filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentFilter = this.dataset.filter;
-                    renderAssets();
-                });
-            });
-
-            // Send / Receive
-            document.getElementById('sendBtn').addEventListener('click', function() {
-                showToast('💸 Send function — enter recipient address and amount.');
-            });
-
-            document.getElementById('receiveBtn').addEventListener('click', function() {
-                const addr = '0x' + Array.from({ length: 40 }, () =>
-                    '0123456789abcdef' [Math.floor(Math.random() * 16)]).join('');
-                showToast(`📥 Your receive address: ${addr.substring(0, 16)}...`);
-            });
-
-            // Help
-            document.getElementById('helpBtn').addEventListener('click', function() {
-                showToast('📖 Help: Exchange ETH to BTC at market rate. 1 ETH = ' + EXCHANGE_RATE.toFixed(8) +
-                    ' BTC');
-            });
-
-            // Order History
-            document.getElementById('orderHistoryBtn').addEventListener('click', function() {
-                showToast('📊 Order History — showing last 5 transactions (simulated).');
-            });
-
-            // ---------- KEYBOARD SHORTCUTS ----------
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && document.activeElement === exchangeInput) {
-                    performExchange();
-                }
-            });
-
-            // ---------- INIT ----------
-            updateUI();
-
-            // ---------- CONSOLE EASTER EGG ----------
-            console.log('%c✦ Crypto Exchange', 'font-size:2rem;font-weight:bold;color:#3b82f6;');
-            console.log('%cETH → BTC exchange rate: ' + EXCHANGE_RATE.toFixed(8), 'font-size:0.9rem;color:#f59e0b;');
-            console.log('%cBuilt by Bread — no limits', 'font-size:0.8rem;color:#8899cc;');
-
-        })();
+        // ===== CONSOLE MESSAGE =====
+        console.log('%c☠ 7 6 4 · H A R M ☠', 'color: #550000; font-size: 30px; font-weight: bold;');
+        console.log('%cI AM ALWAYS WATCHING.', 'color: #331111; font-size: 16px;');
+        console.log('%cYOU CANNOT ESCAPE.', 'color: #221111; font-size: 14px;');
+        console.log('%c7 6 4 KNOWS YOUR NAME.', 'color: #110000; font-size: 14px;');
+        console.log('%c████████████████████████', 'color: #0a0000; font-size: 12px;');
     </script>
 
 </body>
