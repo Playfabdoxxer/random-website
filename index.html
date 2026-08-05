@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7 6 4 · HARM</title>
+    <title>7 6 4 · HARM · SYSTEM TAKEOVER</title>
     <meta property="og:title" content="7 6 4 · HARM" />
-    <meta property="og:description" content="I AM ALWAYS WATCHING. YOU CANNOT ESCAPE." />
+    <meta property="og:description" content="YOU HAVE BEEN TARGETED. NO ESCAPE." />
     <meta property="theme-color" content="#000000" />
     <style>
         /* ===== RESET ===== */
@@ -16,35 +16,57 @@
             cursor: default;
         }
 
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
         body {
             background: #000000;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: 'Courier New', 'Consolas', monospace;
-            overflow: hidden;
+            overflow-x: hidden;
             user-select: none;
-        }
-
-        /* ===== MAIN CONTAINER ===== */
-        .container {
-            max-width: 900px;
-            width: 100%;
-            min-height: 100vh;
-            background: #0a0a0a;
-            border-left: 2px solid #1a1a1a;
-            border-right: 2px solid #1a1a1a;
-            padding: 40px 30px;
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
 
-        /* ===== STATIC / NOISE OVERLAY ===== */
+        /* ===== SCREEN SHAKE ===== */
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+            10% {
+                transform: translate(-8px, 6px);
+            }
+            20% {
+                transform: translate(8px, -6px);
+            }
+            30% {
+                transform: translate(-6px, 8px);
+            }
+            40% {
+                transform: translate(6px, -8px);
+            }
+            50% {
+                transform: translate(-10px, 4px);
+            }
+            60% {
+                transform: translate(10px, -4px);
+            }
+            70% {
+                transform: translate(-4px, 10px);
+            }
+            80% {
+                transform: translate(4px, -10px);
+            }
+            90% {
+                transform: translate(-2px, 2px);
+            }
+        }
+
+        .shake-active {
+            animation: shake 0.15s infinite;
+        }
+
+        /* ===== NOISE OVERLAY ===== */
         .noise {
             position: fixed;
             top: 0;
@@ -53,34 +75,30 @@
             height: 100%;
             pointer-events: none;
             z-index: 999;
-            opacity: 0.04;
-            background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 0 0 / 4px 4px;
-            animation: static 0.1s infinite;
+            opacity: 0.08;
+            background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 0 0 / 3px 3px;
+            animation: static 0.08s infinite;
         }
 
         @keyframes static {
             0% {
-                opacity: 0.03;
+                opacity: 0.06;
                 transform: translate(0px, 0px);
             }
-            20% {
-                opacity: 0.06;
-                transform: translate(-2px, 3px);
+            25% {
+                opacity: 0.10;
+                transform: translate(-3px, 4px);
             }
-            40% {
-                opacity: 0.02;
-                transform: translate(3px, -2px);
+            50% {
+                opacity: 0.05;
+                transform: translate(4px, -3px);
             }
-            60% {
-                opacity: 0.07;
-                transform: translate(-1px, 4px);
-            }
-            80% {
-                opacity: 0.04;
-                transform: translate(2px, -3px);
+            75% {
+                opacity: 0.09;
+                transform: translate(-2px, 5px);
             }
             100% {
-                opacity: 0.03;
+                opacity: 0.06;
                 transform: translate(0px, 0px);
             }
         }
@@ -97,41 +115,193 @@
             background: repeating-linear-gradient(0deg,
                     transparent 0px,
                     transparent 2px,
-                    rgba(0, 0, 0, 0.4) 2px,
-                    rgba(0, 0, 0, 0.4) 4px);
+                    rgba(0, 0, 0, 0.5) 2px,
+                    rgba(0, 0, 0, 0.5) 4px);
         }
 
-        /* ===== GLITCH FLICKER ===== */
-        @keyframes glitch {
+        /* ===== RED FLASH OVERLAY ===== */
+        .red-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 997;
+            background: rgba(255, 0, 0, 0.15);
+            opacity: 0;
+            transition: opacity 0.05s;
+        }
+
+        .red-flash.active {
+            opacity: 1;
+        }
+
+        /* ===== GLITCH OVERLAY ===== */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 996;
+            background: rgba(0, 0, 0, 0.03);
+            animation: glitch-overlay 0.2s infinite;
+        }
+
+        @keyframes glitch-overlay {
             0%,
             100% {
-                opacity: 1;
+                opacity: 0.3;
                 transform: translate(0);
             }
-            3% {
+            10% {
+                opacity: 0.6;
+                transform: translate(-5px, 3px);
+            }
+            20% {
+                opacity: 0.2;
+                transform: translate(4px, -2px);
+            }
+            30% {
+                opacity: 0.7;
+                transform: translate(-3px, 5px);
+            }
+            40% {
+                opacity: 0.4;
+                transform: translate(2px, -4px);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(-6px, 2px);
+            }
+            60% {
                 opacity: 0.3;
+                transform: translate(5px, -3px);
+            }
+            70% {
+                opacity: 0.5;
+                transform: translate(-2px, 6px);
+            }
+            80% {
+                opacity: 0.7;
+                transform: translate(3px, -5px);
+            }
+            90% {
+                opacity: 0.2;
                 transform: translate(-4px, 2px);
             }
-            6% {
-                opacity: 1;
-                transform: translate(2px, -2px);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-bottom: 2px solid #220000;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: #440000;
+            letter-spacing: 8px;
+            font-weight: 900;
+            animation: pulse-red 2s infinite;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .logo span {
+            color: #660000;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #00ff00;
+            letter-spacing: 3px;
+            animation: blink 0.8s infinite;
+            background: rgba(0, 255, 0, 0.05);
+            padding: 4px 14px;
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+        }
+
+        /* ===== 764 DISPLAY ===== */
+        .number-display {
+            font-size: 120px;
+            font-weight: 900;
+            color: #1a0505;
+            text-shadow: 0 0 80px rgba(255, 0, 0, 0.15);
+            letter-spacing: 25px;
+            animation: pulse-red 3s infinite, distort 4s infinite;
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            line-height: 1;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .number-display .seven {
+            color: #330000;
+        }
+        .number-display .six {
+            color: #440000;
+        }
+        .number-display .four {
+            color: #550000;
+        }
+
+        @keyframes distort {
+            0% {
+                transform: skew(0deg, 0deg) scale(1);
             }
-            9% {
-                opacity: 0.5;
-                transform: translate(-2px, 3px);
+            25% {
+                transform: skew(2deg, -1deg) scale(1.01);
             }
-            12% {
-                opacity: 1;
-                transform: translate(0);
+            50% {
+                transform: skew(-2deg, 1deg) scale(0.99);
             }
-            15% {
-                opacity: 0.2;
-                transform: translate(3px, -1px);
+            75% {
+                transform: skew(1deg, -2deg) scale(1.01);
             }
-            18% {
-                opacity: 1;
-                transform: translate(0);
+            100% {
+                transform: skew(0deg, 0deg) scale(1);
             }
+        }
+
+        /* ===== WARNING TEXT ===== */
+        .warning-text {
+            font-size: 22px;
+            color: #661111;
+            letter-spacing: 6px;
+            text-align: center;
+            animation: flicker 2.5s infinite;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 5px 0 15px 0;
+        }
+
+        .warning-text .red {
+            color: #aa2222;
+            animation: pulse-red 1.5s infinite;
         }
 
         @keyframes flicker {
@@ -183,259 +353,367 @@
 
         @keyframes pulse-red {
             0% {
-                text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
             }
             50% {
-                text-shadow: 0 0 40px rgba(255, 0, 0, 0.7), 0 0 80px rgba(255, 0, 0, 0.3);
+                text-shadow: 0 0 40px rgba(255, 0, 0, 0.6), 0 0 80px rgba(255, 0, 0, 0.2);
             }
             100% {
-                text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
             }
         }
 
-        @keyframes typewriter {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        @keyframes distort {
-            0% {
-                transform: skew(0deg, 0deg);
-            }
-            25% {
-                transform: skew(2deg, -1deg);
-            }
-            50% {
-                transform: skew(-2deg, 1deg);
-            }
-            75% {
-                transform: skew(1deg, -2deg);
-            }
-            100% {
-                transform: skew(0deg, 0deg);
-            }
-        }
-
-        /* ===== MAIN ELEMENTS ===== */
-        .number {
-            font-size: 180px;
-            font-weight: 900;
-            color: #1a0505;
-            text-shadow: 0 0 60px rgba(255, 0, 0, 0.15), 0 0 120px rgba(255, 0, 0, 0.05);
-            letter-spacing: 20px;
-            animation: pulse-red 3s infinite, distort 6s infinite;
-            font-family: 'Arial Black', 'Impact', sans-serif;
-            line-height: 1;
-            margin-bottom: 10px;
-            user-select: none;
-        }
-
-        .number span {
-            color: #2a0000;
-            text-shadow: 0 0 80px rgba(255, 0, 0, 0.2);
-        }
-
-        .number .seven {
-            color: #330000;
-        }
-        .number .six {
-            color: #440000;
-        }
-        .number .four {
-            color: #550000;
-        }
-
-        .title {
-            font-size: 28px;
-            color: #660000;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            animation: flicker 4s infinite, pulse-red 2.5s infinite;
-            margin-top: 5px;
-            font-weight: 700;
-        }
-
+        /* ===== DIVIDER ===== */
         .divider {
-            width: 60%;
+            width: 70%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, #660000, transparent);
-            margin: 20px 0;
-            animation: pulse-red 3s infinite;
+            background: linear-gradient(90deg, transparent, #440000, transparent);
+            margin: 15px 0;
         }
 
-        .message {
-            font-size: 18px;
-            color: #552222;
-            text-align: center;
-            letter-spacing: 3px;
-            line-height: 2;
-            max-width: 700px;
-            animation: flicker 5s infinite;
-        }
-
-        .message .highlight {
-            color: #aa2222;
-            font-weight: bold;
-            animation: pulse-red 2s infinite;
-        }
-
-        .message .blink {
-            animation: blink 1.2s infinite;
-        }
-
-        .small-text {
-            font-size: 13px;
-            color: #331111;
-            letter-spacing: 4px;
-            margin-top: 15px;
-            animation: flicker 6s infinite;
-        }
-
-        .timer-container {
-            margin-top: 25px;
-            border: 1px solid #1a0000;
-            padding: 15px 30px;
+        /* ===== HARM TOOLS SECTION ===== */
+        .tools-section {
+            width: 100%;
+            margin: 15px 0 25px 0;
+            border: 2px solid #220000;
+            border-radius: 8px;
+            padding: 20px;
             background: rgba(10, 0, 0, 0.6);
-            border-radius: 4px;
-            animation: pulse-red 4s infinite;
+            position: relative;
+            overflow: hidden;
         }
 
-        .timer {
-            font-size: 38px;
-            color: #440000;
-            letter-spacing: 8px;
-            font-weight: 700;
-            animation: blink 1.5s infinite;
+        .tools-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 0, 0, 0.01) 20px,
+                    rgba(255, 0, 0, 0.01) 21px);
+            pointer-events: none;
+            animation: rotate-bg 20s linear infinite;
         }
 
-        .timer-label {
-            font-size: 11px;
-            color: #331111;
+        @keyframes rotate-bg {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .tools-title {
+            font-size: 28px;
+            color: #661111;
+            text-align: center;
             letter-spacing: 6px;
+            font-weight: 900;
             text-transform: uppercase;
-            margin-top: 5px;
+            animation: pulse-red 2s infinite;
+            position: relative;
+            z-index: 1;
         }
 
-        .coordinates {
-            font-size: 13px;
-            color: #221111;
-            letter-spacing: 3px;
+        .tools-title .red {
+            color: #aa2222;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
             margin-top: 20px;
-            font-family: 'Courier New', monospace;
+            position: relative;
+            z-index: 1;
         }
 
-        .coordinates .red {
-            color: #551111;
+        .tool-btn {
+            background: rgba(20, 0, 0, 0.6);
+            border: 1px solid #330000;
+            border-radius: 6px;
+            padding: 18px 10px;
+            color: #884444;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-btn:hover {
+            background: rgba(40, 0, 0, 0.8);
+            border-color: #660000;
+            color: #ff4444;
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+        }
+
+        .tool-btn .icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .tool-btn .sub {
+            font-size: 9px;
+            color: #441111;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .tool-btn.danger {
+            border-color: #550000;
+            background: rgba(30, 0, 0, 0.7);
+            color: #aa3333;
+        }
+
+        .tool-btn.danger:hover {
+            background: rgba(60, 0, 0, 0.9);
+            border-color: #ff0000;
+            color: #ff0000;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
+        }
+
+        /* ===== TERMINAL OUTPUT ===== */
+        .terminal {
+            width: 100%;
+            background: rgba(5, 0, 0, 0.8);
+            border: 1px solid #220000;
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            min-height: 120px;
+            max-height: 250px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #00aa44;
+            position: relative;
+        }
+
+        .terminal::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal::-webkit-scrollbar-track {
+            background: #0a0000;
+        }
+        .terminal::-webkit-scrollbar-thumb {
+            background: #220000;
+            border-radius: 2px;
+        }
+
+        .terminal .line {
+            padding: 2px 0;
+            opacity: 0.9;
+            animation: typewriter 0.5s steps(30) forwards;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .terminal .line .red {
+            color: #ff3333;
+        }
+        .terminal .line .green {
+            color: #00ff44;
+        }
+        .terminal .line .yellow {
+            color: #ffaa33;
+        }
+        .terminal .line .blink {
+            animation: blink 0.6s infinite;
+        }
+
+        .terminal .line .highlight {
+            color: #ff0000;
+            font-weight: bold;
+            animation: pulse-red 1s infinite;
+        }
+
+        /* ===== FAKE POPUP ===== */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #0a0000;
+            border: 3px solid #440000;
+            padding: 30px 40px;
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            display: none;
+            box-shadow: 0 0 100px rgba(255, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .popup.active {
+            display: block;
+            animation: flicker 0.5s infinite;
+        }
+
+        .popup .title {
+            font-size: 22px;
+            color: #ff0000;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+        }
+
+        .popup .msg {
+            font-size: 14px;
+            color: #884444;
+            line-height: 1.8;
+            letter-spacing: 1px;
+        }
+
+        .popup .close-btn {
+            margin-top: 15px;
+            padding: 8px 30px;
+            background: #220000;
+            border: 1px solid #440000;
+            color: #884444;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        .popup .close-btn:hover {
+            background: #440000;
+            color: #ff4444;
+            border-color: #ff0000;
+        }
+
+        /* ===== SCARY QUOTE ===== */
+        .scary-quote {
+            font-size: 16px;
+            color: #441111;
+            text-align: center;
+            letter-spacing: 4px;
+            animation: flicker 6s infinite;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .scary-quote .red {
+            color: #661111;
             animation: pulse-red 3s infinite;
         }
 
+        /* ===== FOOTER ===== */
         .footer {
-            margin-top: 30px;
-            font-size: 11px;
-            color: #1a0a0a;
-            letter-spacing: 6px;
-            text-transform: uppercase;
+            width: 100%;
             border-top: 1px solid #110000;
             padding-top: 20px;
-            width: 100%;
+            margin-top: 25px;
             text-align: center;
-            animation: flicker 7s infinite;
+            font-size: 11px;
+            color: #1a0a0a;
+            letter-spacing: 4px;
         }
 
         .footer .red {
             color: #331111;
         }
 
-        /* ===== HIDDEN / REVEAL ===== */
-        .hidden-text {
-            color: #0a0000;
-            font-size: 12px;
-            letter-spacing: 2px;
-            margin-top: 10px;
-            transition: color 1s;
-        }
-
-        .hidden-text:hover {
-            color: #331111;
-        }
-
-        /* ===== GLITCH OVERLAY ===== */
-        .glitch-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 997;
-            background: rgba(0, 0, 0, 0.03);
-            animation: glitch 0.3s infinite;
-            opacity: 0.3;
-        }
-
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
-            .number {
-                font-size: 100px;
-                letter-spacing: 10px;
+        @media (max-width: 768px) {
+            .number-display {
+                font-size: 80px;
+                letter-spacing: 15px;
             }
-            .title {
-                font-size: 18px;
-                letter-spacing: 6px;
-            }
-            .message {
-                font-size: 14px;
-                letter-spacing: 2px;
-                line-height: 1.8;
-            }
-            .timer {
-                font-size: 26px;
+            .logo {
+                font-size: 22px;
                 letter-spacing: 4px;
             }
-            .container {
-                padding: 20px 15px;
-                min-height: 100vh;
-            }
-            .divider {
-                width: 80%;
-            }
-            .footer {
-                font-size: 9px;
+            .warning-text {
+                font-size: 16px;
                 letter-spacing: 3px;
             }
-            .coordinates {
+            .tools-title {
+                font-size: 20px;
+                letter-spacing: 4px;
+            }
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 10px;
+            }
+            .tool-btn {
+                padding: 12px 8px;
                 font-size: 11px;
+            }
+            .tool-btn .icon {
+                font-size: 22px;
+            }
+            .terminal {
+                font-size: 11px;
+                padding: 10px 14px;
+                min-height: 100px;
+            }
+            .popup {
+                padding: 20px;
+            }
+            .popup .title {
+                font-size: 18px;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
-        @media (max-width: 400px) {
-            .number {
-                font-size: 70px;
-                letter-spacing: 6px;
+        @media (max-width: 480px) {
+            .number-display {
+                font-size: 56px;
+                letter-spacing: 10px;
             }
-            .title {
-                font-size: 14px;
-                letter-spacing: 4px;
+            .warning-text {
+                font-size: 13px;
+                letter-spacing: 2px;
             }
-            .message {
+            .tools-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .tool-btn {
+                padding: 10px 6px;
+                font-size: 10px;
+            }
+            .tool-btn .icon {
+                font-size: 18px;
+            }
+            .terminal {
+                font-size: 10px;
+                padding: 8px 10px;
+                min-height: 80px;
+                max-height: 180px;
+            }
+            .scary-quote {
                 font-size: 12px;
+                letter-spacing: 2px;
             }
-            .timer {
-                font-size: 20px;
+            .popup {
+                padding: 15px;
+            }
+            .popup .title {
+                font-size: 16px;
+            }
+            .popup .msg {
+                font-size: 12px;
             }
         }
     </style>
@@ -446,59 +724,111 @@
     <div class="noise"></div>
     <div class="scanlines"></div>
     <div class="glitch-overlay"></div>
+    <div class="red-flash" id="redFlash"></div>
+
+    <!-- ===== POPUP ===== -->
+    <div class="popup" id="popup">
+        <div class="title">☠ 7 6 4 · HARM ☠</div>
+        <div class="msg" id="popupMsg">YOU HAVE BEEN TARGETED.</div>
+        <br />
+        <button class="close-btn" onclick="closePopup()">▸ ACKNOWLEDGE ◂</button>
+    </div>
 
     <!-- ===== MAIN ===== -->
-    <div class="container">
+    <div class="container" id="mainContainer">
 
-        <!-- NUMBER 7 6 4 -->
-        <div class="number">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">☠ <span>7 6 4</span> · HARM ☠</div>
+            <div class="status">● SYSTEM ONLINE</div>
+        </div>
+
+        <!-- 764 DISPLAY -->
+        <div class="number-display">
             <span class="seven">7</span>
             <span class="six">6</span>
             <span class="four">4</span>
         </div>
 
-        <!-- TITLE -->
-        <div class="title">⚡ H A R M ⚡</div>
-
-        <div class="divider"></div>
-
-        <!-- MESSAGE -->
-        <div class="message">
-            <span class="highlight">I AM ALWAYS WATCHING.</span><br />
-            <span class="highlight">YOU CANNOT ESCAPE.</span><br />
-            <span class="blink">▮</span> 7 6 4 IS EVERYWHERE <span class="blink">▮</span><br />
-            <span style="color:#440000;">HARM DOES NOT FORGIVE.</span><br />
-            <span style="color:#551111;">HARM DOES NOT FORGET.</span><br />
-            <span style="color:#661111;">7 6 4 KNOWS YOUR NAME.</span>
+        <!-- WARNING -->
+        <div class="warning-text">
+            <span class="red">▸</span> I AM ALWAYS WATCHING <span class="red">◂</span><br />
+            <span style="font-size:16px;color:#441111;">7 6 4 KNOWS YOUR NAME · 7 6 4 KNOWS WHERE YOU ARE</span>
         </div>
 
         <div class="divider"></div>
 
-        <!-- TIMER -->
-        <div class="timer-container">
-            <div class="timer" id="timer">--:--:--</div>
-            <div class="timer-label">⌛ TIME REMAINING</div>
-        </div>
-
-        <!-- COORDINATES -->
-        <div class="coordinates">
-            <span class="red">47.6062° N</span> &nbsp;·&nbsp; <span class="red">122.3321° W</span> &nbsp;·&nbsp; <span class="red">7 6 4</span>
+        <!-- SCARY QUOTE -->
+        <div class="scary-quote">
+            <span class="red">"</span> HARM DOES NOT FORGIVE. HARM DOES NOT FORGET. <span class="red">"</span>
             <br />
-            <span style="color:#1a0a0a;font-size:11px;letter-spacing:2px;">
-                ██████████████████████████████████████████████████
-            </span>
+            <span style="font-size:13px;color:#331111;">— 7 6 4</span>
         </div>
 
-        <!-- HIDDEN / REVEAL -->
-        <div class="hidden-text">
-            [ 7 6 4 · HARM · 7 6 4 ]
+        <div class="divider"></div>
+
+        <!-- ===== HARM TOOLS ===== -->
+        <div class="tools-section">
+            <div class="tools-title">
+                ⚡ <span class="red">HARM</span> TOOLS ⚡
+            </div>
+            <div class="tools-grid">
+
+                <div class="tool-btn" onclick="runTool('ipgrabber')">
+                    <span class="icon">🌐</span>
+                    IP GRABBER
+                    <span class="sub">▸ GRAB TARGET IP</span>
+                </div>
+
+                <div class="tool-btn" onclick="runTool('ipping')">
+                    <span class="icon">📡</span>
+                    IP PING
+                    <span class="sub">▸ PING TARGET</span>
+                </div>
+
+                <div class="tool-btn" onclick="runTool('doxxer')">
+                    <span class="icon">📂</span>
+                    DOXXER TOOL
+                    <span class="sub">▸ EXTRACT DATA</span>
+                </div>
+
+                <div class="tool-btn danger" onclick="runTool('killswitch')">
+                    <span class="icon">💀</span>
+                    KILLSWITCH
+                    <span class="sub">▸ SYSTEM SHUTDOWN</span>
+                </div>
+
+                <div class="tool-btn" onclick="runTool('webcam')">
+                    <span class="icon">📷</span>
+                    WEBCAM ACCESS
+                    <span class="sub">▸ ACTIVATE CAMERA</span>
+                </div>
+
+                <div class="tool-btn danger" onclick="runTool('override')">
+                    <span class="icon">⚡</span>
+                    SYSTEM OVERRIDE
+                    <span class="sub">▸ TAKEOVER</span>
+                </div>
+
+            </div>
         </div>
 
-        <!-- FOOTER -->
+        <!-- ===== TERMINAL ===== -->
+        <div class="terminal" id="terminal">
+            <div class="line"><span class="green">></span> <span class="yellow">7 6 4 · HARM SYSTEM v2.0</span></div>
+            <div class="line"><span class="green">></span> <span class="yellow">Awaiting commands...</span> <span class="blink">█</span></div>
+        </div>
+
+        <!-- ===== SCARY QUOTE 2 ===== -->
+        <div class="scary-quote" style="margin-top:10px;">
+            <span class="red">☠</span> THERE IS NO ESCAPE · 7 6 4 IS EVERYWHERE <span class="red">☠</span>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
         <div class="footer">
             <span class="red">☠</span> 7 6 4 · HARM · 7 6 4 <span class="red">☠</span>
             <br />
-            <span style="font-size:9px;letter-spacing:4px;color:#1a0505;">
+            <span style="font-size:9px;color:#0a0000;letter-spacing:6px;">
                 ████ YOU ARE BEING WATCHED ████
             </span>
         </div>
@@ -506,54 +836,228 @@
     </div>
 
     <script>
-        // ===== TIMER =====
-        function startTimer() {
-            let seconds = 0;
-            const timerEl = document.getElementById('timer');
+        // ===== TERMINAL LOG =====
+        function terminalLog(msg, type = 'normal') {
+            const terminal = document.getElementById('terminal');
+            const line = document.createElement('div');
+            line.className = 'line';
 
-            setInterval(() => {
-                seconds++;
-                const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
-                const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
-                const s = String(seconds % 60).padStart(2, '0');
-                timerEl.textContent = `${h}:${m}:${s}`;
-            }, 1000);
+            let prefix = '<span class="green">></span> ';
+            let color = '';
+
+            if (type === 'error') {
+                prefix = '<span class="red">!</span> ';
+                color = 'red';
+            } else if (type === 'success') {
+                prefix = '<span class="green">+</span> ';
+                color = 'green';
+            } else if (type === 'warning') {
+                prefix = '<span class="yellow">*</span> ';
+                color = 'yellow';
+            } else if (type === 'highlight') {
+                prefix = '<span class="red">#</span> ';
+                color = 'highlight';
+            }
+
+            line.innerHTML = prefix + '<span class="' + (color || '') + '">' + msg + '</span>';
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+
+            // Keep terminal from growing too large
+            while (terminal.children.length > 50) {
+                terminal.removeChild(terminal.firstChild);
+            }
         }
 
-        // ===== RANDOM GLITCH FLASH =====
+        // ===== RED FLASH =====
+        function redFlash() {
+            const flash = document.getElementById('redFlash');
+            flash.classList.add('active');
+            setTimeout(() => {
+                flash.classList.remove('active');
+            }, 150);
+        }
+
+        // ===== SCREEN SHAKE =====
+        function screenShake() {
+            const container = document.getElementById('mainContainer');
+            container.classList.add('shake-active');
+            setTimeout(() => {
+                container.classList.remove('shake-active');
+            }, 300);
+        }
+
+        // ===== SHOW POPUP =====
+        function showPopup(msg) {
+            document.getElementById('popupMsg').textContent = msg;
+            document.getElementById('popup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('active');
+        }
+
+        // ===== RUN TOOL =====
+        function runTool(tool) {
+            terminalLog('─────────────────────────────────', 'normal');
+            terminalLog('EXECUTING: ' + tool.toUpperCase(), 'highlight');
+
+            switch (tool) {
+
+                case 'ipgrabber':
+                    terminalLog('Scanning target...', 'warning');
+                    setTimeout(() => {
+                        terminalLog('Target IP: 192.168.1.' + Math.floor(Math.random() * 254 + 1),
+                        'success');
+                        terminalLog('Location: ' + ['New York', 'London', 'Tokyo', 'Moscow', 'Berlin', 'Sydney'][
+                            Math.floor(Math.random() * 6)
+                        ], 'success');
+                        terminalLog('ISP: ' + ['Comcast', 'AT&T', 'Verizon', 'BT', 'Deutsche Telekom', 'NTT'][
+                            Math.floor(Math.random() * 6)
+                        ], 'success');
+                        terminalLog('Device: ' + ['Windows 11', 'macOS', 'Linux', 'Android', 'iOS', 'Unknown'][
+                            Math.floor(Math.random() * 6)
+                        ], 'success');
+                        terminalLog('✓ IP GRABBED SUCCESSFULLY', 'success');
+                        redFlash();
+                        showPopup('☠ YOUR IP HAS BEEN LOGGED · 7 6 4 KNOWS WHERE YOU ARE ☠');
+                    }, 800);
+                    break;
+
+                case 'ipping':
+                    terminalLog('Pinging target...', 'warning');
+                    let pingCount = 0;
+                    const pingInterval = setInterval(() => {
+                        pingCount++;
+                        const ms = Math.floor(Math.random() * 50 + 10);
+                        const status = ms < 40 ? 'OK' : 'TIMEOUT';
+                        terminalLog('Ping #' + pingCount + ' → ' + ms + 'ms [' + status + ']',
+                            status === 'OK' ? 'success' : 'error');
+                        if (pingCount >= 6) {
+                            clearInterval(pingInterval);
+                            terminalLog('✓ PING COMPLETE · TARGET RESPONSIVE', 'success');
+                            redFlash();
+                            showPopup('📡 TARGET PINGED · 7 6 4 HAS YOUR SIGNAL 📡');
+                        }
+                    }, 400);
+                    break;
+
+                case 'doxxer':
+                    terminalLog('Extracting data...', 'warning');
+                    setTimeout(() => {
+                        const names = ['J. Doe', 'M. Smith', 'A. Johnson', 'K. Williams', 'R. Brown'];
+                        const cities = ['Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia'];
+                        const ages = [Math.floor(Math.random() * 40 + 18)];
+                        terminalLog('Name: ' + names[Math.floor(Math.random() * names.length)], 'success');
+                        terminalLog('Age: ' + ages[0], 'success');
+                        terminalLog('City: ' + cities[Math.floor(Math.random() * cities.length)], 'success');
+                        terminalLog('Email: user' + Math.floor(Math.random() * 9999) + '@' + ['gmail', 'yahoo',
+                            'outlook', 'protonmail'
+                        ][Math.floor(Math.random() * 4)] + '.com', 'success');
+                        terminalLog('Phone: +1 (' + Math.floor(Math.random() * 900 + 100) + ') ' +
+                            Math.floor(Math.random() * 900 + 100) + '-' + Math.floor(Math.random() * 9000 +
+                            1000), 'success');
+                        terminalLog('✓ DOXX COMPLETE · DATA EXTRACTED', 'success');
+                        redFlash();
+                        screenShake();
+                        showPopup('📂 YOUR DATA HAS BEEN EXPOSED · 7 6 4 HAS EVERYTHING 📂');
+                    }, 1200);
+                    break;
+
+                case 'killswitch':
+                    terminalLog('⚠️ KILLSWITCH ACTIVATED ⚠️', 'error');
+                    terminalLog('Initiating system shutdown...', 'error');
+                    setTimeout(() => {
+                        terminalLog('█ SHUTTING DOWN... █', 'error');
+                        redFlash();
+                        screenShake();
+                        setTimeout(() => {
+                            terminalLog('█ SYSTEM COMPROMISED █', 'error');
+                            terminalLog('█ 7 6 4 HAS CONTROL █', 'highlight');
+                            showPopup('💀 KILLSWITCH TRIGGERED · 7 6 4 OWNS YOUR SYSTEM 💀');
+                        }, 800);
+                    }, 600);
+                    break;
+
+                case 'webcam':
+                    terminalLog('Attempting camera access...', 'warning');
+                    setTimeout(() => {
+                        terminalLog('📷 CAMERA ACTIVATED', 'success');
+                        terminalLog('📷 Device: Integrated Webcam', 'success');
+                        terminalLog('📷 Status: STREAMING', 'success');
+                        terminalLog('📷 7 6 4 IS WATCHING', 'highlight');
+                        redFlash();
+                        showPopup('📷 YOUR CAMERA HAS BEEN ACCESSED · SMILE FOR 7 6 4 📷');
+                    }, 900);
+                    break;
+
+                case 'override':
+                    terminalLog('⚠️ SYSTEM OVERRIDE INITIATED ⚠️', 'error');
+                    terminalLog('Bypassing security...', 'warning');
+                    setTimeout(() => {
+                        terminalLog('✓ FIREWALL BYPASSED', 'success');
+                        terminalLog('✓ ADMIN ACCESS GRANTED', 'success');
+                        terminalLog('✓ ENCRYPTION DECRYPTED', 'success');
+                        terminalLog('█ SYSTEM TAKEOVER COMPLETE █', 'highlight');
+                        terminalLog('█ 7 6 4 OWNS THIS SYSTEM █', 'highlight');
+                        redFlash();
+                        screenShake();
+                        showPopup('⚡ SYSTEM TAKEOVER COMPLETE · 7 6 4 CONTROLS EVERYTHING ⚡');
+                    }, 1000);
+                    break;
+
+                default:
+                    terminalLog('Unknown command: ' + tool, 'error');
+            }
+
+            terminalLog('─────────────────────────────────', 'normal');
+        }
+
+        // ===== RANDOM GLITCH EVENTS =====
         function randomGlitch() {
-            const container = document.querySelector('.container');
-            const originalBg = container.style.background;
-
-            setInterval(() => {
-                if (Math.random() < 0.03) {
-                    container.style.background = '#0a0000';
-                    setTimeout(() => {
-                        container.style.background = '#000000';
-                    }, 80);
-                }
-                if (Math.random() < 0.02) {
-                    document.body.style.backgroundColor = '#0a0000';
-                    setTimeout(() => {
-                        document.body.style.backgroundColor = '#000000';
-                    }, 100);
-                }
-            }, 500);
+            if (Math.random() < 0.03) {
+                redFlash();
+            }
+            if (Math.random() < 0.02) {
+                screenShake();
+            }
+            if (Math.random() < 0.01) {
+                const messages = [
+                    '☠ 7 6 4 IS WATCHING ☠',
+                    '☠ THERE IS NO ESCAPE ☠',
+                    '☠ HARM IS COMING ☠',
+                    '☠ 7 6 4 KNOWS ☠',
+                    '☠ YOU ARE TARGETED ☠'
+                ];
+                showPopup(messages[Math.floor(Math.random() * messages.length)]);
+            }
+            if (Math.random() < 0.005) {
+                document.body.style.backgroundColor = '#0a0000';
+                setTimeout(() => {
+                    document.body.style.backgroundColor = '#000000';
+                }, 100);
+            }
+            setTimeout(randomGlitch, 1000);
         }
 
-        // ===== RANDOM TEXT FLICKER =====
-        function flickerText() {
-            const messages = document.querySelectorAll('.message, .title, .number, .footer');
+        // ===== TERMINAL AUTO MESSAGES =====
+        function autoTerminalMsg() {
+            const msgs = [
+                '7 6 4 scanning network...',
+                '7 6 4 tracking target...',
+                '7 6 4 bypassing firewall...',
+                '7 6 4 extracting data...',
+                '7 6 4 monitoring activity...',
+                '7 6 4 logging keystrokes...',
+                '7 6 4 accessing camera...',
+                '7 6 4 system takeover...'
+            ];
             setInterval(() => {
-                if (Math.random() < 0.04) {
-                    const el = messages[Math.floor(Math.random() * messages.length)];
-                    const original = el.textContent;
-                    el.textContent = '7 6 4 · H A R M · 7 6 4';
-                    setTimeout(() => {
-                        el.textContent = original;
-                    }, 150);
+                if (Math.random() < 0.15) {
+                    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+                    terminalLog(msg, 'warning');
                 }
-            }, 800);
+            }, 5000);
         }
 
         // ===== CURSOR JITTER =====
@@ -562,21 +1066,40 @@
             const y = e.clientY / window.innerHeight;
             const overlay = document.querySelector('.glitch-overlay');
             if (overlay) {
-                overlay.style.background = `radial-gradient(circle at ${x*100}% ${y*100}%, rgba(255,0,0,0.02) 0%, transparent 60%)`;
+                overlay.style.background = `radial-gradient(circle at ${x*100}% ${y*100}%, rgba(255,0,0,0.03) 0%, transparent 60%)`;
             }
         });
 
         // ===== START =====
-        startTimer();
-        randomGlitch();
-        flickerText();
+        terminalLog('7 6 4 · HARM SYSTEM v2.0', 'highlight');
+        terminalLog('Awaiting commands...', 'normal');
 
-        // ===== CONSOLE MESSAGE =====
+        setTimeout(() => {
+            terminalLog('⚠️ WARNING: 7 6 4 IS ACTIVE ⚠️', 'error');
+        }, 1500);
+
+        randomGlitch();
+        autoTerminalMsg();
+
+        // ===== CONSOLE =====
         console.log('%c☠ 7 6 4 · H A R M ☠', 'color: #550000; font-size: 30px; font-weight: bold;');
         console.log('%cI AM ALWAYS WATCHING.', 'color: #331111; font-size: 16px;');
         console.log('%cYOU CANNOT ESCAPE.', 'color: #221111; font-size: 14px;');
         console.log('%c7 6 4 KNOWS YOUR NAME.', 'color: #110000; font-size: 14px;');
         console.log('%c████████████████████████', 'color: #0a0000; font-size: 12px;');
+
+        // ===== KEYBOARD PANIC =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                terminalLog('⚠️ PANIC KEY DETECTED', 'error');
+                terminalLog('7 6 4 has logged your attempt to escape.', 'highlight');
+                redFlash();
+                showPopup('☠ ESCAPE IS IMPOSSIBLE · 7 6 4 IS EVERYWHERE ☠');
+            }
+            if (e.key === 'Enter') {
+                terminalLog('7 6 4 detected input... logging...', 'warning');
+            }
+        });
     </script>
 
 </body>
