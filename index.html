@@ -15,12 +15,15 @@
             --accent: #58a6ff;
             --accent-glow: rgba(88, 166, 255, 0.3);
             --html-color: #e34c26;
-            --css-color: #563d7c;
+            --css-color: #2965f1;
             --js-color: #f7df1e;
+            --csharp-color: #9b4f96;
+            --cpp-color: #659ad2;
             --success: #3fb950;
             --danger: #f85149;
-            --radius: 12px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --warning: #d2991d;
+            --radius: 10px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -37,19 +40,19 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            user-select: none;
         }
 
         /* === HEADER === */
         .header {
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border);
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 100;
             animation: slideDown 0.5s ease-out;
+            flex-shrink: 0;
         }
 
         @keyframes slideDown {
@@ -60,21 +63,22 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logo-icon {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, var(--html-color), var(--accent), var(--css-color));
-            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #e34c26, #58a6ff, #9b4f96, #659ad2);
+            background-size: 300% 300%;
+            border-radius: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: #fff;
-            animation: logoPulse 3s ease-in-out infinite;
+            animation: logoGradient 4s ease infinite, logoPulse 3s ease-in-out infinite;
             position: relative;
             overflow: hidden;
         }
@@ -86,9 +90,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
             transform: rotate(45deg);
-            animation: shimmer 3s infinite;
+            animation: shimmer 2.5s infinite;
         }
 
         @keyframes shimmer {
@@ -96,13 +100,19 @@
             100% { transform: translateX(100%) rotate(45deg); }
         }
 
+        @keyframes logoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         @keyframes logoPulse {
-            0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
-            50% { box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+            0%, 100% { box-shadow: 0 0 12px var(--accent-glow); }
+            50% { box-shadow: 0 0 28px rgba(255,255,255,0.25); }
         }
 
         .logo-text {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: -0.5px;
             background: linear-gradient(135deg, #e6edf3, #58a6ff);
@@ -113,23 +123,24 @@
 
         .header-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
         }
 
         .btn {
-            padding: 9px 18px;
+            padding: 8px 15px;
             border: 1px solid var(--border);
             border-radius: 8px;
             background: var(--bg-tertiary);
             color: var(--text-primary);
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 500;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
+            white-space: nowrap;
             position: relative;
             overflow: hidden;
         }
@@ -138,43 +149,45 @@
             border-color: var(--accent);
             background: #1c2533;
             transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(88, 166, 255, 0.2);
+            box-shadow: 0 4px 14px rgba(88, 166, 255, 0.2);
         }
-
         .btn:active {
-            transform: scale(0.96);
-            transition: 0.1s;
+            transform: scale(0.95);
+            transition: 0.08s;
         }
-
         .btn-run {
             background: var(--success);
             border-color: var(--success);
             color: #000;
             font-weight: 700;
         }
-
         .btn-run:hover {
             background: #4ade80;
             border-color: #4ade80;
-            box-shadow: 0 4px 20px rgba(63, 185, 80, 0.4);
+            box-shadow: 0 4px 18px rgba(63, 185, 80, 0.4);
         }
-
         .btn-clear {
             border-color: var(--danger);
             color: var(--danger);
         }
-
         .btn-clear:hover {
             background: rgba(248, 81, 73, 0.1);
-            box-shadow: 0 4px 15px rgba(248, 81, 73, 0.2);
+            box-shadow: 0 4px 14px rgba(248, 81, 73, 0.2);
+        }
+        .btn-copy {
+            border-color: var(--warning);
+            color: var(--warning);
+        }
+        .btn-copy:hover {
+            background: rgba(210, 153, 29, 0.1);
+            box-shadow: 0 4px 14px rgba(210, 153, 29, 0.2);
         }
 
         /* === MAIN LAYOUT === */
         .main-container {
             display: flex;
             flex: 1;
-            gap: 2px;
-            background: var(--border);
+            min-height: 0;
             animation: fadeIn 0.6s ease-out 0.2s both;
         }
 
@@ -183,51 +196,122 @@
             to { opacity: 1; }
         }
 
-        .panel {
-            background: var(--bg-secondary);
+        /* === LEFT SIDE: TABBED EDITOR === */
+        .editor-side {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            flex: 1;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
             min-width: 0;
-            transition: var(--transition);
         }
 
-        .panel.resizable {
-            resize: horizontal;
-            overflow: auto;
-            min-width: 250px;
-            max-width: 50%;
-        }
-
-        .panel-header {
+        /* === TABS === */
+        .tab-bar {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
             background: var(--bg-tertiary);
             border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            flex-shrink: 0;
+            scrollbar-width: none;
+        }
+        .tab-bar::-webkit-scrollbar { display: none; }
+
+        .tab {
+            padding: 11px 18px;
+            cursor: pointer;
             font-size: 0.8rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.4px;
             color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            white-space: nowrap;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .tab:hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.03);
+        }
+        .tab.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--accent);
+            background: rgba(88, 166, 255, 0.06);
         }
 
-        .panel-dot {
-            width: 10px;
-            height: 10px;
+        .tab-dot {
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            animation: dotPulse 2s ease-in-out infinite;
+            transition: var(--transition);
         }
+        .tab-dot.html { background: var(--html-color); }
+        .tab-dot.css { background: var(--css-color); }
+        .tab-dot.js { background: var(--js-color); }
+        .tab-dot.csharp { background: var(--csharp-color); }
+        .tab-dot.cpp { background: var(--cpp-color); }
 
-        .panel-dot.html { background: var(--html-color); animation-delay: 0s; }
-        .panel-dot.css { background: var(--css-color); animation-delay: 0.3s; }
-        .panel-dot.js { background: var(--js-color); animation-delay: 0.6s; }
-        .panel-dot.preview { background: var(--accent); animation-delay: 0.9s; }
+        .tab.active .tab-dot {
+            box-shadow: 0 0 10px currentColor;
+            animation: dotPulse 1.8s ease-in-out infinite;
+        }
 
         @keyframes dotPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.7); }
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.6); opacity: 0.5; }
+        }
+
+        /* === TAB PANELS === */
+        .tab-panels {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-panel {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(8px);
+        }
+        .tab-panel.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        .panel-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 14px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+        .panel-header-bar .lang-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .panel-header-bar .file-ext {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.7rem;
+            letter-spacing: 0;
         }
 
         .editor-wrapper {
@@ -251,15 +335,13 @@
             tab-size: 2;
             transition: var(--transition);
         }
-
         textarea:focus {
             box-shadow: inset 0 0 0 1px var(--accent);
             background: #0c1118;
         }
-
         textarea::placeholder {
             color: var(--text-secondary);
-            opacity: 0.4;
+            opacity: 0.35;
             font-style: italic;
         }
 
@@ -268,12 +350,12 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 40px;
+            width: 38px;
             background: var(--bg-tertiary);
             color: var(--text-secondary);
             font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-            font-size: 0.75rem;
-            padding: 16px 8px;
+            font-size: 0.72rem;
+            padding: 16px 6px;
             text-align: right;
             pointer-events: none;
             opacity: 0;
@@ -281,136 +363,178 @@
             overflow: hidden;
             line-height: 1.7;
         }
-
         .editor-wrapper:hover .line-numbers,
         textarea:focus ~ .line-numbers {
-            opacity: 0.6;
+            opacity: 0.55;
         }
 
-        /* Preview Panel */
-        .preview-frame {
+        /* === RIGHT SIDE: OUTPUT / PREVIEW === */
+        .output-side {
+            flex: 0.85;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-secondary);
+            min-width: 300px;
+        }
+
+        .output-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+        .output-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: dotPulse 1.8s ease-in-out infinite;
+        }
+
+        .output-content {
             flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-frame {
             width: 100%;
+            height: 100%;
             border: none;
             background: #fff;
-            transition: var(--transition);
+        }
+        .preview-frame.hidden {
+            display: none;
         }
 
-        .preview-placeholder {
-            flex: 1;
+        .output-placeholder {
+            position: absolute;
+            inset: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            gap: 16px;
+            gap: 14px;
+            pointer-events: none;
+        }
+        .output-placeholder.hidden {
+            display: none;
+        }
+        .output-placeholder .icon {
+            font-size: 3.5rem;
+            opacity: 0.25;
             animation: floatUp 4s ease-in-out infinite;
         }
-
         @keyframes floatUp {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
         }
-
-        .preview-placeholder .icon {
-            font-size: 4rem;
-            opacity: 0.3;
-        }
-
-        .preview-placeholder .hint {
-            font-size: 0.9rem;
-            opacity: 0.6;
+        .output-placeholder .hint {
+            font-size: 0.85rem;
+            opacity: 0.55;
             text-align: center;
             line-height: 1.6;
         }
-
-        .preview-placeholder .shortcut {
+        .output-placeholder .shortcut {
             background: var(--bg-tertiary);
             padding: 4px 10px;
             border-radius: 6px;
             font-family: monospace;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             border: 1px solid var(--border);
         }
+
+        /* Code output display (for C# / C++) */
+        .code-output-display {
+            position: absolute;
+            inset: 0;
+            background: var(--bg-primary);
+            padding: 20px;
+            overflow: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-break: break-word;
+            display: none;
+        }
+        .code-output-display.visible {
+            display: block;
+        }
+        .code-output-display .comment { color: #6a9955; }
+        .code-output-display .keyword { color: #569cd6; }
+        .code-output-display .string { color: #ce9178; }
+        .code-output-display .type { color: #4ec9b0; }
+        .code-output-display .method { color: #dcdcaa; }
+        .code-output-display .number { color: #b5cea8; }
 
         /* === TOAST === */
         .toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 28px;
+            right: 28px;
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
-            padding: 14px 22px;
+            padding: 13px 20px;
             border-radius: 10px;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             font-weight: 500;
             z-index: 999;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(18px);
             pointer-events: none;
             transition: var(--transition);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
         .toast.show {
             opacity: 1;
             transform: translateY(0);
         }
-
         .toast.success { border-color: var(--success); color: var(--success); }
         .toast.error { border-color: var(--danger); color: var(--danger); }
-
-        /* === RESIZE HANDLE === */
-        .resize-handle {
-            width: 4px;
-            cursor: col-resize;
-            background: transparent;
-            transition: background 0.2s;
-            flex-shrink: 0;
-        }
-
-        .resize-handle:hover,
-        .resize-handle.active {
-            background: var(--accent);
-        }
+        .toast.info { border-color: var(--accent); color: var(--accent); }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
             }
-            .panel.resizable {
-                resize: none;
+            .editor-side {
+                flex: 1;
+                min-height: 45vh;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            .output-side {
+                flex: 1;
+                min-height: 30vh;
                 min-width: auto;
-                max-width: 100%;
-                min-height: 150px;
-                max-height: 40vh;
             }
             .header {
-                padding: 10px 14px;
+                padding: 8px 12px;
                 flex-wrap: wrap;
-                gap: 8px;
+                gap: 6px;
             }
-            .logo-text {
-                font-size: 1.1rem;
-            }
+            .logo-text { font-size: 1rem; }
+            .btn { padding: 6px 10px; font-size: 0.75rem; }
+            .tab { padding: 9px 12px; font-size: 0.72rem; }
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-secondary);
-        }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
     </style>
 </head>
 <body>
@@ -422,67 +546,119 @@
             <span class="logo-text">Hybrid Playground</span>
         </div>
         <div class="header-actions">
-            <button class="btn" onclick="formatCode()" title="Format Code">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 8 16 13"/><polyline points="8 3 3 8 8 13"/><line x1="12" y1="20" x2="12" y2="10"/></svg>
+            <button class="btn btn-copy" onclick="copyCurrentCode()" title="Copy current tab code">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+            </button>
+            <button class="btn" onclick="formatCurrentCode()" title="Format Code">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 8 16 13"/><polyline points="8 3 3 8 8 13"/><line x1="12" y1="20" x2="12" y2="10"/></svg>
                 Format
             </button>
-            <button class="btn btn-clear" onclick="clearAll()" title="Clear All">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+            <button class="btn btn-clear" onclick="clearCurrentTab()" title="Clear current tab">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
                 Clear
             </button>
-            <button class="btn btn-run" onclick="runCode()" title="Run (Ctrl+Enter)">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <button class="btn btn-run" onclick="executeCode()" title="Run (Ctrl+Enter)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 Run
             </button>
         </div>
     </header>
 
     <!-- MAIN CONTENT -->
-    <div class="main-container" id="mainContainer">
-
-        <!-- HTML Panel -->
-        <div class="panel resizable" id="htmlPanel">
-            <div class="panel-header">
-                <span class="panel-dot html"></span> HTML
+    <div class="main-container">
+        <!-- LEFT: TABBED EDITOR -->
+        <div class="editor-side">
+            <div class="tab-bar" id="tabBar">
+                <div class="tab active" data-tab="html" onclick="switchTab('html')">
+                    <span class="tab-dot html"></span> HTML
+                </div>
+                <div class="tab" data-tab="css" onclick="switchTab('css')">
+                    <span class="tab-dot css"></span> CSS
+                </div>
+                <div class="tab" data-tab="js" onclick="switchTab('js')">
+                    <span class="tab-dot js"></span> JavaScript
+                </div>
+                <div class="tab" data-tab="csharp" onclick="switchTab('csharp')">
+                    <span class="tab-dot csharp"></span> C#
+                </div>
+                <div class="tab" data-tab="cpp" onclick="switchTab('cpp')">
+                    <span class="tab-dot cpp"></span> C++
+                </div>
             </div>
-            <div class="editor-wrapper">
-                <textarea id="htmlCode" placeholder="<!-- Write your HTML here -->" spellcheck="false"></textarea>
-                <div class="line-numbers" id="htmlLineNumbers"></div>
+            <div class="tab-panels">
+                <!-- HTML Panel -->
+                <div class="tab-panel active" id="panel-html">
+                    <div class="panel-header-bar">
+                        <span class="lang-label"><span class="tab-dot html"></span> HTML</span>
+                        <span class="file-ext">index.html</span>
+                    </div>
+                    <div class="editor-wrapper">
+                        <textarea id="htmlCode" placeholder="&lt;!-- Write your HTML here --&gt;" spellcheck="false"></textarea>
+                        <div class="line-numbers" id="htmlLineNums"></div>
+                    </div>
+                </div>
+                <!-- CSS Panel -->
+                <div class="tab-panel" id="panel-css">
+                    <div class="panel-header-bar">
+                        <span class="lang-label"><span class="tab-dot css"></span> CSS</span>
+                        <span class="file-ext">styles.css</span>
+                    </div>
+                    <div class="editor-wrapper">
+                        <textarea id="cssCode" placeholder="/* Write your CSS here */" spellcheck="false"></textarea>
+                        <div class="line-numbers" id="cssLineNums"></div>
+                    </div>
+                </div>
+                <!-- JS Panel -->
+                <div class="tab-panel" id="panel-js">
+                    <div class="panel-header-bar">
+                        <span class="lang-label"><span class="tab-dot js"></span> JavaScript</span>
+                        <span class="file-ext">script.js</span>
+                    </div>
+                    <div class="editor-wrapper">
+                        <textarea id="jsCode" placeholder="// Write your JavaScript here" spellcheck="false"></textarea>
+                        <div class="line-numbers" id="jsLineNums"></div>
+                    </div>
+                </div>
+                <!-- C# Panel -->
+                <div class="tab-panel" id="panel-csharp">
+                    <div class="panel-header-bar">
+                        <span class="lang-label"><span class="tab-dot csharp"></span> C#</span>
+                        <span class="file-ext">Program.cs</span>
+                    </div>
+                    <div class="editor-wrapper">
+                        <textarea id="csharpCode" placeholder="// Write your C# code here&#10;using System;&#10;&#10;class Program {&#10;    static void Main() {&#10;        Console.WriteLine(&quot;Hello from C#!&quot;);&#10;    }&#10;}" spellcheck="false"></textarea>
+                        <div class="line-numbers" id="csharpLineNums"></div>
+                    </div>
+                </div>
+                <!-- C++ Panel -->
+                <div class="tab-panel" id="panel-cpp">
+                    <div class="panel-header-bar">
+                        <span class="lang-label"><span class="tab-dot cpp"></span> C++</span>
+                        <span class="file-ext">main.cpp</span>
+                    </div>
+                    <div class="editor-wrapper">
+                        <textarea id="cppCode" placeholder="// Write your C++ code here&#10;#include &lt;iostream&gt;&#10;using namespace std;&#10;&#10;int main() {&#10;    cout &lt;&lt; &quot;Hello from C++!&quot; &lt;&lt; endl;&#10;    return 0;&#10;}" spellcheck="false"></textarea>
+                        <div class="line-numbers" id="cppLineNums"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- CSS Panel -->
-        <div class="panel resizable" id="cssPanel">
-            <div class="panel-header">
-                <span class="panel-dot css"></span> CSS
+        <!-- RIGHT: OUTPUT / PREVIEW -->
+        <div class="output-side">
+            <div class="output-header">
+                <span class="output-dot"></span>
+                <span id="outputLabel">Live Preview</span>
             </div>
-            <div class="editor-wrapper">
-                <textarea id="cssCode" placeholder="/* Write your CSS here */" spellcheck="false"></textarea>
-                <div class="line-numbers" id="cssLineNumbers"></div>
+            <div class="output-content">
+                <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts allow-modals allow-same-origin" title="Live Preview"></iframe>
+                <div class="output-placeholder" id="outputPlaceholder">
+                    <div class="icon">🚀</div>
+                    <div class="hint">Click <strong>Run</strong> or press <span class="shortcut">Ctrl + Enter</span><br>to execute your code</div>
+                </div>
+                <div class="code-output-display" id="codeOutputDisplay"></div>
             </div>
-        </div>
-
-        <!-- JS Panel -->
-        <div class="panel resizable" id="jsPanel">
-            <div class="panel-header">
-                <span class="panel-dot js"></span> JavaScript
-            </div>
-            <div class="editor-wrapper">
-                <textarea id="jsCode" placeholder="// Write your JavaScript here" spellcheck="false"></textarea>
-                <div class="line-numbers" id="jsLineNumbers"></div>
-            </div>
-        </div>
-
-        <!-- Preview Panel -->
-        <div class="panel" id="previewPanel" style="flex: 1.2;">
-            <div class="panel-header">
-                <span class="panel-dot preview"></span> Live Preview
-            </div>
-            <div class="preview-placeholder" id="previewPlaceholder">
-                <div class="icon">🚀</div>
-                <div class="hint">Click <strong>Run</strong> or press <span class="shortcut">Ctrl + Enter</span><br>to see your code come alive</div>
-            </div>
-            <iframe id="previewFrame" class="preview-frame" style="display:none;" sandbox="allow-scripts allow-modals allow-same-origin" title="Live Preview"></iframe>
         </div>
     </div>
 
@@ -490,22 +666,38 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // === DOM ELEMENTS ===
-        const htmlCode = document.getElementById('htmlCode');
-        const cssCode = document.getElementById('cssCode');
-        const jsCode = document.getElementById('jsCode');
-        const previewFrame = document.getElementById('previewFrame');
-        const previewPlaceholder = document.getElementById('previewPlaceholder');
-        const toast = document.getElementById('toast');
-        const htmlPanel = document.getElementById('htmlPanel');
-        const cssPanel = document.getElementById('cssPanel');
-        const jsPanel = document.getElementById('jsPanel');
+        // === STATE ===
+        let currentTab = 'html';
+        const webTabs = ['html', 'css', 'js'];
+        const compiledTabs = ['csharp', 'cpp'];
 
-        // === DEFAULT TEMPLATE ===
-        const defaultHTML = `<div class="container">
+        // === DOM REFS ===
+        const textareas = {
+            html: document.getElementById('htmlCode'),
+            css: document.getElementById('cssCode'),
+            js: document.getElementById('jsCode'),
+            csharp: document.getElementById('csharpCode'),
+            cpp: document.getElementById('cppCode')
+        };
+        const lineNumDivs = {
+            html: document.getElementById('htmlLineNums'),
+            css: document.getElementById('cssLineNums'),
+            js: document.getElementById('jsLineNums'),
+            csharp: document.getElementById('csharpLineNums'),
+            cpp: document.getElementById('cppLineNums')
+        };
+        const previewFrame = document.getElementById('previewFrame');
+        const outputPlaceholder = document.getElementById('outputPlaceholder');
+        const codeOutputDisplay = document.getElementById('codeOutputDisplay');
+        const outputLabel = document.getElementById('outputLabel');
+        const toast = document.getElementById('toast');
+
+        // === DEFAULT CONTENT ===
+        const defaults = {
+            html: `<div class="container">
   <div class="card">
     <h1>✨ Hybrid Playground</h1>
-    <p class="subtitle">Edit HTML, CSS, and JS — See instant magic.</p>
+    <p class="subtitle">HTML • CSS • JS • C# • C++ — All in one place.</p>
     <div class="counter">
       <button onclick="decrement()" class="btn-demo">−</button>
       <span id="count" class="count-display">0</span>
@@ -518,9 +710,8 @@
     <div class="shape shape-2"></div>
     <div class="shape shape-3"></div>
   </div>
-</div>`;
-
-        const defaultCSS = `*, *::before, *::after {
+</div>`,
+            css: `*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -537,9 +728,7 @@ body {
   overflow: hidden;
 }
 
-.container {
-  perspective: 1000px;
-}
+.container { perspective: 1000px; }
 
 .card {
   background: rgba(22, 27, 34, 0.8);
@@ -555,14 +744,8 @@ body {
 }
 
 @keyframes cardEntry {
-  from {
-    opacity: 0;
-    transform: translateY(40px) rotateX(10deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-  }
+  from { opacity: 0; transform: translateY(40px) rotateX(10deg); }
+  to { opacity: 1; transform: translateY(0) rotateX(0); }
 }
 
 h1 {
@@ -610,9 +793,7 @@ h1 {
   box-shadow: 0 0 25px rgba(88, 166, 255, 0.3);
 }
 
-.btn-demo:active {
-  transform: scale(0.9);
-}
+.btn-demo:active { transform: scale(0.9); }
 
 .count-display {
   font-size: 3rem;
@@ -621,18 +802,12 @@ h1 {
   color: #e6edf3;
 }
 
-.hint {
-  color: #8b949e;
-  font-size: 0.9rem;
-}
+.hint { color: #8b949e; font-size: 0.9rem; }
 
-/* Floating shapes */
 .floating-shapes {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
   z-index: 1;
 }
@@ -645,40 +820,16 @@ h1 {
   animation: floatShape 8s ease-in-out infinite;
 }
 
-.shape-1 {
-  width: 300px;
-  height: 300px;
-  background: #58a6ff;
-  top: 10%;
-  left: 5%;
-  animation-delay: 0s;
-}
-
-.shape-2 {
-  width: 250px;
-  height: 250px;
-  background: #bc8cff;
-  bottom: 15%;
-  right: 8%;
-  animation-delay: -3s;
-}
-
-.shape-3 {
-  width: 200px;
-  height: 200px;
-  background: #ff6b9d;
-  top: 50%;
-  left: 60%;
-  animation-delay: -5s;
-}
+.shape-1 { width: 300px; height: 300px; background: #58a6ff; top: 10%; left: 5%; }
+.shape-2 { width: 250px; height: 250px; background: #bc8cff; bottom: 15%; right: 8%; animation-delay: -3s; }
+.shape-3 { width: 200px; height: 200px; background: #ff6b9d; top: 50%; left: 60%; animation-delay: -5s; }
 
 @keyframes floatShape {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -30px) scale(1.1); }
   66% { transform: translate(-20px, 20px) scale(0.9); }
-}`;
-
-        const defaultJS = `let count = 0;
+}`,
+            js: `let count = 0;
 let totalClicks = 0;
 
 function updateDisplay() {
@@ -690,178 +841,348 @@ function increment() {
   count++;
   totalClicks++;
   updateDisplay();
-  animateButton('+');
+  document.querySelector('.card').style.transform = 'scale(1.02)';
+  setTimeout(() => document.querySelector('.card').style.transform = 'scale(1)', 150);
 }
 
 function decrement() {
   count--;
   totalClicks++;
   updateDisplay();
-  animateButton('-');
+  document.querySelector('.card').style.transform = 'scale(0.98)';
+  setTimeout(() => document.querySelector('.card').style.transform = 'scale(1)', 150);
 }
 
-function animateButton(type) {
-  const card = document.querySelector('.card');
-  card.style.transform = type === '+' ? 'scale(1.02)' : 'scale(0.98)';
-  setTimeout(() => {
-    card.style.transform = 'scale(1)';
-  }, 150);
-}
-
-// Initialize
 updateDisplay();
-console.log('🚀 Hybrid Playground ready!');`;
+console.log('🚀 Hybrid Playground ready!');`,
+            csharp: `using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("╔════════════════════════════╗");
+        Console.WriteLine("║   🚀 Hybrid Playground    ║");
+        Console.WriteLine("║   C# Code Demo            ║");
+        Console.WriteLine("╚════════════════════════════╝");
+        Console.WriteLine();
+
+        // Fibonacci Sequence
+        Console.Write("Fibonacci (first 10): ");
+        foreach (int n in Fibonacci(10))
+            Console.Write(n + " ");
+        Console.WriteLine();
+
+        // LINQ Demo
+        var numbers = new List<int> { 3, 7, 2, 9, 1, 5, 8 };
+        var evens = numbers.Where(n => n % 2 == 0).OrderBy(n => n);
+        Console.WriteLine($"Even numbers sorted: {string.Join(", ", evens)}");
+
+        // Async simulation note
+        Console.WriteLine("\\n✅ C# code structure is valid and ready to compile.");
+    }
+
+    static IEnumerable<int> Fibonacci(int count)
+    {
+        int a = 0, b = 1;
+        for (int i = 0; i < count; i++)
+        {
+            yield return a;
+            int temp = a + b;
+            a = b;
+            b = temp;
+        }
+    }
+}`,
+            cpp: `#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+using namespace std;
+
+// Template function for printing vectors
+template<typename T>
+void printVector(const vector<T>& vec, const string& label) {
+    cout << label << ": [ ";
+    for (const auto& item : vec) {
+        cout << item << " ";
+    }
+    cout << "]" << endl;
+}
+
+int main() {
+    cout << "╔════════════════════════════╗" << endl;
+    cout << "║   🚀 Hybrid Playground    ║" << endl;
+    cout << "║   C++ Code Demo           ║" << endl;
+    cout << "╚════════════════════════════╝" << endl << endl;
+
+    // Vector operations
+    vector<int> numbers = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+    printVector(numbers, "Original");
+
+    // Sort
+    sort(numbers.begin(), numbers.end());
+    printVector(numbers, "Sorted  ");
+
+    // Find max element
+    auto maxIt = max_element(numbers.begin(), numbers.end());
+    cout << "Max value: " << *maxIt << endl;
+
+    // Accumulate (sum)
+    int sum = accumulate(numbers.begin(), numbers.end(), 0);
+    cout << "Sum: " << sum << endl;
+
+    // Lambda with for_each
+    cout << "\\nDoubled values: ";
+    for_each(numbers.begin(), numbers.end(), [](int n) {
+        cout << n * 2 << " ";
+    });
+    cout << endl;
+
+    cout << "\\n✅ C++ code structure is valid and ready to compile." << endl;
+    return 0;
+}`
+        };
 
         // Load defaults
-        htmlCode.value = defaultHTML;
-        cssCode.value = defaultCSS;
-        jsCode.value = defaultJS;
+        Object.keys(defaults).forEach(key => {
+            textareas[key].value = defaults[key];
+        });
 
-        // === RUN CODE ===
-        function runCode() {
-            const html = htmlCode.value;
-            const css = cssCode.value;
-            const js = jsCode.value;
+        // === TAB SWITCHING ===
+        function switchTab(tabName) {
+            currentTab = tabName;
 
-            const fullDocument = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>${css}</style>
-</head>
-<body>
-    ${html}
-    <script>
-        try {
-            ${js}
-        } catch (error) {
-            document.body.innerHTML += '<div style="position:fixed;bottom:20px;right:20px;background:#f85149;color:#fff;padding:12px 20px;border-radius:8px;font-family:monospace;z-index:99999;font-size:13px;max-width:400px;"><strong>⚠️ JS Error:</strong> ' + error.message + '</div>';
-            console.error(error);
-        }
-    <\/script>
-</body>
-</html>`;
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
 
-            const blob = new Blob([fullDocument], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
+            // Update panels
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(`panel-${tabName}`).classList.add('active');
 
-            previewFrame.style.display = 'block';
-            previewPlaceholder.style.display = 'none';
-            previewFrame.src = url;
+            // Update output panel
+            updateOutputPanel(tabName);
 
-            // Clean up old blob URL after load
-            previewFrame.onload = () => {
-                URL.revokeObjectURL(url);
-            };
-
-            showToast('Code executed successfully! 🎉', 'success');
+            // Update line numbers
+            updateLineNumbers(tabName);
         }
 
-        // === FORMAT CODE ===
-        function formatCode() {
-            try {
-                // Simple HTML formatting
-                let html = htmlCode.value;
-                html = html.replace(/>\s+</g, '>\n<');
-                html = html.replace(/(<[^\/][^>]*>)([^<]+)(<\/)/g, (match, open, text, close) => {
-                    if (text.trim()) return open + '\n  ' + text.trim() + '\n' + close;
-                    return match;
-                });
-                htmlCode.value = html;
-
-                showToast('Code formatted! ✨', 'success');
-            } catch (e) {
-                showToast('Format failed: ' + e.message, 'error');
+        function updateOutputPanel(tabName) {
+            if (webTabs.includes(tabName)) {
+                outputLabel.textContent = 'Live Preview';
+                previewFrame.classList.remove('hidden');
+                outputPlaceholder.classList.remove('hidden');
+                codeOutputDisplay.classList.remove('visible');
+                // If we have a rendered preview already, keep it; otherwise show placeholder
+                if (!previewFrame.src || previewFrame.src === 'about:blank') {
+                    outputPlaceholder.classList.remove('hidden');
+                }
+            } else {
+                outputLabel.textContent = tabName === 'csharp' ? 'C# Code Preview' : 'C++ Code Preview';
+                previewFrame.classList.add('hidden');
+                outputPlaceholder.classList.add('hidden');
+                codeOutputDisplay.classList.add('visible');
+                renderCodePreview(tabName);
             }
         }
 
-        // === CLEAR ALL ===
-        function clearAll() {
-            htmlCode.value = '';
-            cssCode.value = '';
-            jsCode.value = '';
-            previewFrame.style.display = 'none';
-            previewPlaceholder.style.display = 'flex';
-            previewFrame.src = 'about:blank';
-            showToast('All cleared 🧹', 'success');
+        // === SIMPLE SYNTAX HIGHLIGHT FOR C# / C++ ===
+        function renderCodePreview(tabName) {
+            const code = textareas[tabName].value;
+            const escaped = escapeHTML(code);
+            // Basic keyword highlighting
+            const keywords = tabName === 'csharp'
+                ? ['using','class','static','void','int','string','var','new','public','private','protected','internal',
+                   'foreach','in','yield','return','if','else','for','while','async','await','IEnumerable','List',
+                   'Where','OrderBy','Select','WriteLine','Write','Main','Program','namespace','bool','double','float',
+                   'get','set','value','try','catch','throw','null','true','false']
+                : ['include','iostream','vector','algorithm','numeric','using','namespace','std','cout','cin','endl',
+                   'int','double','float','char','bool','void','auto','const','template','typename','class','struct',
+                   'public','private','protected','return','if','else','for','while','do','switch','case','break',
+                   'continue','sizeof','typedef','static','virtual','override','new','delete','nullptr','true','false',
+                   'sort','max_element','accumulate','for_each','begin','end','push_back','size','main'];
+
+            let highlighted = escaped;
+            keywords.forEach(kw => {
+                const regex = new RegExp(`\\b(${kw})\\b`, 'g');
+                highlighted = highlighted.replace(regex, '<span class="keyword">$1</span>');
+            });
+            // String highlighting
+            highlighted = highlighted.replace(/(&quot;.*?&quot;)/g, '<span class="string">$1</span>');
+            highlighted = highlighted.replace(/(&#39;.*?&#39;)/g, '<span class="string">$1</span>');
+            // Comments
+            highlighted = highlighted.replace(/(\/\/.*)/g, '<span class="comment">$1</span>');
+            // Numbers
+            highlighted = highlighted.replace(/\b(\d+\.?\d*)\b/g, '<span class="number">$1</span>');
+
+            codeOutputDisplay.innerHTML = highlighted;
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // === EXECUTE CODE ===
+        function executeCode() {
+            if (webTabs.includes(currentTab)) {
+                runWebPreview();
+            } else {
+                // For C# / C++, show formatted preview
+                renderCodePreview(currentTab);
+                codeOutputDisplay.classList.add('visible');
+                outputPlaceholder.classList.add('hidden');
+                previewFrame.classList.add('hidden');
+                showToast(`${currentTab.toUpperCase()} code preview updated 📋`, 'info');
+            }
+        }
+
+        function runWebPreview() {
+            const html = textareas.html.value;
+            const css = textareas.css.value;
+            const js = textareas.js.value;
+
+            const fullDoc = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>${css}</style></head>
+<body>${html}
+<script>try{${js}}catch(e){document.body.innerHTML+='<div style="position:fixed;bottom:20px;right:20px;background:#f85149;color:#fff;padding:12px 20px;border-radius:8px;font-family:monospace;z-index:99999;font-size:13px;max-width:400px;"><strong>⚠️ JS Error:</strong> '+e.message+'</div>';console.error(e);}<\/script>
+</body></html>`;
+
+            const blob = new Blob([fullDoc], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+
+            previewFrame.classList.remove('hidden');
+            outputPlaceholder.classList.add('hidden');
+            codeOutputDisplay.classList.remove('visible');
+            previewFrame.src = url;
+            previewFrame.onload = () => URL.revokeObjectURL(url);
+
+            outputLabel.textContent = 'Live Preview';
+            showToast('Web preview rendered! 🎉', 'success');
+        }
+
+        // === FORMAT CURRENT ===
+        function formatCurrentCode() {
+            const ta = textareas[currentTab];
+            let code = ta.value;
+            // Simple indentation cleanup
+            code = code.split('\n').map(line => line.trimRight()).join('\n');
+            ta.value = code;
+            updateLineNumbers(currentTab);
+            if (!webTabs.includes(currentTab)) {
+                renderCodePreview(currentTab);
+            }
+            showToast('Code formatted! ✨', 'success');
+        }
+
+        // === CLEAR CURRENT TAB ===
+        function clearCurrentTab() {
+            textareas[currentTab].value = '';
+            updateLineNumbers(currentTab);
+            if (webTabs.includes(currentTab)) {
+                if (currentTab === 'html' || currentTab === 'css' || currentTab === 'js') {
+                    // If any web tab is cleared, clear preview too
+                }
+            } else {
+                codeOutputDisplay.innerHTML = '';
+                codeOutputDisplay.classList.add('visible');
+                outputPlaceholder.classList.add('hidden');
+                previewFrame.classList.add('hidden');
+            }
+            showToast(`${currentTab.toUpperCase()} tab cleared 🧹`, 'success');
+        }
+
+        // === COPY CURRENT CODE ===
+        function copyCurrentCode() {
+            const code = textareas[currentTab].value;
+            navigator.clipboard.writeText(code).then(() => {
+                showToast('Code copied to clipboard! 📋', 'info');
+            }).catch(() => {
+                // Fallback
+                textareas[currentTab].select();
+                document.execCommand('copy');
+                showToast('Code copied! 📋', 'info');
+            });
         }
 
         // === TOAST ===
         let toastTimer;
-        function showToast(message, type) {
+        function showToast(msg, type) {
             clearTimeout(toastTimer);
-            toast.textContent = message;
-            toast.className = 'toast ' + type + ' show';
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            toast.textContent = msg;
+            toast.className = `toast ${type} show`;
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
         }
+
+        // === LINE NUMBERS ===
+        function updateLineNumbers(tabName) {
+            const lines = textareas[tabName].value.split('\n').length;
+            let nums = '';
+            for (let i = 1; i <= lines; i++) nums += i + '\n';
+            lineNumDivs[tabName].textContent = nums;
+        }
+
+        // Attach listeners
+        Object.keys(textareas).forEach(key => {
+            textareas[key].addEventListener('input', () => {
+                updateLineNumbers(key);
+                if (!webTabs.includes(key) && currentTab === key) {
+                    renderCodePreview(key);
+                }
+            });
+            // Tab key support
+            textareas[key].addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const ta = e.target;
+                    const start = ta.selectionStart;
+                    const end = ta.selectionEnd;
+                    ta.value = ta.value.substring(0, start) + '  ' + ta.value.substring(end);
+                    ta.selectionStart = ta.selectionEnd = start + 2;
+                    updateLineNumbers(key);
+                }
+            });
+        });
+
+        // Initial line numbers
+        Object.keys(textareas).forEach(key => updateLineNumbers(key));
 
         // === KEYBOARD SHORTCUTS ===
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'Enter') {
                 e.preventDefault();
-                runCode();
+                executeCode();
             }
             if (e.ctrlKey && e.key === 's') {
                 e.preventDefault();
-                formatCode();
+                formatCurrentCode();
             }
             if (e.ctrlKey && e.shiftKey && e.key === 'K') {
                 e.preventDefault();
-                clearAll();
+                clearCurrentTab();
+            }
+            // Tab switching with Ctrl+1 through Ctrl+5
+            const tabKeys = { '1': 'html', '2': 'css', '3': 'js', '4': 'csharp', '5': 'cpp' };
+            if (e.ctrlKey && tabKeys[e.key]) {
+                e.preventDefault();
+                switchTab(tabKeys[e.key]);
             }
         });
 
-        // === TAB SUPPORT IN TEXTAREAS ===
-        document.querySelectorAll('textarea').forEach(textarea => {
-            textarea.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    e.preventDefault();
-                    const start = textarea.selectionStart;
-                    const end = textarea.selectionEnd;
-                    textarea.value = textarea.value.substring(0, start) + '  ' + textarea.value.substring(end);
-                    textarea.selectionStart = textarea.selectionEnd = start + 2;
-                }
-            });
-        });
+        // === INITIAL SETUP ===
+        updateOutputPanel('html');
+        setTimeout(runWebPreview, 400);
 
-        // === LINE NUMBERS UPDATE ===
-        function updateLineNumbers(textarea, lineNumbersDiv) {
-            const lines = textarea.value.split('\n').length;
-            let nums = '';
-            for (let i = 1; i <= lines; i++) {
-                nums += i + '\n';
-            }
-            lineNumbersDiv.textContent = nums;
-        }
-
-        htmlCode.addEventListener('input', () => updateLineNumbers(htmlCode, document.getElementById('htmlLineNumbers')));
-        cssCode.addEventListener('input', () => updateLineNumbers(cssCode, document.getElementById('cssLineNumbers')));
-        jsCode.addEventListener('input', () => updateLineNumbers(jsCode, document.getElementById('jsLineNumbers')));
-
-        // Initial line numbers
-        updateLineNumbers(htmlCode, document.getElementById('htmlLineNumbers'));
-        updateLineNumbers(cssCode, document.getElementById('cssLineNumbers'));
-        updateLineNumbers(jsCode, document.getElementById('jsLineNumbers'));
-
-        // === SYNC SCROLL ===
-        const allTextareas = [htmlCode, cssCode, jsCode];
-        let syncing = false;
-
-        // === PANEL RESIZE WITH DRAG ===
-        // (Native CSS resize handles this, but we enhance with keyboard-friendly min-widths)
-
-        // === INITIAL RUN ON LOAD ===
-        setTimeout(runCode, 500);
-
-        console.log('%c🛠️ Hybrid Code Playground %cReady',
-            'font-size:1.2rem;font-weight:bold;color:#58a6ff;',
-            'color:#8b949e;');
-        console.log('%c💡 Tip: Press Ctrl+Enter to run, Ctrl+S to format, Ctrl+Shift+K to clear',
+        console.log('%c🛠️ Hybrid Code Playground %cReady — 5 Languages',
+            'font-size:1.2rem;font-weight:bold;color:#58a6ff;', 'color:#8b949e;');
+        console.log('%c💡 Ctrl+1..5 to switch tabs | Ctrl+Enter to run | Ctrl+S to format | Ctrl+Shift+K to clear',
             'color:#3fb950;');
     </script>
-
 </body>
 </html>
