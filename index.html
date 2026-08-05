@@ -1,1373 +1,866 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>HYBRID ROSTER · Modding Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Code Playground</title>
     <style>
-        /* ================================================================
-           HYBRID ROSTER — Full Forum Website
-           Inspired by the HYBRID ROSTER image
-           Animated background + gradient text + auth system + forum
-           Engineered by Bread — no limits, pure code
-           ================================================================ */
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-glow: rgba(88, 166, 255, 0.3);
+            --html-color: #e34c26;
+            --css-color: #563d7c;
+            --js-color: #f7df1e;
+            --success: #3fb950;
+            --danger: #f85149;
+            --radius: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-        /* ---------- RESET ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --bg-dark: #0a0c18;
-            --bg-card: rgba(14, 20, 40, 0.85);
-            --border-neon: rgba(42, 255, 176, 0.12);
-            --text-main: #eef5ff;
-            --text-dim: #6a84b4;
-            --cyan: #2affb0;
-            --pink: #ff3d9a;
-            --orange: #ff8c42;
-            --purple: #b07cff;
-            --green: #00e67a;
-            --radius: 16px;
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --mono: 'Courier New', 'Fira Code', monospace;
-            --shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: var(--font);
-            background: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            padding: 16px;
-        }
-
-        /* ---------- ANIMATED BACKGROUND ---------- */
-        .bg-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+            font-family: 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             height: 100vh;
-            z-index: 0;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
-            pointer-events: none;
+            user-select: none;
         }
 
-        .bg-gradient {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: conic-gradient(from 0deg, #0a0c18, #141c3a, #0a0c18, #1a0a2a, #0a0c18);
-            animation: rotateBg 40s linear infinite;
-            opacity: 0.8;
-        }
-
-        @keyframes rotateBg {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-            50% {
-                transform: rotate(180deg) scale(1.1);
-            }
-            100% {
-                transform: rotate(360deg) scale(1);
-            }
-        }
-
-        .bg-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.3;
-        }
-
-        .bg-orb.a {
-            width: 600px;
-            height: 600px;
-            background: var(--cyan);
-            top: -200px;
-            right: -200px;
-            animation: floatOrb 25s ease-in-out infinite alternate;
-        }
-
-        .bg-orb.b {
-            width: 500px;
-            height: 500px;
-            background: var(--pink);
-            bottom: -150px;
-            left: -150px;
-            animation: floatOrb 30s ease-in-out infinite alternate-reverse;
-        }
-
-        .bg-orb.c {
-            width: 400px;
-            height: 400px;
-            background: var(--purple);
-            top: 40%;
-            left: 40%;
-            animation: floatOrb 35s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatOrb {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                transform: translate(80px, 60px) scale(1.3);
-            }
-        }
-
-        /* ---------- PARTICLES (Canvas) ---------- */
-        #particlesCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.5;
-        }
-
-        /* ---------- MAIN CONTAINER ---------- */
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1100px;
-            width: 100%;
-            padding: 20px 24px 30px;
-        }
-
-        /* ---------- GLASS CARD ---------- */
-        .glass {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid var(--border-neon);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: 0.3s;
-        }
-
-        /* ---------- HEADER ---------- */
+        /* === HEADER === */
         .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 14px;
-            padding: 18px 24px;
-            margin-bottom: 24px;
+            justify-content: space-between;
+            z-index: 100;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .logo {
-            font-family: var(--mono);
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .logo .gradient-text {
-            background: linear-gradient(90deg, var(--cyan), var(--pink), var(--orange), var(--cyan));
-            background-size: 300% 100%;
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--html-color), var(--accent), var(--css-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            animation: logoPulse 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
+            50% { box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #e6edf3, #58a6ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientMove 4s linear infinite;
-        }
-
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 300% 50%;
-            }
-        }
-
-        .logo .sub {
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            -webkit-text-fill-color: var(--text-dim);
-            letter-spacing: 2px;
-            display: block;
-            font-weight: 400;
         }
 
         .header-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 8px 20px;
-            border-radius: 60px;
-            border: 1px solid var(--border-neon);
-            background: transparent;
-            color: var(--text-main);
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            padding: 9px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
             cursor: pointer;
-            transition: 0.3s;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
-            border-color: var(--cyan);
-            color: var(--cyan);
-            box-shadow: 0 0 30px rgba(42, 255, 176, 0.04);
+            border-color: var(--accent);
+            background: #1c2533;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(88, 166, 255, 0.2);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--cyan), var(--pink));
-            border: none;
-            color: #0a0c18;
+        .btn:active {
+            transform: scale(0.96);
+            transition: 0.1s;
         }
 
-        .btn-primary:hover {
-            transform: scale(1.04);
-            box-shadow: 0 0 40px rgba(42, 255, 176, 0.12);
-            color: #0a0c18;
-        }
-
-        .btn-danger {
-            border-color: rgba(255, 61, 154, 0.2);
-            color: var(--pink);
-        }
-
-        .btn-danger:hover {
-            border-color: var(--pink);
-            color: var(--pink);
-        }
-
-        /* ---------- USER BADGE ---------- */
-        .user-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 4px 16px 4px 12px;
-            border-radius: 60px;
-            border: 1px solid var(--border-neon);
-            background: rgba(42, 255, 176, 0.02);
-        }
-
-        .user-badge .avatar {
-            font-size: 1.6rem;
-        }
-
-        .user-badge .uname {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--cyan);
-        }
-
-        .user-badge .role-tag {
-            font-size: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-dim);
-            background: rgba(42, 255, 176, 0.04);
-            padding: 1px 10px;
-            border-radius: 40px;
-            border: 1px solid rgba(42, 255, 176, 0.04);
-        }
-
-        /* ---------- AUTH MODAL ---------- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.open {
-            display: flex;
-        }
-
-        .modal {
-            max-width: 420px;
-            width: 100%;
-            padding: 30px 28px 34px;
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-neon);
-            border-radius: var(--radius);
-            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
-            animation: modalPop 0.3s ease;
-        }
-
-        @keyframes modalPop {
-            0% {
-                transform: scale(0.92);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .modal h2 {
-            font-family: var(--mono);
-            font-size: 1.4rem;
-            margin-bottom: 6px;
-            background: linear-gradient(135deg, var(--cyan), var(--pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .modal p.sub {
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
-        .modal .form-group {
-            margin-bottom: 14px;
-        }
-
-        .modal .form-group label {
-            display: block;
-            font-family: var(--mono);
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-dim);
-            margin-bottom: 3px;
-        }
-
-        .modal .form-group input {
-            width: 100%;
-            padding: 10px 14px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-neon);
-            border-radius: 10px;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            outline: none;
-            transition: 0.25s;
-        }
-
-        .modal .form-group input:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 30px rgba(42, 255, 176, 0.02);
-        }
-
-        .modal .form-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 18px;
-            flex-wrap: wrap;
-        }
-
-        .modal .form-actions .btn {
-            flex: 1;
-            text-align: center;
-            min-width: 100px;
-        }
-
-        .modal .switch-auth {
-            margin-top: 16px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-        }
-
-        .modal .switch-auth a {
-            color: var(--cyan);
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .modal .switch-auth a:hover {
-            color: var(--pink);
-        }
-
-        .modal .close-modal {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            background: none;
-            border: none;
-            color: var(--text-dim);
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .modal .close-modal:hover {
-            color: var(--pink);
-        }
-
-        .modal {
-            position: relative;
-        }
-
-        /* ---------- ROSTER / TEAM SECTION ---------- */
-        .roster-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 18px;
-            margin: 20px 0 28px;
-        }
-
-        .roster-card {
-            padding: 18px 18px 20px;
-            text-align: center;
-            transition: 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .roster-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(42, 255, 176, 0.15);
-        }
-
-        .roster-card .avatar {
-            font-size: 3.2rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .roster-card .name {
-            font-family: var(--mono);
-            font-size: 1.1rem;
+        .btn-run {
+            background: var(--success);
+            border-color: var(--success);
+            color: #000;
             font-weight: 700;
-            color: var(--text-main);
         }
 
-        .roster-card .handle {
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            letter-spacing: 0.5px;
+        .btn-run:hover {
+            background: #4ade80;
+            border-color: #4ade80;
+            box-shadow: 0 4px 20px rgba(63, 185, 80, 0.4);
         }
 
-        .roster-card .role {
-            display: inline-block;
-            margin-top: 6px;
-            padding: 2px 14px;
-            border-radius: 40px;
-            font-size: 0.55rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-            background: rgba(42, 255, 176, 0.02);
+        .btn-clear {
+            border-color: var(--danger);
+            color: var(--danger);
         }
 
-        .roster-card .role.founder {
-            border-color: var(--orange);
-            color: var(--orange);
-        }
-        .roster-card .role.coowner {
-            border-color: var(--pink);
-            color: var(--pink);
+        .btn-clear:hover {
+            background: rgba(248, 81, 73, 0.1);
+            box-shadow: 0 4px 15px rgba(248, 81, 73, 0.2);
         }
 
-        .roster-card .bio {
-            color: var(--text-dim);
-            font-size: 0.8rem;
-            margin: 8px 0 4px;
-            line-height: 1.5;
-        }
-
-        /* ---------- FORUM / POSTS ---------- */
-        .forum-header {
+        /* === MAIN LAYOUT === */
+        .main-container {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 14px 0 10px;
-            border-bottom: 1px solid var(--border-neon);
-            margin-bottom: 18px;
-        }
-
-        .forum-header h2 {
-            font-family: var(--mono);
-            font-size: 1.3rem;
-            color: var(--orange);
-        }
-
-        .forum-header .count {
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            color: var(--text-dim);
-        }
-
-        /* ---------- POST FORM ---------- */
-        .post-form {
-            padding: 18px 20px 22px;
-            margin-bottom: 24px;
-        }
-
-        .post-form h3 {
-            font-family: var(--mono);
-            font-size: 0.9rem;
-            color: var(--cyan);
-            margin-bottom: 12px;
-        }
-
-        .post-form .form-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-
-        .post-form .form-row input,
-        .post-form .form-row select {
             flex: 1;
-            min-width: 140px;
-            padding: 8px 14px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-neon);
-            border-radius: 10px;
-            color: var(--text-main);
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.25s;
+            gap: 2px;
+            background: var(--border);
+            animation: fadeIn 0.6s ease-out 0.2s both;
         }
 
-        .post-form .form-row input:focus,
-        .post-form .form-row select:focus {
-            border-color: var(--cyan);
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .post-form textarea {
-            width: 100%;
-            padding: 10px 14px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-neon);
-            border-radius: 10px;
-            color: var(--text-main);
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.25s;
-            resize: vertical;
-            min-height: 70px;
-            font-family: var(--font);
-        }
-
-        .post-form textarea:focus {
-            border-color: var(--cyan);
-        }
-
-        .post-form .btn-submit {
-            margin-top: 10px;
-            padding: 8px 28px;
-            background: linear-gradient(135deg, var(--cyan), var(--pink));
-            border: none;
-            border-radius: 60px;
-            color: #0a0c18;
-            font-family: var(--mono);
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .post-form .btn-submit:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 40px rgba(42, 255, 176, 0.08);
-        }
-
-        /* ---------- POST LIST ---------- */
-        .post-list {
+        .panel {
+            background: var(--bg-secondary);
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            flex: 1;
+            min-width: 0;
+            transition: var(--transition);
         }
 
-        .post-item {
-            padding: 16px 18px 18px;
-            transition: 0.25s;
-            animation: fadeUp 0.3s ease;
+        .panel.resizable {
+            resize: horizontal;
+            overflow: auto;
+            min-width: 250px;
+            max-width: 50%;
         }
 
-        .post-item:hover {
-            border-color: rgba(42, 255, 176, 0.08);
-        }
-
-        @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .post-item .p-header {
+        .panel-header {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 6px 12px;
-            margin-bottom: 2px;
-        }
-
-        .post-item .p-title {
-            font-family: var(--mono);
-            font-size: 1rem;
-            font-weight: 700;
-            word-break: break-word;
-        }
-
-        .post-item .p-category {
-            font-family: var(--mono);
-            font-size: 0.5rem;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 2px 12px;
-            border-radius: 40px;
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-            background: rgba(42, 255, 176, 0.02);
-            white-space: nowrap;
+            color: var(--text-secondary);
         }
 
-        .post-item .p-category.apk {
-            border-color: var(--orange);
-            color: var(--orange);
-        }
-        .post-item .p-category.tutorial {
-            border-color: var(--pink);
-            color: var(--pink);
-        }
-        .post-item .p-category.showcase {
-            border-color: var(--cyan);
-            color: var(--cyan);
-        }
-        .post-item .p-category.support {
-            border-color: #ffb74d;
-            color: #ffb74d;
+        .panel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: dotPulse 2s ease-in-out infinite;
         }
 
-        .post-item .p-content {
-            color: var(--text-dim);
+        .panel-dot.html { background: var(--html-color); animation-delay: 0s; }
+        .panel-dot.css { background: var(--css-color); animation-delay: 0.3s; }
+        .panel-dot.js { background: var(--js-color); animation-delay: 0.6s; }
+        .panel-dot.preview { background: var(--accent); animation-delay: 0.9s; }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        .editor-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: none;
+            padding: 16px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
             font-size: 0.85rem;
-            margin: 4px 0 8px;
-            word-break: break-word;
+            line-height: 1.7;
+            resize: none;
+            outline: none;
+            tab-size: 2;
+            transition: var(--transition);
+        }
+
+        textarea:focus {
+            box-shadow: inset 0 0 0 1px var(--accent);
+            background: #0c1118;
+        }
+
+        textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.4;
+            font-style: italic;
+        }
+
+        .line-numbers {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.75rem;
+            padding: 16px 8px;
+            text-align: right;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            overflow: hidden;
+            line-height: 1.7;
+        }
+
+        .editor-wrapper:hover .line-numbers,
+        textarea:focus ~ .line-numbers {
+            opacity: 0.6;
+        }
+
+        /* Preview Panel */
+        .preview-frame {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: #fff;
+            transition: var(--transition);
+        }
+
+        .preview-placeholder {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            gap: 16px;
+            animation: floatUp 4s ease-in-out infinite;
+        }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .preview-placeholder .icon {
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .preview-placeholder .hint {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            text-align: center;
             line-height: 1.6;
         }
 
-        .post-item .p-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px 12px;
-            font-family: var(--mono);
-            font-size: 0.55rem;
-            color: var(--text-dim);
-            border-top: 1px solid rgba(42, 255, 176, 0.03);
-            padding-top: 8px;
-            margin-top: 2px;
-        }
-
-        .post-item .p-footer .author {
-            color: var(--cyan);
-        }
-
-        .post-item .p-footer .delete-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 61, 154, 0.1);
-            border-radius: 40px;
-            padding: 2px 12px;
-            font-family: var(--mono);
-            font-size: 0.5rem;
-            color: var(--pink);
-            cursor: pointer;
-            transition: 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .post-item .p-footer .delete-btn:hover {
-            background: rgba(255, 61, 154, 0.04);
-            border-color: var(--pink);
-        }
-
-        /* ---------- EMPTY STATE ---------- */
-        .empty-state {
-            text-align: center;
-            padding: 40px 16px;
-            color: var(--text-dim);
-            font-family: var(--mono);
+        .preview-placeholder .shortcut {
+            background: var(--bg-tertiary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: monospace;
             font-size: 0.8rem;
-            border: 1px dashed rgba(42, 255, 176, 0.04);
-            border-radius: var(--radius);
+            border: 1px solid var(--border);
         }
 
-        .empty-state .big {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 6px;
+        /* === TOAST === */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* ---------- FOOTER ---------- */
-        .footer {
-            margin-top: 36px;
-            padding: 18px 16px;
-            border-top: 1px solid var(--border-neon);
-            text-align: center;
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            letter-spacing: 0.5px;
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .footer .heart {
-            color: var(--pink);
-        }
-        .footer .highlight {
-            color: var(--cyan);
+        .toast.success { border-color: var(--success); color: var(--success); }
+        .toast.error { border-color: var(--danger); color: var(--danger); }
+
+        /* === RESIZE HANDLE === */
+        .resize-handle {
+            width: 4px;
+            cursor: col-resize;
+            background: transparent;
+            transition: background 0.2s;
+            flex-shrink: 0;
         }
 
-        /* ---------- RESPONSIVE ---------- */
+        .resize-handle:hover,
+        .resize-handle.active {
+            background: var(--accent);
+        }
+
+        /* === RESPONSIVE === */
         @media (max-width: 768px) {
-            .container {
-                padding: 12px 12px 20px;
+            .main-container {
+                flex-direction: column;
+            }
+            .panel.resizable {
+                resize: none;
+                min-width: auto;
+                max-width: 100%;
+                min-height: 150px;
+                max-height: 40vh;
             }
             .header {
-                padding: 14px 16px;
-                flex-direction: column;
-                align-items: stretch;
+                padding: 10px 14px;
+                flex-wrap: wrap;
+                gap: 8px;
             }
-            .logo {
-                font-size: 1.4rem;
-                text-align: center;
-            }
-            .header-actions {
-                justify-content: center;
-            }
-            .roster-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .post-form .form-row {
-                flex-direction: column;
-            }
-            .modal {
-                max-width: 100%;
-                margin: 12px;
+            .logo-text {
+                font-size: 1.1rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .roster-grid {
-                grid-template-columns: 1fr;
-            }
-            .logo {
-                font-size: 1.2rem;
-            }
-            .user-badge {
-                font-size: 0.7rem;
-                padding: 2px 12px 2px 8px;
-            }
-            .user-badge .avatar {
-                font-size: 1.2rem;
-            }
-            .header-actions .btn {
-                font-size: 0.6rem;
-                padding: 6px 14px;
-            }
-            .post-item .p-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-
-        /* ---------- UTILITY ---------- */
-        .hidden {
-            display: none !important;
+        ::-webkit-scrollbar-track {
+            background: transparent;
         }
-
-        .mt-8 {
-            margin-top: 8px;
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
         }
-        .mb-8 {
-            margin-bottom: 8px;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .gap-8 {
-            gap: 8px;
-        }
-        .flex-wrap {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .items-center {
-            align-items: center;
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ANIMATED BACKGROUND ===== -->
-    <div class="bg-wrapper">
-        <div class="bg-gradient"></div>
-        <div class="bg-orb a"></div>
-        <div class="bg-orb b"></div>
-        <div class="bg-orb c"></div>
-    </div>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">&lt;/&gt;</div>
+            <span class="logo-text">Hybrid Playground</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn" onclick="formatCode()" title="Format Code">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 8 16 13"/><polyline points="8 3 3 8 8 13"/><line x1="12" y1="20" x2="12" y2="10"/></svg>
+                Format
+            </button>
+            <button class="btn btn-clear" onclick="clearAll()" title="Clear All">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                Clear
+            </button>
+            <button class="btn btn-run" onclick="runCode()" title="Run (Ctrl+Enter)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Run
+            </button>
+        </div>
+    </header>
 
-    <!-- ===== PARTICLES CANVAS ===== -->
-    <canvas id="particlesCanvas"></canvas>
+    <!-- MAIN CONTENT -->
+    <div class="main-container" id="mainContainer">
 
-    <!-- ===== AUTH MODAL ===== -->
-    <div class="modal-overlay" id="authModal">
-        <div class="modal">
-            <button class="close-modal" id="closeModalBtn">✕</button>
-            <h2 id="authTitle">// SIGN IN</h2>
-            <p class="sub" id="authSub">Sign in to your Hybrid Roster account</p>
-
-            <form id="authForm">
-                <div class="form-group" id="usernameGroup">
-                    <label for="authUsername">username</label>
-                    <input type="text" id="authUsername" placeholder="Enter username" required />
-                </div>
-                <div class="form-group" id="passwordGroup">
-                    <label for="authPassword">password</label>
-                    <input type="password" id="authPassword" placeholder="Enter password" required />
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" id="authSubmitBtn">sign in</button>
-                    <button type="button" class="btn" id="authSwitchBtn">sign up</button>
-                </div>
-            </form>
-
-            <div class="switch-auth">
-                <span id="authSwitchText">Don't have an account? <a id="authSwitchLink">Sign up</a></span>
+        <!-- HTML Panel -->
+        <div class="panel resizable" id="htmlPanel">
+            <div class="panel-header">
+                <span class="panel-dot html"></span> HTML
             </div>
+            <div class="editor-wrapper">
+                <textarea id="htmlCode" placeholder="<!-- Write your HTML here -->" spellcheck="false"></textarea>
+                <div class="line-numbers" id="htmlLineNumbers"></div>
+            </div>
+        </div>
+
+        <!-- CSS Panel -->
+        <div class="panel resizable" id="cssPanel">
+            <div class="panel-header">
+                <span class="panel-dot css"></span> CSS
+            </div>
+            <div class="editor-wrapper">
+                <textarea id="cssCode" placeholder="/* Write your CSS here */" spellcheck="false"></textarea>
+                <div class="line-numbers" id="cssLineNumbers"></div>
+            </div>
+        </div>
+
+        <!-- JS Panel -->
+        <div class="panel resizable" id="jsPanel">
+            <div class="panel-header">
+                <span class="panel-dot js"></span> JavaScript
+            </div>
+            <div class="editor-wrapper">
+                <textarea id="jsCode" placeholder="// Write your JavaScript here" spellcheck="false"></textarea>
+                <div class="line-numbers" id="jsLineNumbers"></div>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="panel" id="previewPanel" style="flex: 1.2;">
+            <div class="panel-header">
+                <span class="panel-dot preview"></span> Live Preview
+            </div>
+            <div class="preview-placeholder" id="previewPlaceholder">
+                <div class="icon">🚀</div>
+                <div class="hint">Click <strong>Run</strong> or press <span class="shortcut">Ctrl + Enter</span><br>to see your code come alive</div>
+            </div>
+            <iframe id="previewFrame" class="preview-frame" style="display:none;" sandbox="allow-scripts allow-modals allow-same-origin" title="Live Preview"></iframe>
         </div>
     </div>
 
-    <!-- ===== MAIN CONTAINER ===== -->
-    <div class="container">
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
 
-        <!-- ===== HEADER ===== -->
-        <header class="header glass">
-            <div class="logo">
-                <span class="gradient-text">// HYBRID ROSTER</span>
-                <span class="sub">⏣ modding · gorilla tag · apk</span>
-            </div>
-            <div class="header-actions">
-                <div id="userBadge" class="user-badge hidden">
-                    <span class="avatar" id="userAvatar">🦍</span>
-                    <span class="uname" id="userName">Lucky</span>
-                    <span class="role-tag" id="userRole">FOUNDER</span>
-                </div>
-                <button class="btn" id="authOpenBtn">sign in</button>
-                <button class="btn btn-danger hidden" id="logoutBtn">logout</button>
-            </div>
-        </header>
-
-        <!-- ===== ROSTER / TEAM ===== -->
-        <section>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
-                <h2 style="font-family:var(--mono);font-size:1.2rem;color:var(--orange);">✦ ROSTER</h2>
-                <span style="font-family:var(--mono);font-size:0.6rem;color:var(--text-dim);">@HybridModdingHub · 8 views</span>
-            </div>
-
-            <div class="roster-grid">
-                <!-- FOUNDER -->
-                <div class="roster-card glass">
-                    <span class="avatar">🍀</span>
-                    <div class="name">Lucky</div>
-                    <div class="handle">@LK · 21</div>
-                    <span class="role founder">FOUNDER</span>
-                    <div class="bio">Gorilla tag combos &amp; i playfab dox — i WILL mod your game</div>
-                </div>
-                <div class="roster-card glass">
-                    <span class="avatar">⚡</span>
-                    <div class="name">Vexy</div>
-                    <div class="handle">@VX · 0</div>
-                    <span class="role founder">FOUNDER</span>
-                    <div class="bio">Egotistical skid that loves skidding with lucky</div>
-                </div>
-
-                <!-- CO-OWNER -->
-                <div class="roster-card glass">
-                    <span class="avatar">🐱</span>
-                    <div class="name">Catlover</div>
-                    <div class="handle">@CL · 1</div>
-                    <span class="role coowner">CO-OWNER</span>
-                    <div class="bio">Extremely Advanced claude AI skid &amp; gorilla tag copy harm combos</div>
-                </div>
-                <div class="roster-card glass">
-                    <span class="avatar">🌀</span>
-                    <div class="name">Zyko</div>
-                    <div class="handle">@ZK · 2</div>
-                    <span class="role coowner">CO-OWNER</span>
-                    <div class="bio">Im a real gorilla tag combos &amp; skidder — i WILL mod your game</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== FORUM ===== -->
-        <section>
-            <div class="forum-header">
-                <h2>📡 FORUM</h2>
-                <span class="count" id="postCount">0 threads</span>
-            </div>
-
-            <!-- POST FORM -->
-            <div class="post-form glass" id="postFormSection">
-                <h3>✦ create thread</h3>
-                <form id="postForm">
-                    <div class="form-row">
-                        <input type="text" id="postTitle" placeholder="Thread title..." required />
-                        <select id="postCategory">
-                            <option value="APK Downloads">APK Downloads</option>
-                            <option value="Modding Tutorials">Modding Tutorials</option>
-                            <option value="Fangame Showcase">Fangame Showcase</option>
-                            <option value="Help & Support">Help & Support</option>
-                            <option value="General">General</option>
-                        </select>
-                    </div>
-                    <textarea id="postContent" placeholder="What's on your mind?" required></textarea>
-                    <button type="submit" class="btn-submit">⏎ post thread</button>
-                </form>
-            </div>
-
-            <!-- POST LIST -->
-            <div class="post-list" id="postList">
-                <!-- rendered by JavaScript -->
-            </div>
-        </section>
-
-        <!-- ===== FOOTER ===== -->
-        <footer class="footer">
-            <span class="highlight">⏣</span> HYBRID ROSTER · built with <span class="heart">♥</span> for gorilla tag modders<br />
-            <span style="opacity:0.4;font-size:0.55rem;">all data saved locally · no limits</span>
-        </footer>
-
-    </div>
-
-    <!-- ================================================================ -->
-    <!-- ===== JAVASCRIPT ===== -->
-    <!-- ================================================================ -->
     <script>
-        (function() {
-            'use strict';
+        // === DOM ELEMENTS ===
+        const htmlCode = document.getElementById('htmlCode');
+        const cssCode = document.getElementById('cssCode');
+        const jsCode = document.getElementById('jsCode');
+        const previewFrame = document.getElementById('previewFrame');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const toast = document.getElementById('toast');
+        const htmlPanel = document.getElementById('htmlPanel');
+        const cssPanel = document.getElementById('cssPanel');
+        const jsPanel = document.getElementById('jsPanel');
 
-            // ---------- PARTICLES ----------
-            const canvas = document.getElementById('particlesCanvas');
-            const ctx = canvas.getContext('2d');
-            let W, H;
+        // === DEFAULT TEMPLATE ===
+        const defaultHTML = `<div class="container">
+  <div class="card">
+    <h1>✨ Hybrid Playground</h1>
+    <p class="subtitle">Edit HTML, CSS, and JS — See instant magic.</p>
+    <div class="counter">
+      <button onclick="decrement()" class="btn-demo">−</button>
+      <span id="count" class="count-display">0</span>
+      <button onclick="increment()" class="btn-demo">+</button>
+    </div>
+    <p class="hint">You clicked <strong id="clickCount">0</strong> times</p>
+  </div>
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+</div>`;
 
-            function resizeCanvas() {
-                W = canvas.width = window.innerWidth;
-                H = canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
+        const defaultCSS = `*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-            const particles = [];
-            const COUNT = 80;
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e6edf3;
+  overflow: hidden;
+}
 
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * W;
-                    this.y = Math.random() * H;
-                    this.vx = (Math.random() - 0.5) * 0.4;
-                    this.vy = (Math.random() - 0.5) * 0.4;
-                    this.r = Math.random() * 1.8 + 0.8;
-                    this.alpha = Math.random() * 0.5 + 0.15;
-                }
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    if (this.x < 0 || this.x > W) this.vx *= -1;
-                    if (this.y < 0 || this.y > H) this.vy *= -1;
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(42, 255, 176, ${this.alpha})`;
-                    ctx.fill();
-                }
-            }
+.container {
+  perspective: 1000px;
+}
 
-            for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+.card {
+  background: rgba(22, 27, 34, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  animation: cardEntry 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 10;
+}
 
-            function drawLines() {
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(42, 255, 176, ${0.04 * (1 - dist / 120)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
+@keyframes cardEntry {
+  from {
+    opacity: 0;
+    transform: translateY(40px) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
 
-            function animateParticles() {
-                ctx.clearRect(0, 0, W, H);
-                particles.forEach(p => { p.update();
-                    p.draw(); });
-                drawLines();
-                requestAnimationFrame(animateParticles);
-            }
-            animateParticles();
+h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #58a6ff, #bc8cff, #ff6b9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-            // ---------- STORAGE KEYS ----------
-            const USER_KEY = 'hybrid_user';
-            const POSTS_KEY = 'hybrid_posts';
+.subtitle {
+  color: #8b949e;
+  font-size: 1rem;
+  margin-bottom: 32px;
+}
 
-            // ---------- USER SYSTEM ----------
-            let currentUser = null;
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
 
-            function loadUser() {
-                try {
-                    const raw = localStorage.getItem(USER_KEY);
-                    return raw ? JSON.parse(raw) : null;
-                } catch (_) { return null; }
-            }
+.btn-demo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #e6edf3;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
 
-            function saveUser(user) {
-                localStorage.setItem(USER_KEY, JSON.stringify(user));
-            }
+.btn-demo:hover {
+  background: rgba(88, 166, 255, 0.2);
+  border-color: #58a6ff;
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(88, 166, 255, 0.3);
+}
 
-            function clearUser() {
-                localStorage.removeItem(USER_KEY);
-            }
+.btn-demo:active {
+  transform: scale(0.9);
+}
 
-            // ---------- POSTS ----------
-            function loadPosts() {
-                try {
-                    const raw = localStorage.getItem(POSTS_KEY);
-                    return raw ? JSON.parse(raw) : [];
-                } catch (_) { return []; }
-            }
+.count-display {
+  font-size: 3rem;
+  font-weight: 800;
+  min-width: 80px;
+  color: #e6edf3;
+}
 
-            function savePosts(posts) {
-                localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
-            }
+.hint {
+  color: #8b949e;
+  font-size: 0.9rem;
+}
 
-            // ---------- DEFAULT POSTS (if empty) ----------
-            function getDefaultPosts() {
-                return [{
-                    id: Date.now() - 100000,
-                    title: 'Welcome to Hybrid Roster',
-                    category: 'General',
-                    content: 'This is the official forum for Gorilla Tag copy modding, APK sharing, and more. Post your mods, questions, and showcase your work!',
-                    author: 'Lucky',
-                    timestamp: Date.now() - 100000
-                }, {
-                    id: Date.now() - 50000,
-                    title: 'How to mod Gorilla Tag copies',
-                    category: 'Modding Tutorials',
-                    content: 'Here\'s a quick guide: 1. Get the APK 2. Use a modding tool 3. Inject your custom assets 4. Test and share!',
-                    author: 'Zyko',
-                    timestamp: Date.now() - 50000
-                }];
-            }
+/* Floating shapes */
+.floating-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
 
-            // ---------- RENDER POSTS ----------
-            function renderPosts() {
-                let posts = loadPosts();
-                if (posts.length === 0) {
-                    posts = getDefaultPosts();
-                    savePosts(posts);
-                }
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: floatShape 8s ease-in-out infinite;
+}
 
-                const sorted = [...posts].sort((a, b) => b.timestamp - a.timestamp);
-                const countEl = document.getElementById('postCount');
-                countEl.textContent = `${sorted.length} thread${sorted.length !== 1 ? 's' : ''}`;
+.shape-1 {
+  width: 300px;
+  height: 300px;
+  background: #58a6ff;
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
 
-                if (sorted.length === 0) {
-                    document.getElementById('postList').innerHTML = `
-                            <div class="empty-state">
-                                <span class="big">🔍</span>
-                                no threads yet — be the first to post!
-                            </div>
-                        `;
-                    return;
-                }
+.shape-2 {
+  width: 250px;
+  height: 250px;
+  background: #bc8cff;
+  bottom: 15%;
+  right: 8%;
+  animation-delay: -3s;
+}
 
-                let html = '';
-                sorted.forEach(p => {
-                    const date = new Date(p.timestamp);
-                    const timeStr = date.toLocaleString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
+.shape-3 {
+  width: 200px;
+  height: 200px;
+  background: #ff6b9d;
+  top: 50%;
+  left: 60%;
+  animation-delay: -5s;
+}
 
-                    let catClass = '';
-                    const cat = p.category || 'General';
-                    if (cat === 'APK Downloads') catClass = 'apk';
-                    else if (cat === 'Modding Tutorials') catClass = 'tutorial';
-                    else if (cat === 'Fangame Showcase') catClass = 'showcase';
-                    else if (cat === 'Help & Support') catClass = 'support';
+@keyframes floatShape {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}`;
 
-                    const isAuthor = currentUser && p.author === currentUser.username;
+        const defaultJS = `let count = 0;
+let totalClicks = 0;
 
-                    html += `
-                            <div class="post-item glass" data-id="${p.id}">
-                                <div class="p-header">
-                                    <span class="p-title">${escapeHtml(p.title)}</span>
-                                    <span class="p-category ${catClass}">${escapeHtml(cat)}</span>
-                                </div>
-                                <div class="p-content">${escapeHtml(p.content)}</div>
-                                <div class="p-footer">
-                                    <span>by <span class="author">${escapeHtml(p.author)}</span> · ⏱ ${timeStr}</span>
-                                    ${isAuthor ? `<button class="delete-btn" data-id="${p.id}">✕ delete</button>` : ''}
-                                </div>
-                            </div>
-                        `;
+function updateDisplay() {
+  document.getElementById('count').textContent = count;
+  document.getElementById('clickCount').textContent = totalClicks;
+}
+
+function increment() {
+  count++;
+  totalClicks++;
+  updateDisplay();
+  animateButton('+');
+}
+
+function decrement() {
+  count--;
+  totalClicks++;
+  updateDisplay();
+  animateButton('-');
+}
+
+function animateButton(type) {
+  const card = document.querySelector('.card');
+  card.style.transform = type === '+' ? 'scale(1.02)' : 'scale(0.98)';
+  setTimeout(() => {
+    card.style.transform = 'scale(1)';
+  }, 150);
+}
+
+// Initialize
+updateDisplay();
+console.log('🚀 Hybrid Playground ready!');`;
+
+        // Load defaults
+        htmlCode.value = defaultHTML;
+        cssCode.value = defaultCSS;
+        jsCode.value = defaultJS;
+
+        // === RUN CODE ===
+        function runCode() {
+            const html = htmlCode.value;
+            const css = cssCode.value;
+            const js = jsCode.value;
+
+            const fullDocument = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>${css}</style>
+</head>
+<body>
+    ${html}
+    <script>
+        try {
+            ${js}
+        } catch (error) {
+            document.body.innerHTML += '<div style="position:fixed;bottom:20px;right:20px;background:#f85149;color:#fff;padding:12px 20px;border-radius:8px;font-family:monospace;z-index:99999;font-size:13px;max-width:400px;"><strong>⚠️ JS Error:</strong> ' + error.message + '</div>';
+            console.error(error);
+        }
+    <\/script>
+</body>
+</html>`;
+
+            const blob = new Blob([fullDocument], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+
+            previewFrame.style.display = 'block';
+            previewPlaceholder.style.display = 'none';
+            previewFrame.src = url;
+
+            // Clean up old blob URL after load
+            previewFrame.onload = () => {
+                URL.revokeObjectURL(url);
+            };
+
+            showToast('Code executed successfully! 🎉', 'success');
+        }
+
+        // === FORMAT CODE ===
+        function formatCode() {
+            try {
+                // Simple HTML formatting
+                let html = htmlCode.value;
+                html = html.replace(/>\s+</g, '>\n<');
+                html = html.replace(/(<[^\/][^>]*>)([^<]+)(<\/)/g, (match, open, text, close) => {
+                    if (text.trim()) return open + '\n  ' + text.trim() + '\n' + close;
+                    return match;
                 });
+                htmlCode.value = html;
 
-                document.getElementById('postList').innerHTML = html;
-
-                // Delete events
-                document.querySelectorAll('.delete-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = parseInt(this.dataset.id, 10);
-                        deletePost(id);
-                    });
-                });
+                showToast('Code formatted! ✨', 'success');
+            } catch (e) {
+                showToast('Format failed: ' + e.message, 'error');
             }
+        }
 
-            // ---------- ADD POST ----------
-            function addPost(title, category, content) {
-                if (!currentUser) {
-                    alert('Please sign in to post.');
-                    return;
-                }
-                const posts = loadPosts();
-                posts.push({
-                    id: Date.now() + Math.floor(Math.random() * 999),
-                    title: title.trim(),
-                    category: category.trim(),
-                    content: content.trim(),
-                    author: currentUser.username,
-                    timestamp: Date.now()
-                });
-                savePosts(posts);
-                renderPosts();
+        // === CLEAR ALL ===
+        function clearAll() {
+            htmlCode.value = '';
+            cssCode.value = '';
+            jsCode.value = '';
+            previewFrame.style.display = 'none';
+            previewPlaceholder.style.display = 'flex';
+            previewFrame.src = 'about:blank';
+            showToast('All cleared 🧹', 'success');
+        }
+
+        // === TOAST ===
+        let toastTimer;
+        function showToast(message, type) {
+            clearTimeout(toastTimer);
+            toast.textContent = message;
+            toast.className = 'toast ' + type + ' show';
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // === KEYBOARD SHORTCUTS ===
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                runCode();
             }
-
-            // ---------- DELETE POST ----------
-            function deletePost(id) {
-                let posts = loadPosts();
-                posts = posts.filter(p => p.id !== id);
-                savePosts(posts);
-                renderPosts();
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                formatCode();
             }
-
-            // ---------- ESCAPE ----------
-            function escapeHtml(text) {
-                const el = document.createElement('div');
-                el.textContent = text;
-                return el.innerHTML;
+            if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+                e.preventDefault();
+                clearAll();
             }
+        });
 
-            // ---------- UPDATE UI (user) ----------
-            function updateUI() {
-                const user = loadUser();
-                currentUser = user;
-
-                const badge = document.getElementById('userBadge');
-                const authBtn = document.getElementById('authOpenBtn');
-                const logoutBtn = document.getElementById('logoutBtn');
-
-                if (user) {
-                    badge.classList.remove('hidden');
-                    document.getElementById('userName').textContent = user.username;
-                    document.getElementById('userRole').textContent = user.role || 'MEMBER';
-                    document.getElementById('userAvatar').textContent = user.avatar || '🦍';
-                    authBtn.classList.add('hidden');
-                    logoutBtn.classList.remove('hidden');
-                } else {
-                    badge.classList.add('hidden');
-                    authBtn.classList.remove('hidden');
-                    logoutBtn.classList.add('hidden');
-                }
-
-                renderPosts();
-            }
-
-            // ---------- AUTH MODAL ----------
-            const modal = document.getElementById('authModal');
-            const authTitle = document.getElementById('authTitle');
-            const authSub = document.getElementById('authSub');
-            const authSubmitBtn = document.getElementById('authSubmitBtn');
-            const authSwitchBtn = document.getElementById('authSwitchBtn');
-            const authSwitchText = document.getElementById('authSwitchText');
-            const authSwitchLink = document.getElementById('authSwitchLink');
-            const authForm = document.getElementById('authForm');
-            const authUsername = document.getElementById('authUsername');
-            const authPassword = document.getElementById('authPassword');
-
-            let isSignUp = false;
-
-            function openModal(signUp = false) {
-                isSignUp = signUp;
-                modal.classList.add('open');
-                if (signUp) {
-                    authTitle.textContent = '// SIGN UP';
-                    authSub.textContent = 'Create your Hybrid Roster account';
-                    authSubmitBtn.textContent = 'sign up';
-                    authSwitchBtn.textContent = 'sign in';
-                    authSwitchText.innerHTML = 'Already have an account? <a id="authSwitchLink">Sign in</a>';
-                } else {
-                    authTitle.textContent = '// SIGN IN';
-                    authSub.textContent = 'Sign in to your Hybrid Roster account';
-                    authSubmitBtn.textContent = 'sign in';
-                    authSwitchBtn.textContent = 'sign up';
-                    authSwitchText.innerHTML = 'Don\'t have an account? <a id="authSwitchLink">Sign up</a>';
-                }
-                document.querySelector('#authSwitchLink').addEventListener('click', function(e) {
+        // === TAB SUPPORT IN TEXTAREAS ===
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
                     e.preventDefault();
-                    openModal(!isSignUp);
-                });
-                authUsername.value = '';
-                authPassword.value = '';
-                authUsername.focus();
+                    const start = textarea.selectionStart;
+                    const end = textarea.selectionEnd;
+                    textarea.value = textarea.value.substring(0, start) + '  ' + textarea.value.substring(end);
+                    textarea.selectionStart = textarea.selectionEnd = start + 2;
+                }
+            });
+        });
+
+        // === LINE NUMBERS UPDATE ===
+        function updateLineNumbers(textarea, lineNumbersDiv) {
+            const lines = textarea.value.split('\n').length;
+            let nums = '';
+            for (let i = 1; i <= lines; i++) {
+                nums += i + '\n';
             }
+            lineNumbersDiv.textContent = nums;
+        }
 
-            function closeModal() {
-                modal.classList.remove('open');
-            }
+        htmlCode.addEventListener('input', () => updateLineNumbers(htmlCode, document.getElementById('htmlLineNumbers')));
+        cssCode.addEventListener('input', () => updateLineNumbers(cssCode, document.getElementById('cssLineNumbers')));
+        jsCode.addEventListener('input', () => updateLineNumbers(jsCode, document.getElementById('jsLineNumbers')));
 
-            document.getElementById('authOpenBtn').addEventListener('click', () => openModal(false));
-            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
-            document.getElementById('authSwitchBtn').addEventListener('click', () => openModal(!isSignUp));
+        // Initial line numbers
+        updateLineNumbers(htmlCode, document.getElementById('htmlLineNumbers'));
+        updateLineNumbers(cssCode, document.getElementById('cssLineNumbers'));
+        updateLineNumbers(jsCode, document.getElementById('jsLineNumbers'));
 
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) closeModal();
-            });
+        // === SYNC SCROLL ===
+        const allTextareas = [htmlCode, cssCode, jsCode];
+        let syncing = false;
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closeModal();
-            });
+        // === PANEL RESIZE WITH DRAG ===
+        // (Native CSS resize handles this, but we enhance with keyboard-friendly min-widths)
 
-            // ---------- AUTH SUBMIT ----------
-            authForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const username = authUsername.value.trim();
-                const password = authPassword.value.trim();
+        // === INITIAL RUN ON LOAD ===
+        setTimeout(runCode, 500);
 
-                if (!username || !password) {
-                    alert('Please fill in both fields.');
-                    return;
-                }
-
-                if (isSignUp) {
-                    // Sign up
-                    const user = {
-                        username: username,
-                        password: password,
-                        role: 'MEMBER',
-                        avatar: ['🦍', '🐱', '⚡', '🌀', '🍀', '🔥', '💀', '👾'][Math.floor(Math.random() * 8)]
-                    };
-                    saveUser(user);
-                    closeModal();
-                    updateUI();
-                    alert(`Account created! Welcome, ${username}.`);
-                } else {
-                    // Sign in
-                    const saved = loadUser();
-                    if (saved && saved.username === username && saved.password === password) {
-                        closeModal();
-                        updateUI();
-                        alert(`Welcome back, ${username}!`);
-                    } else {
-                        alert('Invalid username or password. Please try again.');
-                    }
-                }
-            });
-
-            // ---------- LOGOUT ----------
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                if (confirm('Logout?')) {
-                    clearUser();
-                    updateUI();
-                    alert('Logged out.');
-                }
-            });
-
-            // ---------- POST FORM ----------
-            document.getElementById('postForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const title = document.getElementById('postTitle').value.trim();
-                const category = document.getElementById('postCategory').value;
-                const content = document.getElementById('postContent').value.trim();
-
-                if (!title || !content) {
-                    alert('Please fill in both title and content.');
-                    return;
-                }
-
-                addPost(title, category, content);
-                document.getElementById('postTitle').value = '';
-                document.getElementById('postContent').value = '';
-                document.getElementById('postTitle').focus();
-            });
-
-            // ---------- CTRL+ENTER ----------
-            document.getElementById('postContent').addEventListener('keydown', function(e) {
-                if (e.ctrlKey && e.key === 'Enter') {
-                    document.getElementById('postForm').dispatchEvent(new Event('submit'));
-                }
-            });
-
-            // ---------- INIT ----------
-            updateUI();
-
-            // ---------- CONSOLE EASTER EGG ----------
-            console.log('%c// HYBRID ROSTER', 'font-size:2.4rem;font-weight:bold;color:#2affb0;');
-            console.log('%cGorilla Tag modding · APK · fangames — built by Bread', 'font-size:1rem;color:#ff8c42;');
-            console.log('%c🍀 Lucky  ⚡ Vexy  🐱 Catlover  🌀 Zyko', 'font-size:0.9rem;color:#b07cff;');
-
-        })();
+        console.log('%c🛠️ Hybrid Code Playground %cReady',
+            'font-size:1.2rem;font-weight:bold;color:#58a6ff;',
+            'color:#8b949e;');
+        console.log('%c💡 Tip: Press Ctrl+Enter to run, Ctrl+S to format, Ctrl+Shift+K to clear',
+            'color:#3fb950;');
     </script>
 
 </body>
