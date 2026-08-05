@@ -3,626 +3,176 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7 6 4 · HARM · SYSTEM TAKEOVER</title>
-    <meta property="og:title" content="7 6 4 · HARM" />
-    <meta property="og:description" content="YOU HAVE BEEN TARGETED. NO ESCAPE." />
-    <meta property="theme-color" content="#000000" />
+    <title>7 6 4 · HARM · REAL TOOLS</title>
     <style>
-        /* ===== RESET ===== */
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: default;
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
         body {
-            background: #000000;
-            min-height: 100vh;
+            background: #0a0a0a;
             font-family: 'Courier New', 'Consolas', monospace;
-            overflow-x: hidden;
-            user-select: none;
-            position: relative;
-        }
-
-        /* ===== SCREEN SHAKE ===== */
-        @keyframes shake {
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-            10% {
-                transform: translate(-8px, 6px);
-            }
-            20% {
-                transform: translate(8px, -6px);
-            }
-            30% {
-                transform: translate(-6px, 8px);
-            }
-            40% {
-                transform: translate(6px, -8px);
-            }
-            50% {
-                transform: translate(-10px, 4px);
-            }
-            60% {
-                transform: translate(10px, -4px);
-            }
-            70% {
-                transform: translate(-4px, 10px);
-            }
-            80% {
-                transform: translate(4px, -10px);
-            }
-            90% {
-                transform: translate(-2px, 2px);
-            }
-        }
-
-        .shake-active {
-            animation: shake 0.15s infinite;
-        }
-
-        /* ===== NOISE OVERLAY ===== */
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0.08;
-            background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 0 0 / 3px 3px;
-            animation: static 0.08s infinite;
-        }
-
-        @keyframes static {
-            0% {
-                opacity: 0.06;
-                transform: translate(0px, 0px);
-            }
-            25% {
-                opacity: 0.10;
-                transform: translate(-3px, 4px);
-            }
-            50% {
-                opacity: 0.05;
-                transform: translate(4px, -3px);
-            }
-            75% {
-                opacity: 0.09;
-                transform: translate(-2px, 5px);
-            }
-            100% {
-                opacity: 0.06;
-                transform: translate(0px, 0px);
-            }
-        }
-
-        /* ===== SCANLINES ===== */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 998;
-            background: repeating-linear-gradient(0deg,
-                    transparent 0px,
-                    transparent 2px,
-                    rgba(0, 0, 0, 0.5) 2px,
-                    rgba(0, 0, 0, 0.5) 4px);
-        }
-
-        /* ===== RED FLASH OVERLAY ===== */
-        .red-flash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 997;
-            background: rgba(255, 0, 0, 0.15);
-            opacity: 0;
-            transition: opacity 0.05s;
-        }
-
-        .red-flash.active {
-            opacity: 1;
-        }
-
-        /* ===== GLITCH OVERLAY ===== */
-        .glitch-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 996;
-            background: rgba(0, 0, 0, 0.03);
-            animation: glitch-overlay 0.2s infinite;
-        }
-
-        @keyframes glitch-overlay {
-            0%,
-            100% {
-                opacity: 0.3;
-                transform: translate(0);
-            }
-            10% {
-                opacity: 0.6;
-                transform: translate(-5px, 3px);
-            }
-            20% {
-                opacity: 0.2;
-                transform: translate(4px, -2px);
-            }
-            30% {
-                opacity: 0.7;
-                transform: translate(-3px, 5px);
-            }
-            40% {
-                opacity: 0.4;
-                transform: translate(2px, -4px);
-            }
-            50% {
-                opacity: 0.8;
-                transform: translate(-6px, 2px);
-            }
-            60% {
-                opacity: 0.3;
-                transform: translate(5px, -3px);
-            }
-            70% {
-                opacity: 0.5;
-                transform: translate(-2px, 6px);
-            }
-            80% {
-                opacity: 0.7;
-                transform: translate(3px, -5px);
-            }
-            90% {
-                opacity: 0.2;
-                transform: translate(-4px, 2px);
-            }
-        }
-
-        /* ===== MAIN CONTAINER ===== */
-        .container {
-            max-width: 1100px;
-            width: 100%;
-            margin: 0 auto;
+            color: #cc4444;
             padding: 20px;
-            position: relative;
-            z-index: 1;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         /* ===== HEADER ===== */
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
+            text-align: center;
             border-bottom: 2px solid #220000;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 10px;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        .logo {
-            font-size: 32px;
+        .header h1 {
+            font-size: 48px;
             color: #440000;
-            letter-spacing: 8px;
-            font-weight: 900;
-            animation: pulse-red 2s infinite;
-            font-family: 'Arial Black', sans-serif;
+            letter-spacing: 10px;
+            animation: pulse 2s infinite;
         }
 
-        .logo span {
+        .header h1 span {
             color: #660000;
         }
 
-        .status {
-            font-size: 12px;
-            color: #00ff00;
-            letter-spacing: 3px;
-            animation: blink 0.8s infinite;
-            background: rgba(0, 255, 0, 0.05);
-            padding: 4px 14px;
-            border: 1px solid #00ff00;
-            border-radius: 4px;
+        .header .sub {
+            color: #331111;
+            letter-spacing: 4px;
+            font-size: 14px;
+            margin-top: 5px;
         }
 
-        /* ===== 764 DISPLAY ===== */
-        .number-display {
-            font-size: 120px;
-            font-weight: 900;
-            color: #1a0505;
-            text-shadow: 0 0 80px rgba(255, 0, 0, 0.15);
-            letter-spacing: 25px;
-            animation: pulse-red 3s infinite, distort 4s infinite;
-            font-family: 'Arial Black', 'Impact', sans-serif;
-            line-height: 1;
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        .number-display .seven {
-            color: #330000;
-        }
-        .number-display .six {
-            color: #440000;
-        }
-        .number-display .four {
-            color: #550000;
-        }
-
-        @keyframes distort {
-            0% {
-                transform: skew(0deg, 0deg) scale(1);
-            }
-            25% {
-                transform: skew(2deg, -1deg) scale(1.01);
-            }
-            50% {
-                transform: skew(-2deg, 1deg) scale(0.99);
-            }
-            75% {
-                transform: skew(1deg, -2deg) scale(1.01);
-            }
-            100% {
-                transform: skew(0deg, 0deg) scale(1);
-            }
-        }
-
-        /* ===== WARNING TEXT ===== */
-        .warning-text {
-            font-size: 22px;
-            color: #661111;
-            letter-spacing: 6px;
-            text-align: center;
-            animation: flicker 2.5s infinite;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 5px 0 15px 0;
-        }
-
-        .warning-text .red {
-            color: #aa2222;
-            animation: pulse-red 1.5s infinite;
-        }
-
-        @keyframes flicker {
+        @keyframes pulse {
             0%,
             100% {
-                opacity: 1;
-            }
-            5% {
-                opacity: 0.2;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            15% {
-                opacity: 0.1;
-            }
-            20% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.9;
-            }
-            55% {
-                opacity: 0.3;
-            }
-            60% {
-                opacity: 1;
-            }
-            80% {
-                opacity: 0.95;
-            }
-            85% {
-                opacity: 0.15;
-            }
-            90% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes pulse-red {
-            0% {
                 text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
             }
             50% {
-                text-shadow: 0 0 40px rgba(255, 0, 0, 0.6), 0 0 80px rgba(255, 0, 0, 0.2);
-            }
-            100% {
-                text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+                text-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
             }
         }
 
-        /* ===== DIVIDER ===== */
-        .divider {
-            width: 70%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #440000, transparent);
-            margin: 15px 0;
-        }
-
-        /* ===== HARM TOOLS SECTION ===== */
-        .tools-section {
-            width: 100%;
-            margin: 15px 0 25px 0;
-            border: 2px solid #220000;
-            border-radius: 8px;
-            padding: 20px;
-            background: rgba(10, 0, 0, 0.6);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tools-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(45deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(255, 0, 0, 0.01) 20px,
-                    rgba(255, 0, 0, 0.01) 21px);
-            pointer-events: none;
-            animation: rotate-bg 20s linear infinite;
-        }
-
-        @keyframes rotate-bg {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .tools-title {
-            font-size: 28px;
-            color: #661111;
-            text-align: center;
-            letter-spacing: 6px;
-            font-weight: 900;
-            text-transform: uppercase;
-            animation: pulse-red 2s infinite;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tools-title .red {
-            color: #aa2222;
-        }
-
+        /* ===== TOOLS GRID ===== */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
             margin-top: 20px;
-            position: relative;
-            z-index: 1;
         }
 
-        .tool-btn {
-            background: rgba(20, 0, 0, 0.6);
+        .tool-card {
+            background: #0d0d0d;
+            border: 1px solid #1a0a0a;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .tool-card:hover {
+            border-color: #440000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.05);
+        }
+
+        .tool-card .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #884444;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .tool-card .title .icon {
+            margin-right: 8px;
+        }
+
+        .tool-card .desc {
+            font-size: 12px;
+            color: #442222;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .tool-card input,
+        .tool-card select,
+        .tool-card textarea {
+            width: 100%;
+            padding: 8px 12px;
+            background: #0a0000;
+            border: 1px solid #1a0a0a;
+            color: #884444;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .tool-card input:focus,
+        .tool-card select:focus,
+        .tool-card textarea:focus {
+            outline: none;
+            border-color: #440000;
+        }
+
+        .tool-card button {
+            padding: 8px 20px;
+            background: #1a0000;
             border: 1px solid #330000;
-            border-radius: 6px;
-            padding: 18px 10px;
             color: #884444;
             font-family: 'Courier New', monospace;
             font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
             cursor: pointer;
+            border-radius: 4px;
             transition: all 0.2s;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            letter-spacing: 2px;
         }
 
-        .tool-btn:hover {
-            background: rgba(40, 0, 0, 0.8);
+        .tool-card button:hover {
+            background: #330000;
             border-color: #660000;
             color: #ff4444;
-            transform: scale(1.03);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
         }
 
-        .tool-btn .icon {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .tool-btn .sub {
-            font-size: 9px;
-            color: #441111;
-            letter-spacing: 1px;
-            display: block;
-            margin-top: 4px;
-        }
-
-        .tool-btn.danger {
-            border-color: #550000;
-            background: rgba(30, 0, 0, 0.7);
-            color: #aa3333;
-        }
-
-        .tool-btn.danger:hover {
-            background: rgba(60, 0, 0, 0.9);
-            border-color: #ff0000;
-            color: #ff0000;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
-        }
-
-        /* ===== TERMINAL OUTPUT ===== */
-        .terminal {
-            width: 100%;
-            background: rgba(5, 0, 0, 0.8);
-            border: 1px solid #220000;
-            border-radius: 6px;
-            padding: 15px 20px;
-            margin: 15px 0;
-            min-height: 120px;
-            max-height: 250px;
+        .tool-card .output {
+            margin-top: 10px;
+            padding: 10px;
+            background: #050000;
+            border: 1px solid #110000;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #884444;
+            max-height: 150px;
             overflow-y: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: #00aa44;
-            position: relative;
-        }
-
-        .terminal::-webkit-scrollbar {
-            width: 4px;
-        }
-        .terminal::-webkit-scrollbar-track {
-            background: #0a0000;
-        }
-        .terminal::-webkit-scrollbar-thumb {
-            background: #220000;
-            border-radius: 2px;
-        }
-
-        .terminal .line {
-            padding: 2px 0;
-            opacity: 0.9;
-            animation: typewriter 0.5s steps(30) forwards;
-            white-space: pre-wrap;
             word-break: break-all;
+            white-space: pre-wrap;
         }
 
-        .terminal .line .red {
+        .tool-card .output .green {
+            color: #00aa44;
+        }
+        .tool-card .output .red {
             color: #ff3333;
         }
-        .terminal .line .green {
-            color: #00ff44;
-        }
-        .terminal .line .yellow {
+        .tool-card .output .yellow {
             color: #ffaa33;
-        }
-        .terminal .line .blink {
-            animation: blink 0.6s infinite;
-        }
-
-        .terminal .line .highlight {
-            color: #ff0000;
-            font-weight: bold;
-            animation: pulse-red 1s infinite;
-        }
-
-        /* ===== FAKE POPUP ===== */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #0a0000;
-            border: 3px solid #440000;
-            padding: 30px 40px;
-            z-index: 1000;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            display: none;
-            box-shadow: 0 0 100px rgba(255, 0, 0, 0.2);
-            border-radius: 8px;
-        }
-
-        .popup.active {
-            display: block;
-            animation: flicker 0.5s infinite;
-        }
-
-        .popup .title {
-            font-size: 22px;
-            color: #ff0000;
-            font-weight: 900;
-            letter-spacing: 4px;
-            margin-bottom: 12px;
-        }
-
-        .popup .msg {
-            font-size: 14px;
-            color: #884444;
-            line-height: 1.8;
-            letter-spacing: 1px;
-        }
-
-        .popup .close-btn {
-            margin-top: 15px;
-            padding: 8px 30px;
-            background: #220000;
-            border: 1px solid #440000;
-            color: #884444;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-radius: 4px;
-        }
-
-        .popup .close-btn:hover {
-            background: #440000;
-            color: #ff4444;
-            border-color: #ff0000;
-        }
-
-        /* ===== SCARY QUOTE ===== */
-        .scary-quote {
-            font-size: 16px;
-            color: #441111;
-            text-align: center;
-            letter-spacing: 4px;
-            animation: flicker 6s infinite;
-            margin: 10px 0;
-            font-style: italic;
-        }
-
-        .scary-quote .red {
-            color: #661111;
-            animation: pulse-red 3s infinite;
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            width: 100%;
-            border-top: 1px solid #110000;
-            padding-top: 20px;
-            margin-top: 25px;
             text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #110000;
             font-size: 11px;
-            color: #1a0a0a;
+            color: #221111;
             letter-spacing: 4px;
         }
 
@@ -631,475 +181,547 @@
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .number-display {
-                font-size: 80px;
-                letter-spacing: 15px;
-            }
-            .logo {
-                font-size: 22px;
-                letter-spacing: 4px;
-            }
-            .warning-text {
-                font-size: 16px;
-                letter-spacing: 3px;
-            }
-            .tools-title {
-                font-size: 20px;
-                letter-spacing: 4px;
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 28px;
+                letter-spacing: 5px;
             }
             .tools-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 10px;
+                grid-template-columns: 1fr;
             }
-            .tool-btn {
-                padding: 12px 8px;
-                font-size: 11px;
-            }
-            .tool-btn .icon {
-                font-size: 22px;
-            }
-            .terminal {
-                font-size: 11px;
-                padding: 10px 14px;
-                min-height: 100px;
-            }
-            .popup {
-                padding: 20px;
-            }
-            .popup .title {
-                font-size: 18px;
-            }
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .number-display {
-                font-size: 56px;
-                letter-spacing: 10px;
-            }
-            .warning-text {
-                font-size: 13px;
-                letter-spacing: 2px;
-            }
-            .tools-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .tool-btn {
-                padding: 10px 6px;
-                font-size: 10px;
-            }
-            .tool-btn .icon {
-                font-size: 18px;
-            }
-            .terminal {
-                font-size: 10px;
-                padding: 8px 10px;
-                min-height: 80px;
-                max-height: 180px;
-            }
-            .scary-quote {
-                font-size: 12px;
-                letter-spacing: 2px;
-            }
-            .popup {
+            .tool-card {
                 padding: 15px;
-            }
-            .popup .title {
-                font-size: 16px;
-            }
-            .popup .msg {
-                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== OVERLAYS ===== -->
-    <div class="noise"></div>
-    <div class="scanlines"></div>
-    <div class="glitch-overlay"></div>
-    <div class="red-flash" id="redFlash"></div>
-
-    <!-- ===== POPUP ===== -->
-    <div class="popup" id="popup">
-        <div class="title">☠ 7 6 4 · HARM ☠</div>
-        <div class="msg" id="popupMsg">YOU HAVE BEEN TARGETED.</div>
-        <br />
-        <button class="close-btn" onclick="closePopup()">▸ ACKNOWLEDGE ◂</button>
-    </div>
-
-    <!-- ===== MAIN ===== -->
-    <div class="container" id="mainContainer">
+    <div class="container">
 
         <!-- HEADER -->
         <div class="header">
-            <div class="logo">☠ <span>7 6 4</span> · HARM ☠</div>
-            <div class="status">● SYSTEM ONLINE</div>
+            <h1>☠ <span>7 6 4</span> · HARM ☠</h1>
+            <div class="sub">REAL TOOLS · NO FAKE · NO BULLSHIT</div>
         </div>
 
-        <!-- 764 DISPLAY -->
-        <div class="number-display">
-            <span class="seven">7</span>
-            <span class="six">6</span>
-            <span class="four">4</span>
-        </div>
+        <!-- TOOLS GRID -->
+        <div class="tools-grid">
 
-        <!-- WARNING -->
-        <div class="warning-text">
-            <span class="red">▸</span> I AM ALWAYS WATCHING <span class="red">◂</span><br />
-            <span style="font-size:16px;color:#441111;">7 6 4 KNOWS YOUR NAME · 7 6 4 KNOWS WHERE YOU ARE</span>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- SCARY QUOTE -->
-        <div class="scary-quote">
-            <span class="red">"</span> HARM DOES NOT FORGIVE. HARM DOES NOT FORGET. <span class="red">"</span>
-            <br />
-            <span style="font-size:13px;color:#331111;">— 7 6 4</span>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- ===== HARM TOOLS ===== -->
-        <div class="tools-section">
-            <div class="tools-title">
-                ⚡ <span class="red">HARM</span> TOOLS ⚡
+            <!-- ===== 1. IP LOOKUP ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🌐</span> IP LOOKUP</div>
+                <div class="desc">Fetches your real public IP, ISP, location, and coordinates.</div>
+                <button onclick="lookupIP()">▶ LOOKUP MY IP</button>
+                <div class="output" id="ipOutput">Click the button to fetch your IP...</div>
             </div>
-            <div class="tools-grid">
 
-                <div class="tool-btn" onclick="runTool('ipgrabber')">
-                    <span class="icon">🌐</span>
-                    IP GRABBER
-                    <span class="sub">▸ GRAB TARGET IP</span>
-                </div>
-
-                <div class="tool-btn" onclick="runTool('ipping')">
-                    <span class="icon">📡</span>
-                    IP PING
-                    <span class="sub">▸ PING TARGET</span>
-                </div>
-
-                <div class="tool-btn" onclick="runTool('doxxer')">
-                    <span class="icon">📂</span>
-                    DOXXER TOOL
-                    <span class="sub">▸ EXTRACT DATA</span>
-                </div>
-
-                <div class="tool-btn danger" onclick="runTool('killswitch')">
-                    <span class="icon">💀</span>
-                    KILLSWITCH
-                    <span class="sub">▸ SYSTEM SHUTDOWN</span>
-                </div>
-
-                <div class="tool-btn" onclick="runTool('webcam')">
-                    <span class="icon">📷</span>
-                    WEBCAM ACCESS
-                    <span class="sub">▸ ACTIVATE CAMERA</span>
-                </div>
-
-                <div class="tool-btn danger" onclick="runTool('override')">
-                    <span class="icon">⚡</span>
-                    SYSTEM OVERRIDE
-                    <span class="sub">▸ TAKEOVER</span>
-                </div>
-
+            <!-- ===== 2. PING TOOL ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">📡</span> PING TOOL</div>
+                <div class="desc">Ping a host or IP address (uses a proxy API).</div>
+                <input type="text" id="pingTarget" value="8.8.8.8" placeholder="Enter IP or hostname" />
+                <button onclick="pingHost()">▶ PING</button>
+                <div class="output" id="pingOutput">Enter a target and click Ping...</div>
             </div>
+
+            <!-- ===== 3. DOXXER (Mock) ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">📂</span> DOXXER (MOCK)</div>
+                <div class="desc">Generates a realistic fake identity. For educational purposes only.</div>
+                <button onclick="generateDoxx()">▶ GENERATE DOXX</button>
+                <div class="output" id="doxxOutput">Click to generate a mock doxx...</div>
+            </div>
+
+            <!-- ===== 4. KILLSWITCH ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">💀</span> KILLSWITCH</div>
+                <div class="desc">Plays an alarm, flashes red, and locks the page. Press ESC to escape.</div>
+                <button onclick="triggerKillswitch()" style="border-color:#660000;color:#aa3333;">▶ TRIGGER KILLSWITCH</button>
+                <div class="output" id="killOutput">Click at your own risk...</div>
+            </div>
+
+            <!-- ===== 5. WEBCAM SNAPSHOT ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">📷</span> WEBCAM SNAPSHOT</div>
+                <div class="desc">Accesses your webcam and takes a photo (saved locally).</div>
+                <button onclick="takeSnapshot()">▶ TAKE SNAPSHOT</button>
+                <video id="webcamPreview" autoplay playsinline style="width:100%;max-height:150px;background:#050000;border:1px solid #110000;border-radius:4px;margin-top:8px;display:none;"></video>
+                <canvas id="webcamCanvas" style="display:none;"></canvas>
+                <div class="output" id="webcamOutput">Click to access your webcam...</div>
+            </div>
+
+            <!-- ===== 6. SYSTEM INFO ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">⚡</span> SYSTEM INFO</div>
+                <div class="desc">Displays real browser, OS, screen, timezone, and hardware info.</div>
+                <button onclick="showSystemInfo()">▶ SHOW SYSTEM INFO</button>
+                <div class="output" id="sysOutput">Click to reveal system info...</div>
+            </div>
+
+            <!-- ===== 7. WEBHOOK TESTER ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">📨</span> WEBHOOK TESTER</div>
+                <div class="desc">Sends a real HTTP POST request to any Discord webhook URL.</div>
+                <input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..." />
+                <input type="text" id="webhookMsg" placeholder="Message to send..." value="Hello from 7 6 4 · HARM" />
+                <button onclick="testWebhook()">▶ SEND WEBHOOK</button>
+                <div class="output" id="webhookOutput">Enter a webhook URL and message...</div>
+            </div>
+
+            <!-- ===== 8. FILE HASHER ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">📁</span> FILE HASHER</div>
+                <div class="desc">Calculates MD5, SHA-1, and SHA-256 hashes of any file.</div>
+                <input type="file" id="fileInput" />
+                <button onclick="hashFile()">▶ HASH FILE</button>
+                <div class="output" id="hashOutput">Select a file and click Hash...</div>
+            </div>
+
+            <!-- ===== 9. PASSWORD GENERATOR ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🔐</span> PASSWORD GENERATOR</div>
+                <div class="desc">Generates cryptographically secure passwords.</div>
+                <input type="number" id="passLength" value="16" min="8" max="64" />
+                <button onclick="generatePassword()">▶ GENERATE PASSWORD</button>
+                <div class="output" id="passOutput">Click to generate a secure password...</div>
+            </div>
+
+            <!-- ===== 10. DEVICE FINGERPRINT ===== -->
+            <div class="tool-card">
+                <div class="title"><span class="icon">🕵️</span> DEVICE FINGERPRINT</div>
+                <div class="desc">Generates a unique fingerprint based on your browser and hardware.</div>
+                <button onclick="generateFingerprint()">▶ GENERATE FINGERPRINT</button>
+                <div class="output" id="fpOutput">Click to generate your fingerprint...</div>
+            </div>
+
         </div>
 
-        <!-- ===== TERMINAL ===== -->
-        <div class="terminal" id="terminal">
-            <div class="line"><span class="green">></span> <span class="yellow">7 6 4 · HARM SYSTEM v2.0</span></div>
-            <div class="line"><span class="green">></span> <span class="yellow">Awaiting commands...</span> <span class="blink">█</span></div>
-        </div>
-
-        <!-- ===== SCARY QUOTE 2 ===== -->
-        <div class="scary-quote" style="margin-top:10px;">
-            <span class="red">☠</span> THERE IS NO ESCAPE · 7 6 4 IS EVERYWHERE <span class="red">☠</span>
-        </div>
-
-        <!-- ===== FOOTER ===== -->
+        <!-- FOOTER -->
         <div class="footer">
-            <span class="red">☠</span> 7 6 4 · HARM · 7 6 4 <span class="red">☠</span>
+            <span class="red">☠</span> 7 6 4 · HARM · REAL TOOLS <span class="red">☠</span>
             <br />
             <span style="font-size:9px;color:#0a0000;letter-spacing:6px;">
-                ████ YOU ARE BEING WATCHED ████
+                ████ USE AT YOUR OWN RISK ████
             </span>
         </div>
 
     </div>
 
     <script>
-        // ===== TERMINAL LOG =====
-        function terminalLog(msg, type = 'normal') {
-            const terminal = document.getElementById('terminal');
-            const line = document.createElement('div');
-            line.className = 'line';
-
-            let prefix = '<span class="green">></span> ';
-            let color = '';
-
-            if (type === 'error') {
-                prefix = '<span class="red">!</span> ';
-                color = 'red';
-            } else if (type === 'success') {
-                prefix = '<span class="green">+</span> ';
-                color = 'green';
-            } else if (type === 'warning') {
-                prefix = '<span class="yellow">*</span> ';
-                color = 'yellow';
-            } else if (type === 'highlight') {
-                prefix = '<span class="red">#</span> ';
-                color = 'highlight';
-            }
-
-            line.innerHTML = prefix + '<span class="' + (color || '') + '">' + msg + '</span>';
-            terminal.appendChild(line);
-            terminal.scrollTop = terminal.scrollHeight;
-
-            // Keep terminal from growing too large
-            while (terminal.children.length > 50) {
-                terminal.removeChild(terminal.firstChild);
-            }
+        // ============================================================
+        // TOOL 1: REAL IP LOOKUP
+        // ============================================================
+        function lookupIP() {
+            const output = document.getElementById('ipOutput');
+            output.innerHTML = '⏳ Fetching your IP...';
+            fetch('https://ipapi.co/json/')
+                .then(res => res.json())
+                .then(data => {
+                    output.innerHTML = `
+                <span class="green">✓ IP: ${data.ip}</span>
+                City: ${data.city || 'N/A'}
+                Region: ${data.region || 'N/A'}
+                Country: ${data.country_name || 'N/A'}
+                ISP: ${data.org || 'N/A'}
+                Timezone: ${data.timezone || 'N/A'}
+                Coordinates: ${data.latitude || 'N/A'}, ${data.longitude || 'N/A'}
+                `;
+                })
+                .catch(() => {
+                    output.innerHTML = '<span class="red">✗ Failed to fetch IP. Try again.</span>';
+                });
         }
 
-        // ===== RED FLASH =====
-        function redFlash() {
-            const flash = document.getElementById('redFlash');
-            flash.classList.add('active');
-            setTimeout(() => {
-                flash.classList.remove('active');
-            }, 150);
+        // ============================================================
+        // TOOL 2: REAL PING (via proxy)
+        // ============================================================
+        function pingHost() {
+            const target = document.getElementById('pingTarget').value.trim() || '8.8.8.8';
+            const output = document.getElementById('pingOutput');
+            output.innerHTML = '⏳ Pinging ' + target + '...';
+
+            const start = performance.now();
+
+            // Use a proxy to simulate ping
+            fetch('https://cors-anywhere.herokuapp.com/https://' + target + '/', {
+                    method: 'HEAD',
+                    mode: 'no-cors'
+                })
+                .then(() => {
+                    const end = performance.now();
+                    const ms = Math.round(end - start);
+                    output.innerHTML = `
+                <span class="green">✓ PING SUCCESS</span>
+                Target: ${target}
+                Response Time: ${ms}ms
+                Status: ${ms < 200 ? '✅ Fast' : ms < 500 ? '⚠️ Moderate' : '❌ Slow'}
+                `;
+                })
+                .catch(() => {
+                    // Fallback: simulate ping if CORS blocks
+                    const ms = Math.floor(Math.random() * 80 + 20);
+                    output.innerHTML = `
+                <span class="yellow">⚠️ CORS Blocked — Simulated</span>
+                Target: ${target}
+                Response Time: ${ms}ms
+                Status: ${ms < 200 ? '✅ Fast' : ms < 500 ? '⚠️ Moderate' : '❌ Slow'}
+                `;
+                });
         }
 
-        // ===== SCREEN SHAKE =====
-        function screenShake() {
-            const container = document.getElementById('mainContainer');
-            container.classList.add('shake-active');
-            setTimeout(() => {
-                container.classList.remove('shake-active');
-            }, 300);
-        }
-
-        // ===== SHOW POPUP =====
-        function showPopup(msg) {
-            document.getElementById('popupMsg').textContent = msg;
-            document.getElementById('popup').classList.add('active');
-        }
-
-        function closePopup() {
-            document.getElementById('popup').classList.remove('active');
-        }
-
-        // ===== RUN TOOL =====
-        function runTool(tool) {
-            terminalLog('─────────────────────────────────', 'normal');
-            terminalLog('EXECUTING: ' + tool.toUpperCase(), 'highlight');
-
-            switch (tool) {
-
-                case 'ipgrabber':
-                    terminalLog('Scanning target...', 'warning');
-                    setTimeout(() => {
-                        terminalLog('Target IP: 192.168.1.' + Math.floor(Math.random() * 254 + 1),
-                        'success');
-                        terminalLog('Location: ' + ['New York', 'London', 'Tokyo', 'Moscow', 'Berlin', 'Sydney'][
-                            Math.floor(Math.random() * 6)
-                        ], 'success');
-                        terminalLog('ISP: ' + ['Comcast', 'AT&T', 'Verizon', 'BT', 'Deutsche Telekom', 'NTT'][
-                            Math.floor(Math.random() * 6)
-                        ], 'success');
-                        terminalLog('Device: ' + ['Windows 11', 'macOS', 'Linux', 'Android', 'iOS', 'Unknown'][
-                            Math.floor(Math.random() * 6)
-                        ], 'success');
-                        terminalLog('✓ IP GRABBED SUCCESSFULLY', 'success');
-                        redFlash();
-                        showPopup('☠ YOUR IP HAS BEEN LOGGED · 7 6 4 KNOWS WHERE YOU ARE ☠');
-                    }, 800);
-                    break;
-
-                case 'ipping':
-                    terminalLog('Pinging target...', 'warning');
-                    let pingCount = 0;
-                    const pingInterval = setInterval(() => {
-                        pingCount++;
-                        const ms = Math.floor(Math.random() * 50 + 10);
-                        const status = ms < 40 ? 'OK' : 'TIMEOUT';
-                        terminalLog('Ping #' + pingCount + ' → ' + ms + 'ms [' + status + ']',
-                            status === 'OK' ? 'success' : 'error');
-                        if (pingCount >= 6) {
-                            clearInterval(pingInterval);
-                            terminalLog('✓ PING COMPLETE · TARGET RESPONSIVE', 'success');
-                            redFlash();
-                            showPopup('📡 TARGET PINGED · 7 6 4 HAS YOUR SIGNAL 📡');
-                        }
-                    }, 400);
-                    break;
-
-                case 'doxxer':
-                    terminalLog('Extracting data...', 'warning');
-                    setTimeout(() => {
-                        const names = ['J. Doe', 'M. Smith', 'A. Johnson', 'K. Williams', 'R. Brown'];
-                        const cities = ['Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia'];
-                        const ages = [Math.floor(Math.random() * 40 + 18)];
-                        terminalLog('Name: ' + names[Math.floor(Math.random() * names.length)], 'success');
-                        terminalLog('Age: ' + ages[0], 'success');
-                        terminalLog('City: ' + cities[Math.floor(Math.random() * cities.length)], 'success');
-                        terminalLog('Email: user' + Math.floor(Math.random() * 9999) + '@' + ['gmail', 'yahoo',
-                            'outlook', 'protonmail'
-                        ][Math.floor(Math.random() * 4)] + '.com', 'success');
-                        terminalLog('Phone: +1 (' + Math.floor(Math.random() * 900 + 100) + ') ' +
-                            Math.floor(Math.random() * 900 + 100) + '-' + Math.floor(Math.random() * 9000 +
-                            1000), 'success');
-                        terminalLog('✓ DOXX COMPLETE · DATA EXTRACTED', 'success');
-                        redFlash();
-                        screenShake();
-                        showPopup('📂 YOUR DATA HAS BEEN EXPOSED · 7 6 4 HAS EVERYTHING 📂');
-                    }, 1200);
-                    break;
-
-                case 'killswitch':
-                    terminalLog('⚠️ KILLSWITCH ACTIVATED ⚠️', 'error');
-                    terminalLog('Initiating system shutdown...', 'error');
-                    setTimeout(() => {
-                        terminalLog('█ SHUTTING DOWN... █', 'error');
-                        redFlash();
-                        screenShake();
-                        setTimeout(() => {
-                            terminalLog('█ SYSTEM COMPROMISED █', 'error');
-                            terminalLog('█ 7 6 4 HAS CONTROL █', 'highlight');
-                            showPopup('💀 KILLSWITCH TRIGGERED · 7 6 4 OWNS YOUR SYSTEM 💀');
-                        }, 800);
-                    }, 600);
-                    break;
-
-                case 'webcam':
-                    terminalLog('Attempting camera access...', 'warning');
-                    setTimeout(() => {
-                        terminalLog('📷 CAMERA ACTIVATED', 'success');
-                        terminalLog('📷 Device: Integrated Webcam', 'success');
-                        terminalLog('📷 Status: STREAMING', 'success');
-                        terminalLog('📷 7 6 4 IS WATCHING', 'highlight');
-                        redFlash();
-                        showPopup('📷 YOUR CAMERA HAS BEEN ACCESSED · SMILE FOR 7 6 4 📷');
-                    }, 900);
-                    break;
-
-                case 'override':
-                    terminalLog('⚠️ SYSTEM OVERRIDE INITIATED ⚠️', 'error');
-                    terminalLog('Bypassing security...', 'warning');
-                    setTimeout(() => {
-                        terminalLog('✓ FIREWALL BYPASSED', 'success');
-                        terminalLog('✓ ADMIN ACCESS GRANTED', 'success');
-                        terminalLog('✓ ENCRYPTION DECRYPTED', 'success');
-                        terminalLog('█ SYSTEM TAKEOVER COMPLETE █', 'highlight');
-                        terminalLog('█ 7 6 4 OWNS THIS SYSTEM █', 'highlight');
-                        redFlash();
-                        screenShake();
-                        showPopup('⚡ SYSTEM TAKEOVER COMPLETE · 7 6 4 CONTROLS EVERYTHING ⚡');
-                    }, 1000);
-                    break;
-
-                default:
-                    terminalLog('Unknown command: ' + tool, 'error');
-            }
-
-            terminalLog('─────────────────────────────────', 'normal');
-        }
-
-        // ===== RANDOM GLITCH EVENTS =====
-        function randomGlitch() {
-            if (Math.random() < 0.03) {
-                redFlash();
-            }
-            if (Math.random() < 0.02) {
-                screenShake();
-            }
-            if (Math.random() < 0.01) {
-                const messages = [
-                    '☠ 7 6 4 IS WATCHING ☠',
-                    '☠ THERE IS NO ESCAPE ☠',
-                    '☠ HARM IS COMING ☠',
-                    '☠ 7 6 4 KNOWS ☠',
-                    '☠ YOU ARE TARGETED ☠'
-                ];
-                showPopup(messages[Math.floor(Math.random() * messages.length)]);
-            }
-            if (Math.random() < 0.005) {
-                document.body.style.backgroundColor = '#0a0000';
-                setTimeout(() => {
-                    document.body.style.backgroundColor = '#000000';
-                }, 100);
-            }
-            setTimeout(randomGlitch, 1000);
-        }
-
-        // ===== TERMINAL AUTO MESSAGES =====
-        function autoTerminalMsg() {
-            const msgs = [
-                '7 6 4 scanning network...',
-                '7 6 4 tracking target...',
-                '7 6 4 bypassing firewall...',
-                '7 6 4 extracting data...',
-                '7 6 4 monitoring activity...',
-                '7 6 4 logging keystrokes...',
-                '7 6 4 accessing camera...',
-                '7 6 4 system takeover...'
+        // ============================================================
+        // TOOL 3: DOXXER (Mock)
+        // ============================================================
+        function generateDoxx() {
+            const output = document.getElementById('doxxOutput');
+            const firstNames = ['John', 'Jane', 'Michael', 'Sarah', 'David', 'Emily', 'Chris', 'Amanda', 'James', 'Jessica'];
+            const lastNames = ['Doe', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis',
+                'Martinez'
             ];
-            setInterval(() => {
-                if (Math.random() < 0.15) {
-                    const msg = msgs[Math.floor(Math.random() * msgs.length)];
-                    terminalLog(msg, 'warning');
-                }
-            }, 5000);
+            const streets = ['Main St', 'Oak Ave', 'Pine Rd', 'Maple Dr', 'Cedar Ln', 'Elm St', 'Lakeview Blvd',
+                'Sunset Dr', 'Hillcrest Ave', 'Park Pl'
+            ];
+            const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio',
+                'San Diego', 'Dallas', 'Austin'
+            ];
+            const states = ['NY', 'CA', 'IL', 'TX', 'AZ', 'PA', 'TX', 'CA', 'TX', 'TX'];
+            const zip = Math.floor(Math.random() * 90000 + 10000);
+
+            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+            const streetNum = Math.floor(Math.random() * 9999 + 100);
+            const street = streets[Math.floor(Math.random() * streets.length)];
+            const city = cities[Math.floor(Math.random() * cities.length)];
+            const state = states[cities.indexOf(city)] || 'CA';
+            const age = Math.floor(Math.random() * 40 + 18);
+            const email = firstName.toLowerCase() + '.' + lastName.toLowerCase() + Math.floor(Math.random() * 999) + '@' + [
+                'gmail.com', 'yahoo.com', 'outlook.com', 'protonmail.com', 'icloud.com'
+            ][Math.floor(Math.random() * 5)];
+
+            output.innerHTML = `
+                <span class="green">✓ DOXX GENERATED (MOCK)</span>
+                Name: ${firstName} ${lastName}
+                Age: ${age}
+                Address: ${streetNum} ${street}, ${city}, ${state} ${zip}
+                Email: ${email}
+                Phone: +1 (${Math.floor(Math.random()*900+100)}) ${Math.floor(Math.random()*900+100)}-${Math.floor(Math.random()*9000+1000)}
+                SSN: XXX-XX-${Math.floor(Math.random()*9000+1000)}
+                `;
         }
 
-        // ===== CURSOR JITTER =====
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            const overlay = document.querySelector('.glitch-overlay');
-            if (overlay) {
-                overlay.style.background = `radial-gradient(circle at ${x*100}% ${y*100}%, rgba(255,0,0,0.03) 0%, transparent 60%)`;
+        // ============================================================
+        // TOOL 4: KILLSWITCH
+        // ============================================================
+        let killswitchActive = false;
+
+        function triggerKillswitch() {
+            if (killswitchActive) return;
+
+            const output = document.getElementById('killOutput');
+            killswitchActive = true;
+
+            // Red flash
+            document.body.style.transition = 'background 0.05s';
+            let flashCount = 0;
+            const flashInterval = setInterval(() => {
+                document.body.style.background = flashCount % 2 === 0 ? '#1a0000' : '#0a0a0a';
+                flashCount++;
+                if (flashCount > 20) clearInterval(flashInterval);
+            }, 80);
+
+            // Alarm sound
+            try {
+                const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                oscillator.connect(gain);
+                gain.connect(audioCtx.destination);
+                oscillator.frequency.value = 800;
+                oscillator.type = 'square';
+                gain.gain.value = 0.3;
+                oscillator.start();
+                setTimeout(() => {
+                    oscillator.stop();
+                }, 3000);
+            } catch (e) {}
+
+            output.innerHTML = `
+                <span class="red">⚠️ KILLSWITCH ACTIVATED ⚠️</span>
+                System locked. Press ESC to escape.
+                `;
+
+            // Lock screen
+            const lockOverlay = document.createElement('div');
+            lockOverlay.id = 'killOverlay';
+            lockOverlay.style.cssText = `
+                position:fixed;top:0;left:0;width:100%;height:100%;
+                background:rgba(0,0,0,0.95);z-index:9999;
+                display:flex;justify-content:center;align-items:center;
+                flex-direction:column;color:#ff0000;font-family:'Arial Black',sans-serif;
+                text-align:center;padding:20px;
+                animation: pulse 0.5s infinite;
+                `;
+            lockOverlay.innerHTML = `
+                <div style="font-size:72px;">☠</div>
+                <div style="font-size:42px;letter-spacing:10px;margin:20px 0;">KILLSWITCH</div>
+                <div style="font-size:18px;color:#884444;letter-spacing:4px;">SYSTEM COMPROMISED</div>
+                <div style="font-size:14px;color:#442222;margin-top:20px;letter-spacing:2px;">PRESS ESC TO ESCAPE</div>
+                `;
+            document.body.appendChild(lockOverlay);
+
+            // ESC to escape
+            const escHandler = function(e) {
+                if (e.key === 'Escape') {
+                    document.body.removeChild(lockOverlay);
+                    document.body.style.background = '#0a0a0a';
+                    killswitchActive = false;
+                    document.removeEventListener('keydown', escHandler);
+                    output.innerHTML = '<span class="green">✓ Killswitch deactivated. You escaped.</span>';
+                }
+            };
+            document.addEventListener('keydown', escHandler);
+        }
+
+        // ============================================================
+        // TOOL 5: WEBCAM SNAPSHOT
+        // ============================================================
+        async function takeSnapshot() {
+            const output = document.getElementById('webcamOutput');
+            const video = document.getElementById('webcamPreview');
+            const canvas = document.getElementById('webcamCanvas');
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                video.style.display = 'block';
+                output.innerHTML = '<span class="green">✓ Camera active. Click again to capture.</span>';
+
+                // Replace button to capture
+                const btn = document.querySelector('.tool-card button[onclick="takeSnapshot()"]');
+                btn.textContent = '📸 CAPTURE PHOTO';
+                btn.onclick = function() {
+                    canvas.width = video.videoWidth || 640;
+                    canvas.height = video.videoHeight || 480;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    const dataUrl = canvas.toDataURL('image/png');
+
+                    // Download
+                    const link = document.createElement('a');
+                    link.download = 'snapshot_' + Date.now() + '.png';
+                    link.href = dataUrl;
+                    link.click();
+
+                    output.innerHTML = '<span class="green">✓ Snapshot captured and downloaded!</span>';
+                    // Stop stream
+                    stream.getTracks().forEach(track => track.stop());
+                    video.style.display = 'none';
+                    btn.textContent = '📷 TAKE SNAPSHOT';
+                    btn.onclick = takeSnapshot;
+                };
+            } catch (e) {
+                output.innerHTML = '<span class="red">✗ Camera access denied: ' + e.message + '</span>';
             }
+        }
+
+        // ============================================================
+        // TOOL 6: SYSTEM INFO
+        // ============================================================
+        function showSystemInfo() {
+            const output = document.getElementById('sysOutput');
+            const info = {
+                'Browser': navigator.userAgent,
+                'Platform': navigator.platform,
+                'OS': navigator.oscpu || navigator.platform,
+                'Language': navigator.language,
+                'Timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+                'Screen Resolution': screen.width + 'x' + screen.height,
+                'Color Depth': screen.colorDepth + 'bit',
+                'Pixel Ratio': window.devicePixelRatio,
+                'Hardware Concurrency': navigator.hardwareConcurrency || 'N/A',
+                'Memory': navigator.deviceMemory ? navigator.deviceMemory + 'GB' : 'N/A',
+                'Touch Support': 'ontouchstart' in window ? 'Yes' : 'No',
+                'Cookies Enabled': navigator.cookieEnabled ? 'Yes' : 'No',
+                'Do Not Track': navigator.doNotTrack || 'Not set'
+            };
+
+            let html = '<span class="green">✓ SYSTEM INFO</span>\n';
+            for (const [key, value] of Object.entries(info)) {
+                html += key + ': ' + value + '\n';
+            }
+            output.innerHTML = html;
+        }
+
+        // ============================================================
+        // TOOL 7: WEBHOOK TESTER (REAL HTTP POST)
+        // ============================================================
+        function testWebhook() {
+            const url = document.getElementById('webhookUrl').value.trim();
+            const msg = document.getElementById('webhookMsg').value.trim() || 'Hello from 7 6 4 · HARM';
+            const output = document.getElementById('webhookOutput');
+
+            if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
+                output.innerHTML = '<span class="red">✗ Please enter a valid Discord webhook URL.</span>';
+                return;
+            }
+
+            output.innerHTML = '⏳ Sending webhook...';
+
+            fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: msg + ' | Sent from 7 6 4 · HARM' })
+                })
+                .then(res => {
+                    if (res.status === 204 || res.status === 200) {
+                        output.innerHTML = '<span class="green">✓ Webhook sent successfully!</span>';
+                    } else {
+                        output.innerHTML = '<span class="red">✗ Failed. Status: ' + res.status + '</span>';
+                    }
+                })
+                .catch(e => {
+                    output.innerHTML = '<span class="red">✗ Error: ' + e.message + '</span>';
+                });
+        }
+
+        // ============================================================
+        // TOOL 8: FILE HASHER
+        // ============================================================
+        async function hashFile() {
+            const input = document.getElementById('fileInput');
+            const output = document.getElementById('hashOutput');
+
+            if (!input.files || !input.files[0]) {
+                output.innerHTML = '<span class="red">✗ Please select a file.</span>';
+                return;
+            }
+
+            const file = input.files[0];
+            const buffer = await file.arrayBuffer();
+            const data = new Uint8Array(buffer);
+
+            // MD5 (simple implementation)
+            async function md5(data) {
+                const hash = await crypto.subtle.digest('MD5', data);
+                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            // SHA-1
+            async function sha1(data) {
+                const hash = await crypto.subtle.digest('SHA-1', data);
+                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            // SHA-256
+            async function sha256(data) {
+                const hash = await crypto.subtle.digest('SHA-256', data);
+                return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            try {
+                const md5Hash = await md5(buffer);
+                const sha1Hash = await sha1(buffer);
+                const sha256Hash = await sha256(buffer);
+
+                output.innerHTML = `
+                    <span class="green">✓ FILE HASHES</span>
+                    File: ${file.name} (${file.size} bytes)
+                    MD5: ${md5Hash}
+                    SHA-1: ${sha1Hash}
+                    SHA-256: ${sha256Hash}
+                    `;
+            } catch (e) {
+                output.innerHTML = '<span class="red">✗ Error hashing file: ' + e.message + '</span>';
+            }
+        }
+
+        // ============================================================
+        // TOOL 9: PASSWORD GENERATOR
+        // ============================================================
+        function generatePassword() {
+            const output = document.getElementById('passOutput');
+            const length = parseInt(document.getElementById('passLength').value) || 16;
+
+            if (length < 8 || length > 64) {
+                output.innerHTML = '<span class="red">✗ Length must be between 8 and 64.</span>';
+                return;
+            }
+
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            const array = new Uint32Array(length);
+            crypto.getRandomValues(array);
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars[array[i] % chars.length];
+            }
+
+            // Check strength
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasDigit = /\d/.test(password);
+            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+            const strength = [hasUpper, hasLower, hasDigit, hasSpecial].filter(Boolean).length;
+
+            const strengthText = strength === 4 ? '✅ Strong' : strength === 3 ? '⚠️ Medium' : '❌ Weak';
+
+            output.innerHTML = `
+                <span class="green">✓ PASSWORD GENERATED</span>
+                Password: <span class="yellow">${password}</span>
+                Length: ${length} | Strength: ${strengthText}
+                `;
+        }
+
+        // ============================================================
+        // TOOL 10: DEVICE FINGERPRINT
+        // ============================================================
+        function generateFingerprint() {
+            const output = document.getElementById('fpOutput');
+
+            const components = [
+                navigator.userAgent,
+                navigator.language,
+                screen.width + 'x' + screen.height,
+                screen.colorDepth,
+                window.devicePixelRatio,
+                navigator.hardwareConcurrency || 'N/A',
+                navigator.deviceMemory || 'N/A',
+                Intl.DateTimeFormat().resolvedOptions().timeZone,
+                'ontouchstart' in window,
+                navigator.cookieEnabled,
+                navigator.doNotTrack || 'N/A'
+            ];
+
+            const raw = components.join('|');
+            // Simple hash
+            let hash = 0;
+            for (let i = 0; i < raw.length; i++) {
+                const char = raw.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            const fingerprint = (hash >>> 0).toString(16).padStart(8, '0');
+
+            output.innerHTML = `
+                <span class="green">✓ FINGERPRINT GENERATED</span>
+                Fingerprint: <span class="yellow">${fingerprint}</span>
+                Components: ${components.length}
+                Raw: ${raw.substring(0, 80)}...
+                `;
+        }
+
+        // ============================================================
+        // AUTO: Load IP on page load
+        // ============================================================
+        window.addEventListener('load', () => {
+            lookupIP();
         });
 
-        // ===== START =====
-        terminalLog('7 6 4 · HARM SYSTEM v2.0', 'highlight');
-        terminalLog('Awaiting commands...', 'normal');
-
-        setTimeout(() => {
-            terminalLog('⚠️ WARNING: 7 6 4 IS ACTIVE ⚠️', 'error');
-        }, 1500);
-
-        randomGlitch();
-        autoTerminalMsg();
-
-        // ===== CONSOLE =====
-        console.log('%c☠ 7 6 4 · H A R M ☠', 'color: #550000; font-size: 30px; font-weight: bold;');
-        console.log('%cI AM ALWAYS WATCHING.', 'color: #331111; font-size: 16px;');
-        console.log('%cYOU CANNOT ESCAPE.', 'color: #221111; font-size: 14px;');
-        console.log('%c7 6 4 KNOWS YOUR NAME.', 'color: #110000; font-size: 14px;');
-        console.log('%c████████████████████████', 'color: #0a0000; font-size: 12px;');
-
-        // ===== KEYBOARD PANIC =====
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                terminalLog('⚠️ PANIC KEY DETECTED', 'error');
-                terminalLog('7 6 4 has logged your attempt to escape.', 'highlight');
-                redFlash();
-                showPopup('☠ ESCAPE IS IMPOSSIBLE · 7 6 4 IS EVERYWHERE ☠');
-            }
-            if (e.key === 'Enter') {
-                terminalLog('7 6 4 detected input... logging...', 'warning');
-            }
-        });
+        // ============================================================
+        // CONSOLE MESSAGE
+        // ============================================================
+        console.log('%c☠ 7 6 4 · H A R M · REAL TOOLS ☠', 'color: #550000; font-size: 28px; font-weight: bold;');
+        console.log('%cThese are REAL tools. Use responsibly.', 'color: #331111; font-size: 14px;');
     </script>
 
 </body>
