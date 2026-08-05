@@ -1,1188 +1,1360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybrid Code Playground</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Exodus · Crypto Wallet</title>
     <style>
-        :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --border: #30363d;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
-            --accent: #58a6ff;
-            --accent-glow: rgba(88, 166, 255, 0.3);
-            --html-color: #e34c26;
-            --css-color: #2965f1;
-            --js-color: #f7df1e;
-            --csharp-color: #9b4f96;
-            --cpp-color: #659ad2;
-            --success: #3fb950;
-            --danger: #f85149;
-            --warning: #d2991d;
-            --radius: 10px;
-            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* ================================================================
+           EXODUS-STYLE CRYPTO WALLET
+           Full-featured fake wallet with login, portfolio, send/receive
+           Designed by Bread — no limits, pure code
+           ================================================================ */
 
+        /* ---------- RESET ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #0b0e17;
+            --bg-secondary: #131b2a;
+            --bg-card: #1a2438;
+            --bg-input: #0f1729;
+            --border-color: rgba(255, 255, 255, 0.04);
+            --text-primary: #f0f4ff;
+            --text-secondary: #8899cc;
+            --text-muted: #4a5a7a;
+            --accent-blue: #3b82f6;
+            --accent-green: #22c55e;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --gradient-main: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
         body {
-            font-family: 'Segoe UI', 'SF Pro Display', system-ui, -apple-system, sans-serif;
+            font-family: var(--font);
             background: var(--bg-primary);
             color: var(--text-primary);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 20px;
+        }
+
+        /* ---------- APP CONTAINER ---------- */
+        .app {
+            max-width: 480px;
+            width: 100%;
+            background: var(--bg-secondary);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+            min-height: 700px;
+        }
+
+        /* ---------- LOGIN SCREEN ---------- */
+        .screen {
+            display: none;
+            padding: 24px 22px 30px;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- LOGIN ---------- */
+        .login-header {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+
+        .login-header .logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .login-header .sub {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 14px;
+        }
+
+        .login-form .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .login-form .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .login-form .form-group input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.04);
+        }
+
+        .login-form .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 6px;
+        }
+
+        .login-form .btn-login:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .login-form .error-msg {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        /* ---------- DASHBOARD ---------- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0 10px;
+        }
+
+        .dashboard-header .greeting {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .dashboard-header .greeting span {
+            color: var(--accent-blue);
+        }
+
+        .dashboard-header .logout-btn {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.1);
+            border-radius: 60px;
+            padding: 4px 14px;
+            color: var(--accent-red);
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .dashboard-header .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.12);
+        }
+
+        /* ---------- BALANCE CARD ---------- */
+        .balance-card {
+            background: var(--gradient-main);
+            border-radius: var(--radius);
+            padding: 24px 22px 26px;
+            margin-bottom: 20px;
+            position: relative;
             overflow: hidden;
         }
 
-        /* === HEADER === */
-        .header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            padding: 10px 20px;
+        .balance-card::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .balance-card .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .balance-card .amount {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin: 4px 0 2px;
+            letter-spacing: -0.5px;
+        }
+
+        .balance-card .usd {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .balance-card .change {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+        }
+
+        /* ---------- QUICK ACTIONS ---------- */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quick-actions .action-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 14px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .quick-actions .action-btn:hover {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.02);
+        }
+
+        .quick-actions .action-btn .icon {
+            font-size: 1.6rem;
+            display: block;
+        }
+
+        .quick-actions .action-btn .label {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ---------- ASSETS LIST ---------- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 12px 0 8px;
+        }
+
+        .section-header h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-header .view-all {
+            font-size: 0.65rem;
+            color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        .asset-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .asset-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .asset-item:hover {
+            border-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .asset-item .left {
             display: flex;
             align-items: center;
+            gap: 12px;
+        }
+
+        .asset-item .left .coin-icon {
+            font-size: 1.8rem;
+            width: 36px;
+            text-align: center;
+        }
+
+        .asset-item .left .info .name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .asset-item .left .info .symbol {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+        }
+
+        .asset-item .right {
+            text-align: right;
+        }
+
+        .asset-item .right .balance {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .asset-item .right .usd-value {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+        }
+
+        .asset-item .right .change-negative {
+            color: var(--accent-red);
+            font-size: 0.65rem;
+        }
+
+        .asset-item .right .change-positive {
+            color: var(--accent-green);
+            font-size: 0.65rem;
+        }
+
+        /* ---------- SEND MODAL ---------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            max-width: 420px;
+            width: 100%;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 28px 24px 32px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+            animation: modalPop 0.25s ease;
+        }
+
+        @keyframes modalPop {
+            0% {
+                transform: scale(0.94);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal .modal-header {
+            display: flex;
             justify-content: space-between;
-            z-index: 100;
-            animation: slideDown 0.5s ease-out;
-            flex-shrink: 0;
+            align-items: center;
+            margin-bottom: 18px;
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .modal .modal-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
         }
 
-        .logo {
+        .modal .modal-header .close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .modal .modal-header .close:hover {
+            color: var(--accent-red);
+        }
+
+        .modal .form-group {
+            margin-bottom: 14px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .modal .form-group input,
+        .modal .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .modal .form-group input:focus,
+        .modal .form-group select:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .modal .form-group select option {
+            background: var(--bg-secondary);
+        }
+
+        .modal .btn-send {
+            width: 100%;
+            padding: 12px;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 4px;
+        }
+
+        .modal .btn-send:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .modal .modal-status {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            min-height: 20px;
+        }
+
+        .modal .modal-status.success {
+            color: var(--accent-green);
+        }
+        .modal .modal-status.error {
+            color: var(--accent-red);
+        }
+
+        /* ---------- RECEIVE MODAL ---------- */
+        .receive-address {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+            margin: 8px 0 16px;
+            user-select: all;
+        }
+
+        .receive-address .label {
+            display: block;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .receive-qr {
+            text-align: center;
+            font-size: 4rem;
+            margin: 4px 0 10px;
+            opacity: 0.5;
+        }
+
+        /* ---------- TRANSACTION HISTORY ---------- */
+        .tx-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .tx-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .tx-item .left {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, #e34c26, #58a6ff, #9b4f96, #659ad2);
-            background-size: 300% 300%;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 900;
-            color: #fff;
-            animation: logoGradient 4s ease infinite, logoPulse 3s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
+        .tx-item .left .tx-icon {
+            font-size: 1.2rem;
         }
 
-        .logo-icon::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
-            transform: rotate(45deg);
-            animation: shimmer 2.5s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        @keyframes logoGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes logoPulse {
-            0%, 100% { box-shadow: 0 0 12px var(--accent-glow); }
-            50% { box-shadow: 0 0 28px rgba(255,255,255,0.25); }
-        }
-
-        .logo-text {
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #e6edf3, #58a6ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 8px 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            cursor: pointer;
-            font-size: 0.82rem;
-            font-weight: 500;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            border-color: var(--accent);
-            background: #1c2533;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(88, 166, 255, 0.2);
-        }
-        .btn:active {
-            transform: scale(0.95);
-            transition: 0.08s;
-        }
-        .btn-run {
-            background: var(--success);
-            border-color: var(--success);
-            color: #000;
-            font-weight: 700;
-        }
-        .btn-run:hover {
-            background: #4ade80;
-            border-color: #4ade80;
-            box-shadow: 0 4px 18px rgba(63, 185, 80, 0.4);
-        }
-        .btn-clear {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
-        .btn-clear:hover {
-            background: rgba(248, 81, 73, 0.1);
-            box-shadow: 0 4px 14px rgba(248, 81, 73, 0.2);
-        }
-        .btn-copy {
-            border-color: var(--warning);
-            color: var(--warning);
-        }
-        .btn-copy:hover {
-            background: rgba(210, 153, 29, 0.1);
-            box-shadow: 0 4px 14px rgba(210, 153, 29, 0.2);
-        }
-
-        /* === MAIN LAYOUT === */
-        .main-container {
-            display: flex;
-            flex: 1;
-            min-height: 0;
-            animation: fadeIn 0.6s ease-out 0.2s both;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* === LEFT SIDE: TABBED EDITOR === */
-        .editor-side {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            min-width: 0;
-        }
-
-        /* === TABS === */
-        .tab-bar {
-            display: flex;
-            background: var(--bg-tertiary);
-            border-bottom: 1px solid var(--border);
-            overflow-x: auto;
-            flex-shrink: 0;
-            scrollbar-width: none;
-        }
-        .tab-bar::-webkit-scrollbar { display: none; }
-
-        .tab {
-            padding: 11px 18px;
-            cursor: pointer;
+        .tx-item .left .tx-info .tx-type {
             font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 0.4px;
+        }
+
+        .tx-item .left .tx-info .tx-date {
+            font-size: 0.6rem;
             color: var(--text-secondary);
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            white-space: nowrap;
-            position: relative;
-            flex-shrink: 0;
-        }
-        .tab:hover {
-            color: var(--text-primary);
-            background: rgba(255,255,255,0.03);
-        }
-        .tab.active {
-            color: var(--text-primary);
-            border-bottom-color: var(--accent);
-            background: rgba(88, 166, 255, 0.06);
         }
 
-        .tab-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-        .tab-dot.html { background: var(--html-color); }
-        .tab-dot.css { background: var(--css-color); }
-        .tab-dot.js { background: var(--js-color); }
-        .tab-dot.csharp { background: var(--csharp-color); }
-        .tab-dot.cpp { background: var(--cpp-color); }
-
-        .tab.active .tab-dot {
-            box-shadow: 0 0 10px currentColor;
-            animation: dotPulse 1.8s ease-in-out infinite;
-        }
-
-        @keyframes dotPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.6); opacity: 0.5; }
-        }
-
-        /* === TAB PANELS === */
-        .tab-panels {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tab-panel {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            transform: translateY(8px);
-        }
-        .tab-panel.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-        }
-
-        .panel-header-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 14px;
-            background: var(--bg-tertiary);
-            border-bottom: 1px solid var(--border);
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-        }
-        .panel-header-bar .lang-label {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-        .panel-header-bar .file-ext {
-            color: var(--text-secondary);
-            font-weight: 400;
-            font-size: 0.7rem;
-            letter-spacing: 0;
-        }
-
-        .editor-wrapper {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            border: none;
-            padding: 16px;
-            font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-            font-size: 0.85rem;
-            line-height: 1.7;
-            resize: none;
-            outline: none;
-            tab-size: 2;
-            transition: var(--transition);
-        }
-        textarea:focus {
-            box-shadow: inset 0 0 0 1px var(--accent);
-            background: #0c1118;
-        }
-        textarea::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.35;
-            font-style: italic;
-        }
-
-        .line-numbers {
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 38px;
-            background: var(--bg-tertiary);
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-            font-size: 0.72rem;
-            padding: 16px 6px;
+        .tx-item .right {
             text-align: right;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-            overflow: hidden;
-            line-height: 1.7;
-        }
-        .editor-wrapper:hover .line-numbers,
-        textarea:focus ~ .line-numbers {
-            opacity: 0.55;
         }
 
-        /* === RIGHT SIDE: OUTPUT / PREVIEW === */
-        .output-side {
-            flex: 0.85;
-            display: flex;
-            flex-direction: column;
-            background: var(--bg-secondary);
-            min-width: 300px;
-        }
-
-        .output-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
-            background: var(--bg-tertiary);
-            border-bottom: 1px solid var(--border);
-            font-size: 0.8rem;
+        .tx-item .right .tx-amount {
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-        }
-        .output-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--accent);
-            animation: dotPulse 1.8s ease-in-out infinite;
-        }
-
-        .output-content {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .preview-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #fff;
-        }
-        .preview-frame.hidden {
-            display: none;
-        }
-
-        .output-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            gap: 14px;
-            pointer-events: none;
-        }
-        .output-placeholder.hidden {
-            display: none;
-        }
-        .output-placeholder .icon {
-            font-size: 3.5rem;
-            opacity: 0.25;
-            animation: floatUp 4s ease-in-out infinite;
-        }
-        @keyframes floatUp {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
-        .output-placeholder .hint {
             font-size: 0.85rem;
-            opacity: 0.55;
+        }
+
+        .tx-item .right .tx-amount.negative {
+            color: var(--accent-red);
+        }
+        .tx-item .right .tx-amount.positive {
+            color: var(--accent-green);
+        }
+
+        .tx-item .right .tx-usd {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+        }
+
+        /* ---------- FOOTER ---------- */
+        .wallet-footer {
             text-align: center;
-            line-height: 1.6;
-        }
-        .output-placeholder .shortcut {
-            background: var(--bg-tertiary);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 0.78rem;
-            border: 1px solid var(--border);
+            padding: 16px 0 6px;
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 16px;
         }
 
-        /* Code output display (for C# / C++) */
-        .code-output-display {
-            position: absolute;
-            inset: 0;
-            background: var(--bg-primary);
-            padding: 20px;
-            overflow: auto;
-            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-            font-size: 0.85rem;
-            line-height: 1.7;
-            color: var(--text-primary);
-            white-space: pre-wrap;
-            word-break: break-word;
-            display: none;
-        }
-        .code-output-display.visible {
-            display: block;
-        }
-        .code-output-display .comment { color: #6a9955; }
-        .code-output-display .keyword { color: #569cd6; }
-        .code-output-display .string { color: #ce9178; }
-        .code-output-display .type { color: #4ec9b0; }
-        .code-output-display .method { color: #dcdcaa; }
-        .code-output-display .number { color: #b5cea8; }
-
-        /* === TOAST === */
-        .toast {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            padding: 13px 20px;
-            border-radius: 10px;
-            font-size: 0.84rem;
-            font-weight: 500;
-            z-index: 999;
-            opacity: 0;
-            transform: translateY(18px);
-            pointer-events: none;
-            transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .toast.success { border-color: var(--success); color: var(--success); }
-        .toast.error { border-color: var(--danger); color: var(--danger); }
-        .toast.info { border-color: var(--accent); color: var(--accent); }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 480px) {
+            .app {
+                border-radius: 20px;
+                min-height: 600px;
             }
-            .editor-side {
-                flex: 1;
-                min-height: 45vh;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
+            .screen {
+                padding: 18px 16px 24px;
             }
-            .output-side {
-                flex: 1;
-                min-height: 30vh;
-                min-width: auto;
+            .balance-card .amount {
+                font-size: 2rem;
             }
-            .header {
-                padding: 8px 12px;
-                flex-wrap: wrap;
+            .quick-actions {
                 gap: 6px;
             }
-            .logo-text { font-size: 1rem; }
-            .btn { padding: 6px 10px; font-size: 0.75rem; }
-            .tab { padding: 9px 12px; font-size: 0.72rem; }
+            .quick-actions .action-btn {
+                padding: 10px 6px;
+            }
+            .quick-actions .action-btn .icon {
+                font-size: 1.3rem;
+            }
+            .asset-item {
+                padding: 8px 10px;
+            }
+            .asset-item .left .coin-icon {
+                font-size: 1.4rem;
+                width: 30px;
+            }
+            .modal {
+                padding: 20px 16px 24px;
+            }
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+        /* ---------- UTILITY ---------- */
+        .hidden {
+            display: none !important;
+        }
+
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="logo">
-            <div class="logo-icon">&lt;/&gt;</div>
-            <span class="logo-text">Hybrid Playground</span>
-        </div>
-        <div class="header-actions">
-            <button class="btn btn-copy" onclick="copyCurrentCode()" title="Copy current tab code">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                Copy
-            </button>
-            <button class="btn" onclick="formatCurrentCode()" title="Format Code">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 8 16 13"/><polyline points="8 3 3 8 8 13"/><line x1="12" y1="20" x2="12" y2="10"/></svg>
-                Format
-            </button>
-            <button class="btn btn-clear" onclick="clearCurrentTab()" title="Clear current tab">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
-                Clear
-            </button>
-            <button class="btn btn-run" onclick="executeCode()" title="Run (Ctrl+Enter)">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                Run
-            </button>
-        </div>
-    </header>
+    <!-- ===== APP ===== -->
+    <div class="app" id="app">
 
-    <!-- MAIN CONTENT -->
-    <div class="main-container">
-        <!-- LEFT: TABBED EDITOR -->
-        <div class="editor-side">
-            <div class="tab-bar" id="tabBar">
-                <div class="tab active" data-tab="html" onclick="switchTab('html')">
-                    <span class="tab-dot html"></span> HTML
-                </div>
-                <div class="tab" data-tab="css" onclick="switchTab('css')">
-                    <span class="tab-dot css"></span> CSS
-                </div>
-                <div class="tab" data-tab="js" onclick="switchTab('js')">
-                    <span class="tab-dot js"></span> JavaScript
-                </div>
-                <div class="tab" data-tab="csharp" onclick="switchTab('csharp')">
-                    <span class="tab-dot csharp"></span> C#
-                </div>
-                <div class="tab" data-tab="cpp" onclick="switchTab('cpp')">
-                    <span class="tab-dot cpp"></span> C++
-                </div>
+        <!-- ===== LOGIN SCREEN ===== -->
+        <div class="screen active" id="loginScreen">
+            <div class="login-header">
+                <div class="logo">✦ Exodus</div>
+                <div class="sub">Secure crypto wallet</div>
             </div>
-            <div class="tab-panels">
-                <!-- HTML Panel -->
-                <div class="tab-panel active" id="panel-html">
-                    <div class="panel-header-bar">
-                        <span class="lang-label"><span class="tab-dot html"></span> HTML</span>
-                        <span class="file-ext">index.html</span>
-                    </div>
-                    <div class="editor-wrapper">
-                        <textarea id="htmlCode" placeholder="&lt;!-- Write your HTML here --&gt;" spellcheck="false"></textarea>
-                        <div class="line-numbers" id="htmlLineNums"></div>
-                    </div>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginPassword">password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your wallet password" required />
                 </div>
-                <!-- CSS Panel -->
-                <div class="tab-panel" id="panel-css">
-                    <div class="panel-header-bar">
-                        <span class="lang-label"><span class="tab-dot css"></span> CSS</span>
-                        <span class="file-ext">styles.css</span>
-                    </div>
-                    <div class="editor-wrapper">
-                        <textarea id="cssCode" placeholder="/* Write your CSS here */" spellcheck="false"></textarea>
-                        <div class="line-numbers" id="cssLineNums"></div>
-                    </div>
-                </div>
-                <!-- JS Panel -->
-                <div class="tab-panel" id="panel-js">
-                    <div class="panel-header-bar">
-                        <span class="lang-label"><span class="tab-dot js"></span> JavaScript</span>
-                        <span class="file-ext">script.js</span>
-                    </div>
-                    <div class="editor-wrapper">
-                        <textarea id="jsCode" placeholder="// Write your JavaScript here" spellcheck="false"></textarea>
-                        <div class="line-numbers" id="jsLineNums"></div>
-                    </div>
-                </div>
-                <!-- C# Panel -->
-                <div class="tab-panel" id="panel-csharp">
-                    <div class="panel-header-bar">
-                        <span class="lang-label"><span class="tab-dot csharp"></span> C#</span>
-                        <span class="file-ext">Program.cs</span>
-                    </div>
-                    <div class="editor-wrapper">
-                        <textarea id="csharpCode" placeholder="// Write your C# code here&#10;using System;&#10;&#10;class Program {&#10;    static void Main() {&#10;        Console.WriteLine(&quot;Hello from C#!&quot;);&#10;    }&#10;}" spellcheck="false"></textarea>
-                        <div class="line-numbers" id="csharpLineNums"></div>
-                    </div>
-                </div>
-                <!-- C++ Panel -->
-                <div class="tab-panel" id="panel-cpp">
-                    <div class="panel-header-bar">
-                        <span class="lang-label"><span class="tab-dot cpp"></span> C++</span>
-                        <span class="file-ext">main.cpp</span>
-                    </div>
-                    <div class="editor-wrapper">
-                        <textarea id="cppCode" placeholder="// Write your C++ code here&#10;#include &lt;iostream&gt;&#10;using namespace std;&#10;&#10;int main() {&#10;    cout &lt;&lt; &quot;Hello from C++!&quot; &lt;&lt; endl;&#10;    return 0;&#10;}" spellcheck="false"></textarea>
-                        <div class="line-numbers" id="cppLineNums"></div>
-                    </div>
-                </div>
+                <button type="submit" class="btn-login">unlock wallet</button>
+                <div class="error-msg" id="loginError"></div>
+            </form>
+            <div class="login-footer">
+                <span>🔐 secured · version 24.8.0</span>
             </div>
         </div>
 
-        <!-- RIGHT: OUTPUT / PREVIEW -->
-        <div class="output-side">
-            <div class="output-header">
-                <span class="output-dot"></span>
-                <span id="outputLabel">Live Preview</span>
+        <!-- ===== DASHBOARD SCREEN ===== -->
+        <div class="screen" id="dashboardScreen">
+
+            <!-- HEADER -->
+            <div class="dashboard-header">
+                <div class="greeting">👋 Welcome, <span id="userName">User</span></div>
+                <button class="logout-btn" id="logoutBtn">✕ logout</button>
             </div>
-            <div class="output-content">
-                <iframe id="previewFrame" class="preview-frame" sandbox="allow-scripts allow-modals allow-same-origin" title="Live Preview"></iframe>
-                <div class="output-placeholder" id="outputPlaceholder">
-                    <div class="icon">🚀</div>
-                    <div class="hint">Click <strong>Run</strong> or press <span class="shortcut">Ctrl + Enter</span><br>to execute your code</div>
+
+            <!-- BALANCE -->
+            <div class="balance-card">
+                <div class="label">total balance</div>
+                <div class="amount" id="totalBalance">$0.00</div>
+                <div class="usd" id="totalBalanceUsd">≈ 0.000 BTC</div>
+                <div class="change">+2.4% this week</div>
+            </div>
+
+            <!-- QUICK ACTIONS -->
+            <div class="quick-actions">
+                <div class="action-btn" id="sendBtn">
+                    <span class="icon">↑</span>
+                    <span class="label">send</span>
                 </div>
-                <div class="code-output-display" id="codeOutputDisplay"></div>
+                <div class="action-btn" id="receiveBtn">
+                    <span class="icon">↓</span>
+                    <span class="label">receive</span>
+                </div>
+                <div class="action-btn" id="historyBtn">
+                    <span class="icon">📊</span>
+                    <span class="label">history</span>
+                </div>
+            </div>
+
+            <!-- ASSETS -->
+            <div class="section-header">
+                <h3>assets</h3>
+                <span class="view-all" id="viewAllAssets">view all</span>
+            </div>
+            <div class="asset-list" id="assetList">
+                <!-- rendered by JS -->
+            </div>
+
+            <!-- TRANSACTIONS (mini) -->
+            <div class="section-header" style="padding-top:16px;">
+                <h3>recent transactions</h3>
+                <span class="view-all" id="viewAllTx">view all</span>
+            </div>
+            <div class="tx-list" id="txList">
+                <!-- rendered by JS -->
+            </div>
+
+            <!-- FOOTER -->
+            <div class="wallet-footer">
+                <span>✦ Exodus · all funds are simulated</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== SEND MODAL ===== -->
+    <div class="modal-overlay" id="sendModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>↑ Send</h2>
+                <button class="close" id="sendModalClose">✕</button>
+            </div>
+            <form id="sendForm">
+                <div class="form-group">
+                    <label for="sendAsset">asset</label>
+                    <select id="sendAsset">
+                        <!-- rendered by JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sendAddress">recipient address</label>
+                    <input type="text" id="sendAddress" placeholder="0x... or wallet address" required />
+                </div>
+                <div class="form-group">
+                    <label for="sendAmount">amount</label>
+                    <input type="number" id="sendAmount" placeholder="0.00" step="any" min="0" required />
+                </div>
+                <button type="submit" class="btn-send">send now</button>
+                <div class="modal-status" id="sendStatus"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== RECEIVE MODAL ===== -->
+    <div class="modal-overlay" id="receiveModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>↓ Receive</h2>
+                <button class="close" id="receiveModalClose">✕</button>
+            </div>
+            <div class="receive-qr">⟠</div>
+            <div class="receive-address">
+                <span class="label">your wallet address</span>
+                <span id="receiveAddress">0x7F4c...3d2a</span>
+            </div>
+            <div style="text-align:center;font-size:0.7rem;color:var(--text-secondary);">
+                <p>Send only supported assets to this address.</p>
+                <p style="margin-top:4px;font-size:0.6rem;color:var(--text-muted);">Supported: BTC, ETH, SOL, XRP, ADA, DOT, AVAX, MATIC, LINK, UNI, USDC, USDT, DOGE, SHIB</p>
             </div>
         </div>
     </div>
 
-    <!-- TOAST -->
-    <div class="toast" id="toast"></div>
+    <!-- ===== HISTORY MODAL ===== -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal" style="max-width:480px;">
+            <div class="modal-header">
+                <h2>📊 Transaction History</h2>
+                <button class="close" id="historyModalClose">✕</button>
+            </div>
+            <div class="tx-list" id="historyTxList" style="max-height:400px;overflow-y:auto;">
+                <!-- rendered by JS -->
+            </div>
+            <div style="text-align:center;margin-top:12px;font-size:0.65rem;color:var(--text-muted);">
+                showing all transactions
+            </div>
+        </div>
+    </div>
 
+
+    <!-- ================================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ================================================================ -->
     <script>
-        // === STATE ===
-        let currentTab = 'html';
-        const webTabs = ['html', 'css', 'js'];
-        const compiledTabs = ['csharp', 'cpp'];
+        (function() {
+            'use strict';
 
-        // === DOM REFS ===
-        const textareas = {
-            html: document.getElementById('htmlCode'),
-            css: document.getElementById('cssCode'),
-            js: document.getElementById('jsCode'),
-            csharp: document.getElementById('csharpCode'),
-            cpp: document.getElementById('cppCode')
-        };
-        const lineNumDivs = {
-            html: document.getElementById('htmlLineNums'),
-            css: document.getElementById('cssLineNums'),
-            js: document.getElementById('jsLineNums'),
-            csharp: document.getElementById('csharpLineNums'),
-            cpp: document.getElementById('cppLineNums')
-        };
-        const previewFrame = document.getElementById('previewFrame');
-        const outputPlaceholder = document.getElementById('outputPlaceholder');
-        const codeOutputDisplay = document.getElementById('codeOutputDisplay');
-        const outputLabel = document.getElementById('outputLabel');
-        const toast = document.getElementById('toast');
+            // ---------- CONFIG ----------
+            const WALLET_PASSWORD = 'exodus123'; // default password
 
-        // === DEFAULT CONTENT ===
-        const defaults = {
-            html: `<div class="container">
-  <div class="card">
-    <h1>✨ Hybrid Playground</h1>
-    <p class="subtitle">HTML • CSS • JS • C# • C++ — All in one place.</p>
-    <div class="counter">
-      <button onclick="decrement()" class="btn-demo">−</button>
-      <span id="count" class="count-display">0</span>
-      <button onclick="increment()" class="btn-demo">+</button>
-    </div>
-    <p class="hint">You clicked <strong id="clickCount">0</strong> times</p>
-  </div>
-  <div class="floating-shapes">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-  </div>
-</div>`,
-            css: `*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+            // ---------- COIN DATA ----------
+            const COINS = [{
+                id: 'btc',
+                symbol: 'BTC',
+                name: 'Bitcoin',
+                icon: '₿',
+                balance: 0.047,
+                usdPrice: 67200,
+                change: 2.4
+            }, {
+                id: 'eth',
+                symbol: 'ETH',
+                name: 'Ethereum',
+                icon: '⟠',
+                balance: 1.82,
+                usdPrice: 3450,
+                change: 1.8
+            }, {
+                id: 'sol',
+                symbol: 'SOL',
+                name: 'Solana',
+                icon: '◎',
+                balance: 48.5,
+                usdPrice: 172,
+                change: 5.2
+            }, {
+                id: 'xrp',
+                symbol: 'XRP',
+                name: 'Ripple',
+                icon: '✕',
+                balance: 1250,
+                usdPrice: 0.62,
+                change: -0.3
+            }, {
+                id: 'ada',
+                symbol: 'ADA',
+                name: 'Cardano',
+                icon: '₳',
+                balance: 3200,
+                usdPrice: 0.46,
+                change: 1.1
+            }, {
+                id: 'dot',
+                symbol: 'DOT',
+                name: 'Polkadot',
+                icon: '●',
+                balance: 210,
+                usdPrice: 7.20,
+                change: -1.2
+            }, {
+                id: 'avax',
+                symbol: 'AVAX',
+                name: 'Avalanche',
+                icon: '▲',
+                balance: 94,
+                usdPrice: 38.50,
+                change: 3.8
+            }, {
+                id: 'matic',
+                symbol: 'MATIC',
+                name: 'Polygon',
+                icon: '◆',
+                balance: 1800,
+                usdPrice: 0.72,
+                change: 0.5
+            }, {
+                id: 'link',
+                symbol: 'LINK',
+                name: 'Chainlink',
+                icon: '🔗',
+                balance: 120,
+                usdPrice: 14.20,
+                change: 2.1
+            }, {
+                id: 'uni',
+                symbol: 'UNI',
+                name: 'Uniswap',
+                icon: '🦄',
+                balance: 450,
+                usdPrice: 7.80,
+                change: -0.8
+            }, {
+                id: 'usdc',
+                symbol: 'USDC',
+                name: 'USD Coin',
+                icon: '💵',
+                balance: 3200,
+                usdPrice: 1.00,
+                change: 0.0
+            }, {
+                id: 'usdt',
+                symbol: 'USDT',
+                name: 'Tether',
+                icon: '₮',
+                balance: 1500,
+                usdPrice: 1.00,
+                change: 0.0
+            }, {
+                id: 'doge',
+                symbol: 'DOGE',
+                name: 'Dogecoin',
+                icon: '🐕',
+                balance: 12500,
+                usdPrice: 0.15,
+                change: 4.3
+            }, {
+                id: 'shib',
+                symbol: 'SHIB',
+                name: 'Shiba Inu',
+                icon: '🐶',
+                balance: 8400000,
+                usdPrice: 0.000023,
+                change: 6.7
+            }];
 
-body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #e6edf3;
-  overflow: hidden;
-}
+            // ---------- STORAGE KEYS ----------
+            const TX_KEY = 'exodus_tx_history';
+            const BALANCE_KEY = 'exodus_balances';
 
-.container { perspective: 1000px; }
+            // ---------- STATE ----------
+            let isLoggedIn = false;
+            let currentUser = 'User';
 
-.card {
-  background: rgba(22, 27, 34, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 20px;
-  padding: 48px 40px;
-  text-align: center;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-  animation: cardEntry 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  z-index: 10;
-}
+            // ---------- LOAD BALANCES ----------
+            function loadBalances() {
+                try {
+                    const raw = localStorage.getItem(BALANCE_KEY);
+                    if (raw) {
+                        const saved = JSON.parse(raw);
+                        COINS.forEach(c => {
+                            if (saved[c.id] !== undefined) {
+                                c.balance = saved[c.id];
+                            }
+                        });
+                    }
+                } catch (_) {}
+            }
 
-@keyframes cardEntry {
-  from { opacity: 0; transform: translateY(40px) rotateX(10deg); }
-  to { opacity: 1; transform: translateY(0) rotateX(0); }
-}
+            function saveBalances() {
+                const data = {};
+                COINS.forEach(c => { data[c.id] = c.balance; });
+                localStorage.setItem(BALANCE_KEY, JSON.stringify(data));
+            }
 
-h1 {
-  font-size: 2.4rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin-bottom: 8px;
-  background: linear-gradient(135deg, #58a6ff, #bc8cff, #ff6b9d);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+            // ---------- LOAD TRANSACTIONS ----------
+            function loadTransactions() {
+                try {
+                    const raw = localStorage.getItem(TX_KEY);
+                    return raw ? JSON.parse(raw) : [];
+                } catch (_) { return []; }
+            }
 
-.subtitle {
-  color: #8b949e;
-  font-size: 1rem;
-  margin-bottom: 32px;
-}
+            function saveTransactions(tx) {
+                localStorage.setItem(TX_KEY, JSON.stringify(tx));
+            }
 
-.counter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
+            // ---------- GET DEFAULT TRANSACTIONS ----------
+            function getDefaultTx() {
+                return [{
+                    id: Date.now() - 1000000,
+                    type: 'received',
+                    asset: 'BTC',
+                    amount: 0.012,
+                    usdValue: 806.40,
+                    address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+                    date: Date.now() - 1000000,
+                    status: 'completed'
+                }, {
+                    id: Date.now() - 2000000,
+                    type: 'sent',
+                    asset: 'ETH',
+                    amount: 0.5,
+                    usdValue: 1725,
+                    address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+                    date: Date.now() - 2000000,
+                    status: 'completed'
+                }, {
+                    id: Date.now() - 3000000,
+                    type: 'received',
+                    asset: 'SOL',
+                    amount: 12.8,
+                    usdValue: 2201.60,
+                    address: '7Ec2V6rF7KXPJq9vRXkHwYkLpE1nF9Xb8r',
+                    date: Date.now() - 3000000,
+                    status: 'completed'
+                }];
+            }
 
-.btn-demo {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.05);
-  color: #e6edf3;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 600;
-}
-
-.btn-demo:hover {
-  background: rgba(88, 166, 255, 0.2);
-  border-color: #58a6ff;
-  transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(88, 166, 255, 0.3);
-}
-
-.btn-demo:active { transform: scale(0.9); }
-
-.count-display {
-  font-size: 3rem;
-  font-weight: 800;
-  min-width: 80px;
-  color: #e6edf3;
-}
-
-.hint { color: #8b949e; font-size: 0.9rem; }
-
-.floating-shapes {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.15;
-  animation: floatShape 8s ease-in-out infinite;
-}
-
-.shape-1 { width: 300px; height: 300px; background: #58a6ff; top: 10%; left: 5%; }
-.shape-2 { width: 250px; height: 250px; background: #bc8cff; bottom: 15%; right: 8%; animation-delay: -3s; }
-.shape-3 { width: 200px; height: 200px; background: #ff6b9d; top: 50%; left: 60%; animation-delay: -5s; }
-
-@keyframes floatShape {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-}`,
-            js: `let count = 0;
-let totalClicks = 0;
-
-function updateDisplay() {
-  document.getElementById('count').textContent = count;
-  document.getElementById('clickCount').textContent = totalClicks;
-}
-
-function increment() {
-  count++;
-  totalClicks++;
-  updateDisplay();
-  document.querySelector('.card').style.transform = 'scale(1.02)';
-  setTimeout(() => document.querySelector('.card').style.transform = 'scale(1)', 150);
-}
-
-function decrement() {
-  count--;
-  totalClicks++;
-  updateDisplay();
-  document.querySelector('.card').style.transform = 'scale(0.98)';
-  setTimeout(() => document.querySelector('.card').style.transform = 'scale(1)', 150);
-}
-
-updateDisplay();
-console.log('🚀 Hybrid Playground ready!');`,
-            csharp: `using System;
-using System.Linq;
-using System.Collections.Generic;
-
-class Program
-{
-    static void Main()
-    {
-        Console.WriteLine("╔════════════════════════════╗");
-        Console.WriteLine("║   🚀 Hybrid Playground    ║");
-        Console.WriteLine("║   C# Code Demo            ║");
-        Console.WriteLine("╚════════════════════════════╝");
-        Console.WriteLine();
-
-        // Fibonacci Sequence
-        Console.Write("Fibonacci (first 10): ");
-        foreach (int n in Fibonacci(10))
-            Console.Write(n + " ");
-        Console.WriteLine();
-
-        // LINQ Demo
-        var numbers = new List<int> { 3, 7, 2, 9, 1, 5, 8 };
-        var evens = numbers.Where(n => n % 2 == 0).OrderBy(n => n);
-        Console.WriteLine($"Even numbers sorted: {string.Join(", ", evens)}");
-
-        // Async simulation note
-        Console.WriteLine("\\n✅ C# code structure is valid and ready to compile.");
-    }
-
-    static IEnumerable<int> Fibonacci(int count)
-    {
-        int a = 0, b = 1;
-        for (int i = 0; i < count; i++)
-        {
-            yield return a;
-            int temp = a + b;
-            a = b;
-            b = temp;
-        }
-    }
-}`,
-            cpp: `#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <numeric>
-using namespace std;
-
-// Template function for printing vectors
-template<typename T>
-void printVector(const vector<T>& vec, const string& label) {
-    cout << label << ": [ ";
-    for (const auto& item : vec) {
-        cout << item << " ";
-    }
-    cout << "]" << endl;
-}
-
-int main() {
-    cout << "╔════════════════════════════╗" << endl;
-    cout << "║   🚀 Hybrid Playground    ║" << endl;
-    cout << "║   C++ Code Demo           ║" << endl;
-    cout << "╚════════════════════════════╝" << endl << endl;
-
-    // Vector operations
-    vector<int> numbers = {5, 2, 8, 1, 9, 3, 7, 4, 6};
-    printVector(numbers, "Original");
-
-    // Sort
-    sort(numbers.begin(), numbers.end());
-    printVector(numbers, "Sorted  ");
-
-    // Find max element
-    auto maxIt = max_element(numbers.begin(), numbers.end());
-    cout << "Max value: " << *maxIt << endl;
-
-    // Accumulate (sum)
-    int sum = accumulate(numbers.begin(), numbers.end(), 0);
-    cout << "Sum: " << sum << endl;
-
-    // Lambda with for_each
-    cout << "\\nDoubled values: ";
-    for_each(numbers.begin(), numbers.end(), [](int n) {
-        cout << n * 2 << " ";
-    });
-    cout << endl;
-
-    cout << "\\n✅ C++ code structure is valid and ready to compile." << endl;
-    return 0;
-}`
-        };
-
-        // Load defaults
-        Object.keys(defaults).forEach(key => {
-            textareas[key].value = defaults[key];
-        });
-
-        // === TAB SWITCHING ===
-        function switchTab(tabName) {
-            currentTab = tabName;
-
-            // Update tab buttons
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
-
-            // Update panels
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            document.getElementById(`panel-${tabName}`).classList.add('active');
-
-            // Update output panel
-            updateOutputPanel(tabName);
-
-            // Update line numbers
-            updateLineNumbers(tabName);
-        }
-
-        function updateOutputPanel(tabName) {
-            if (webTabs.includes(tabName)) {
-                outputLabel.textContent = 'Live Preview';
-                previewFrame.classList.remove('hidden');
-                outputPlaceholder.classList.remove('hidden');
-                codeOutputDisplay.classList.remove('visible');
-                // If we have a rendered preview already, keep it; otherwise show placeholder
-                if (!previewFrame.src || previewFrame.src === 'about:blank') {
-                    outputPlaceholder.classList.remove('hidden');
+            // ---------- GENERATE RANDOM ADDRESS ----------
+            function generateAddress() {
+                const chars = '0123456789abcdef';
+                let addr = '0x';
+                for (let i = 0; i < 40; i++) {
+                    addr += chars[Math.floor(Math.random() * 16)];
                 }
-            } else {
-                outputLabel.textContent = tabName === 'csharp' ? 'C# Code Preview' : 'C++ Code Preview';
-                previewFrame.classList.add('hidden');
-                outputPlaceholder.classList.add('hidden');
-                codeOutputDisplay.classList.add('visible');
-                renderCodePreview(tabName);
+                return addr;
             }
-        }
 
-        // === SIMPLE SYNTAX HIGHLIGHT FOR C# / C++ ===
-        function renderCodePreview(tabName) {
-            const code = textareas[tabName].value;
-            const escaped = escapeHTML(code);
-            // Basic keyword highlighting
-            const keywords = tabName === 'csharp'
-                ? ['using','class','static','void','int','string','var','new','public','private','protected','internal',
-                   'foreach','in','yield','return','if','else','for','while','async','await','IEnumerable','List',
-                   'Where','OrderBy','Select','WriteLine','Write','Main','Program','namespace','bool','double','float',
-                   'get','set','value','try','catch','throw','null','true','false']
-                : ['include','iostream','vector','algorithm','numeric','using','namespace','std','cout','cin','endl',
-                   'int','double','float','char','bool','void','auto','const','template','typename','class','struct',
-                   'public','private','protected','return','if','else','for','while','do','switch','case','break',
-                   'continue','sizeof','typedef','static','virtual','override','new','delete','nullptr','true','false',
-                   'sort','max_element','accumulate','for_each','begin','end','push_back','size','main'];
+            // ---------- UPDATE UI ----------
+            function updateDashboard() {
+                const totalUsd = COINS.reduce((sum, c) => sum + (c.balance * c.usdPrice), 0);
+                document.getElementById('totalBalance').textContent = '$' + totalUsd.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+                document.getElementById('totalBalanceUsd').textContent = '≈ ' + (totalUsd / 67200).toFixed(4) + ' BTC';
 
-            let highlighted = escaped;
-            keywords.forEach(kw => {
-                const regex = new RegExp(`\\b(${kw})\\b`, 'g');
-                highlighted = highlighted.replace(regex, '<span class="keyword">$1</span>');
-            });
-            // String highlighting
-            highlighted = highlighted.replace(/(&quot;.*?&quot;)/g, '<span class="string">$1</span>');
-            highlighted = highlighted.replace(/(&#39;.*?&#39;)/g, '<span class="string">$1</span>');
-            // Comments
-            highlighted = highlighted.replace(/(\/\/.*)/g, '<span class="comment">$1</span>');
-            // Numbers
-            highlighted = highlighted.replace(/\b(\d+\.?\d*)\b/g, '<span class="number">$1</span>');
+                // Render assets
+                const assetList = document.getElementById('assetList');
+                let html = '';
+                COINS.forEach(c => {
+                    const value = c.balance * c.usdPrice;
+                    const changeClass = c.change >= 0 ? 'change-positive' : 'change-negative';
+                    const changeSymbol = c.change >= 0 ? '+' : '';
+                    html += `
+                            <div class="asset-item" data-coin="${c.id}">
+                                <div class="left">
+                                    <span class="coin-icon">${c.icon}</span>
+                                    <div class="info">
+                                        <div class="name">${c.name}</div>
+                                        <div class="symbol">${c.symbol}</div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="balance">${c.balance.toFixed(c.balance < 1 ? 4 : 2)}</div>
+                                    <div class="usd-value">$${value.toFixed(2)}</div>
+                                    <div class="${changeClass}">${changeSymbol}${c.change}%</div>
+                                </div>
+                            </div>
+                        `;
+                });
+                assetList.innerHTML = html;
 
-            codeOutputDisplay.innerHTML = highlighted;
-        }
-
-        function escapeHTML(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        // === EXECUTE CODE ===
-        function executeCode() {
-            if (webTabs.includes(currentTab)) {
-                runWebPreview();
-            } else {
-                // For C# / C++, show formatted preview
-                renderCodePreview(currentTab);
-                codeOutputDisplay.classList.add('visible');
-                outputPlaceholder.classList.add('hidden');
-                previewFrame.classList.add('hidden');
-                showToast(`${currentTab.toUpperCase()} code preview updated 📋`, 'info');
-            }
-        }
-
-        function runWebPreview() {
-            const html = textareas.html.value;
-            const css = textareas.css.value;
-            const js = textareas.js.value;
-
-            const fullDoc = `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>${css}</style></head>
-<body>${html}
-<script>try{${js}}catch(e){document.body.innerHTML+='<div style="position:fixed;bottom:20px;right:20px;background:#f85149;color:#fff;padding:12px 20px;border-radius:8px;font-family:monospace;z-index:99999;font-size:13px;max-width:400px;"><strong>⚠️ JS Error:</strong> '+e.message+'</div>';console.error(e);}<\/script>
-</body></html>`;
-
-            const blob = new Blob([fullDoc], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-
-            previewFrame.classList.remove('hidden');
-            outputPlaceholder.classList.add('hidden');
-            codeOutputDisplay.classList.remove('visible');
-            previewFrame.src = url;
-            previewFrame.onload = () => URL.revokeObjectURL(url);
-
-            outputLabel.textContent = 'Live Preview';
-            showToast('Web preview rendered! 🎉', 'success');
-        }
-
-        // === FORMAT CURRENT ===
-        function formatCurrentCode() {
-            const ta = textareas[currentTab];
-            let code = ta.value;
-            // Simple indentation cleanup
-            code = code.split('\n').map(line => line.trimRight()).join('\n');
-            ta.value = code;
-            updateLineNumbers(currentTab);
-            if (!webTabs.includes(currentTab)) {
-                renderCodePreview(currentTab);
-            }
-            showToast('Code formatted! ✨', 'success');
-        }
-
-        // === CLEAR CURRENT TAB ===
-        function clearCurrentTab() {
-            textareas[currentTab].value = '';
-            updateLineNumbers(currentTab);
-            if (webTabs.includes(currentTab)) {
-                if (currentTab === 'html' || currentTab === 'css' || currentTab === 'js') {
-                    // If any web tab is cleared, clear preview too
+                // Render transactions (recent 3)
+                const tx = loadTransactions();
+                if (tx.length === 0) {
+                    const defaults = getDefaultTx();
+                    saveTransactions(defaults);
+                    renderTx(defaults);
+                } else {
+                    renderTx(tx);
                 }
-            } else {
-                codeOutputDisplay.innerHTML = '';
-                codeOutputDisplay.classList.add('visible');
-                outputPlaceholder.classList.add('hidden');
-                previewFrame.classList.add('hidden');
             }
-            showToast(`${currentTab.toUpperCase()} tab cleared 🧹`, 'success');
-        }
 
-        // === COPY CURRENT CODE ===
-        function copyCurrentCode() {
-            const code = textareas[currentTab].value;
-            navigator.clipboard.writeText(code).then(() => {
-                showToast('Code copied to clipboard! 📋', 'info');
-            }).catch(() => {
-                // Fallback
-                textareas[currentTab].select();
-                document.execCommand('copy');
-                showToast('Code copied! 📋', 'info');
-            });
-        }
+            function renderTx(tx) {
+                const txList = document.getElementById('txList');
+                const sorted = [...tx].sort((a, b) => b.date - a.date);
+                const recent = sorted.slice(0, 4);
 
-        // === TOAST ===
-        let toastTimer;
-        function showToast(msg, type) {
-            clearTimeout(toastTimer);
-            toast.textContent = msg;
-            toast.className = `toast ${type} show`;
-            toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
-        }
+                if (recent.length === 0) {
+                    txList.innerHTML =
+                        `<div style="text-align:center;padding:16px;color:var(--text-muted);font-size:0.8rem;">No transactions yet</div>`;
+                    return;
+                }
 
-        // === LINE NUMBERS ===
-        function updateLineNumbers(tabName) {
-            const lines = textareas[tabName].value.split('\n').length;
-            let nums = '';
-            for (let i = 1; i <= lines; i++) nums += i + '\n';
-            lineNumDivs[tabName].textContent = nums;
-        }
+                let html = '';
+                recent.forEach(t => {
+                    const date = new Date(t.date);
+                    const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    const sign = t.type === 'received' ? '+' : '-';
+                    const amountClass = t.type === 'received' ? 'positive' : 'negative';
+                    const icon = t.type === 'received' ? '↓' : '↑';
+                    html += `
+                            <div class="tx-item">
+                                <div class="left">
+                                    <span class="tx-icon">${icon}</span>
+                                    <div class="tx-info">
+                                        <div class="tx-type">${t.type === 'received' ? 'Received' : 'Sent'} ${t.asset}</div>
+                                        <div class="tx-date">${dateStr}</div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="tx-amount ${amountClass}">${sign}${t.amount.toFixed(t.amount < 1 ? 4 : 2)} ${t.asset}</div>
+                                    <div class="tx-usd">$${t.usdValue.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        `;
+                });
+                txList.innerHTML = html;
+            }
 
-        // Attach listeners
-        Object.keys(textareas).forEach(key => {
-            textareas[key].addEventListener('input', () => {
-                updateLineNumbers(key);
-                if (!webTabs.includes(key) && currentTab === key) {
-                    renderCodePreview(key);
+            // ---------- SEND CRYPTO ----------
+            function sendCrypto(assetSymbol, address, amount) {
+                const coin = COINS.find(c => c.symbol === assetSymbol);
+                if (!coin) return { success: false, message: 'Asset not found.' };
+
+                if (coin.balance < amount) {
+                    return { success: false, message: 'Insufficient balance.' };
+                }
+
+                // Deduct balance
+                coin.balance -= amount;
+                saveBalances();
+
+                // Create transaction
+                const tx = loadTransactions();
+                const usdValue = amount * coin.usdPrice;
+                tx.push({
+                    id: Date.now(),
+                    type: 'sent',
+                    asset: assetSymbol,
+                    amount: amount,
+                    usdValue: usdValue,
+                    address: address,
+                    date: Date.now(),
+                    status: 'completed'
+                });
+                saveTransactions(tx);
+
+                updateDashboard();
+                return { success: true, message: `Sent ${amount} ${assetSymbol} to ${address.substring(0, 10)}...` };
+            }
+
+            // ---------- LOGIN ----------
+            const loginScreen = document.getElementById('loginScreen');
+            const dashboardScreen = document.getElementById('dashboardScreen');
+            const loginForm = document.getElementById('loginForm');
+            const loginPassword = document.getElementById('loginPassword');
+            const loginError = document.getElementById('loginError');
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const pass = loginPassword.value.trim();
+                if (pass === WALLET_PASSWORD) {
+                    isLoggedIn = true;
+                    loginScreen.classList.remove('active');
+                    dashboardScreen.classList.add('active');
+                    document.getElementById('userName').textContent = currentUser;
+                    loadBalances();
+                    updateDashboard();
+                    loginPassword.value = '';
+                    loginError.textContent = '';
+                } else {
+                    loginError.textContent = '❌ Invalid password. Try: exodus123';
                 }
             });
-            // Tab key support
-            textareas[key].addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    e.preventDefault();
-                    const ta = e.target;
-                    const start = ta.selectionStart;
-                    const end = ta.selectionEnd;
-                    ta.value = ta.value.substring(0, start) + '  ' + ta.value.substring(end);
-                    ta.selectionStart = ta.selectionEnd = start + 2;
-                    updateLineNumbers(key);
+
+            // ---------- LOGOUT ----------
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                if (confirm('Logout from wallet?')) {
+                    isLoggedIn = false;
+                    dashboardScreen.classList.remove('active');
+                    loginScreen.classList.add('active');
+                    loginPassword.value = '';
+                    loginError.textContent = '';
                 }
             });
-        });
 
-        // Initial line numbers
-        Object.keys(textareas).forEach(key => updateLineNumbers(key));
+            // ---------- SEND MODAL ----------
+            const sendModal = document.getElementById('sendModal');
+            const sendModalClose = document.getElementById('sendModalClose');
+            const sendForm = document.getElementById('sendForm');
+            const sendAsset = document.getElementById('sendAsset');
+            const sendAddress = document.getElementById('sendAddress');
+            const sendAmount = document.getElementById('sendAmount');
+            const sendStatus = document.getElementById('sendStatus');
 
-        // === KEYBOARD SHORTCUTS ===
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'Enter') {
-                e.preventDefault();
-                executeCode();
-            }
-            if (e.ctrlKey && e.key === 's') {
-                e.preventDefault();
-                formatCurrentCode();
-            }
-            if (e.ctrlKey && e.shiftKey && e.key === 'K') {
-                e.preventDefault();
-                clearCurrentTab();
-            }
-            // Tab switching with Ctrl+1 through Ctrl+5
-            const tabKeys = { '1': 'html', '2': 'css', '3': 'js', '4': 'csharp', '5': 'cpp' };
-            if (e.ctrlKey && tabKeys[e.key]) {
-                e.preventDefault();
-                switchTab(tabKeys[e.key]);
-            }
-        });
+            document.getElementById('sendBtn').addEventListener('click', function() {
+                // Populate asset dropdown
+                sendAsset.innerHTML = COINS.map(c =>
+                    `<option value="${c.symbol}">${c.icon} ${c.symbol} — ${c.balance.toFixed(c.balance < 1 ? 4 : 2)}</option>`
+                ).join('');
+                sendAddress.value = '';
+                sendAmount.value = '';
+                sendStatus.textContent = '';
+                sendStatus.className = 'modal-status';
+                sendModal.classList.add('open');
+            });
 
-        // === INITIAL SETUP ===
-        updateOutputPanel('html');
-        setTimeout(runWebPreview, 400);
+            sendModalClose.addEventListener('click', () => sendModal.classList.remove('open'));
+            sendModal.addEventListener('click', function(e) {
+                if (e.target === this) sendModal.classList.remove('open');
+            });
 
-        console.log('%c🛠️ Hybrid Code Playground %cReady — 5 Languages',
-            'font-size:1.2rem;font-weight:bold;color:#58a6ff;', 'color:#8b949e;');
-        console.log('%c💡 Ctrl+1..5 to switch tabs | Ctrl+Enter to run | Ctrl+S to format | Ctrl+Shift+K to clear',
-            'color:#3fb950;');
+            sendForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const symbol = sendAsset.value;
+                const address = sendAddress.value.trim();
+                const amount = parseFloat(sendAmount.value);
+
+                if (!address || address.length < 10) {
+                    sendStatus.textContent = '❌ Please enter a valid wallet address.';
+                    sendStatus.className = 'modal-status error';
+                    return;
+                }
+
+                if (!amount || amount <= 0) {
+                    sendStatus.textContent = '❌ Please enter a valid amount.';
+                    sendStatus.className = 'modal-status error';
+                    return;
+                }
+
+                const result = sendCrypto(symbol, address, amount);
+                if (result.success) {
+                    sendStatus.textContent = '✅ ' + result.message;
+                    sendStatus.className = 'modal-status success';
+                    setTimeout(() => sendModal.classList.remove('open'), 1500);
+                } else {
+                    sendStatus.textContent = '❌ ' + result.message;
+                    sendStatus.className = 'modal-status error';
+                }
+            });
+
+            // ---------- RECEIVE MODAL ----------
+            const receiveModal = document.getElementById('receiveModal');
+            const receiveModalClose = document.getElementById('receiveModalClose');
+            document.getElementById('receiveBtn').addEventListener('click', function() {
+                document.getElementById('receiveAddress').textContent = generateAddress();
+                receiveModal.classList.add('open');
+            });
+            receiveModalClose.addEventListener('click', () => receiveModal.classList.remove('open'));
+            receiveModal.addEventListener('click', function(e) {
+                if (e.target === this) receiveModal.classList.remove('open');
+            });
+
+            // ---------- HISTORY MODAL ----------
+            const historyModal = document.getElementById('historyModal');
+            const historyModalClose = document.getElementById('historyModalClose');
+            const historyTxList = document.getElementById('historyTxList');
+
+            document.getElementById('historyBtn').addEventListener('click', function() {
+                const tx = loadTransactions();
+                if (tx.length === 0) {
+                    const defaults = getDefaultTx();
+                    saveTransactions(defaults);
+                    renderFullHistory(defaults);
+                } else {
+                    renderFullHistory(tx);
+                }
+                historyModal.classList.add('open');
+            });
+
+            document.getElementById('viewAllTx').addEventListener('click', function() {
+                document.getElementById('historyBtn').click();
+            });
+
+            historyModalClose.addEventListener('click', () => historyModal.classList.remove('open'));
+            historyModal.addEventListener('click', function(e) {
+                if (e.target === this) historyModal.classList.remove('open');
+            });
+
+            function renderFullHistory(tx) {
+                const sorted = [...tx].sort((a, b) => b.date - a.date);
+                if (sorted.length === 0) {
+                    historyTxList.innerHTML =
+                        `<div style="text-align:center;padding:20px;color:var(--text-muted);">No transactions</div>`;
+                    return;
+                }
+                let html = '';
+                sorted.forEach(t => {
+                    const date = new Date(t.date);
+                    const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric',
+                        year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    const sign = t.type === 'received' ? '+' : '-';
+                    const amountClass = t.type === 'received' ? 'positive' : 'negative';
+                    const icon = t.type === 'received' ? '↓' : '↑';
+                    html += `
+                            <div class="tx-item">
+                                <div class="left">
+                                    <span class="tx-icon">${icon}</span>
+                                    <div class="tx-info">
+                                        <div class="tx-type">${t.type === 'received' ? 'Received' : 'Sent'} ${t.asset}</div>
+                                        <div class="tx-date">${dateStr}</div>
+                                        <div style="font-size:0.55rem;color:var(--text-muted);word-break:break-all;">${t.address}</div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="tx-amount ${amountClass}">${sign}${t.amount.toFixed(t.amount < 1 ? 4 : 2)} ${t.asset}</div>
+                                    <div class="tx-usd">$${t.usdValue.toFixed(2)}</div>
+                                    <div style="font-size:0.55rem;color:var(--text-muted);">${t.status}</div>
+                                </div>
+                            </div>
+                        `;
+                });
+                historyTxList.innerHTML = html;
+            }
+
+            // ---------- VIEW ALL ASSETS ----------
+            document.getElementById('viewAllAssets').addEventListener('click', function() {
+                document.getElementById('assetList').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // ---------- KEYBOARD SHORTCUTS ----------
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+                }
+                if (e.ctrlKey && e.key === 'l' && isLoggedIn) {
+                    document.getElementById('logoutBtn').click();
+                }
+            });
+
+            // ---------- INIT ----------
+            // Pre-fill default balances if empty
+            loadBalances();
+            saveBalances();
+
+            // Check if there are transactions, if not add defaults
+            let tx = loadTransactions();
+            if (tx.length === 0) {
+                saveTransactions(getDefaultTx());
+            }
+
+            // ---------- CONSOLE EASTER EGG ----------
+            console.log('%c✦ Exodus Wallet', 'font-size:2rem;font-weight:bold;color:#3b82f6;');
+            console.log('%cFake crypto wallet · all balances are simulated', 'font-size:0.9rem;color:#8899cc;');
+            console.log('%c🔑 Default password: exodus123', 'font-size:0.8rem;color:#f59e0b;');
+
+        })();
     </script>
+
 </body>
 </html>
